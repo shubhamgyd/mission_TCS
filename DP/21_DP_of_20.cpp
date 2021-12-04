@@ -52,8 +52,8 @@ int main()
 {
     ios::sync_with_stdio(0);
     cin.tie(0);
-    string X="leetcode";
-    string Y="etcode";
+    string X="cde";
+    string Y="abc";
     int m=X.length();
     int n=Y.length();
     cout<<"Length of Longest common subsequence by using DP: "<<LCS(X,Y,m,n)<<"\n";

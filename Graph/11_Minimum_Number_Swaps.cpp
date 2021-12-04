@@ -10,7 +10,7 @@ int main()
     //fast();
     int n;
     cin>>n;
-    int arr[n];
+    int arr[n+1];
     for(int i=0;i<n;i++)
     {
         cin>>arr[i];
@@ -44,17 +44,10 @@ int main()
         }
         if(cycle>0)
         {
-            if(abs(j-i)<mn)
-            {
-                mn=abs(j-i);
-                start=i;
-                end=num[j].first;
-            }
             ans+=(cycle-1); // Total Number of cycles -1 , means total number of nodes evolved in cycle -1
             //ans+=(n-cycle);
         }
     }
     cout<<"total number of swaps by using graph approach : "<<ans<<endl;
-    cout<<start<<" "<<end<<endl;
     return 0;
 }

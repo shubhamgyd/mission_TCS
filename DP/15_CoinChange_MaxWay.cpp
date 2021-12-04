@@ -163,8 +163,8 @@ int solve(int arr[],int sum,int n)
 int main()
 {
     memset(dp,-1,sizeof(dp));
-    int arr[]={1,2,3};
-    int sum=4;
+    int arr[]={1,5,6};
+    int sum=7;
     int n=sizeof(arr)/sizeof(arr[0]);
     cout<<solve(arr,sum,n)<<endl;
     return 0;
@@ -261,6 +261,16 @@ private:
             return;
         }
         for (int i = begin; i != candidates.size() && target >= candidates[i]; ++i) {
+
+
+            // for no infinite coins
+            if(i && candidates[i]==candidates[i-1] && i>begin) continue;
+            combination.push_back(candidates[i]);
+            combinationSum(candidates, target - candidates[i], res, combination, i+1);
+            combination.pop_back();
+
+
+
             combination.push_back(candidates[i]);
             combinationSum(candidates, target - candidates[i], res, combination, i);
             combination.pop_back();

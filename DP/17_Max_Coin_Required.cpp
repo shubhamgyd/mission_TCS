@@ -38,8 +38,8 @@ int main()
 {
     ios::sync_with_stdio(0);
     cin.tie(0);
-    int coin[] = {2,3,5};
-    int sum= 9;
+    int coin[] = {1,5,6};
+    int sum= 7;
     int n=sizeof(coin)/sizeof(coin[0]);
     cout<<"Maximum number of coins required to make given sum: "<<coin1(coin,sum,n)<<"\n";
     return 0; 

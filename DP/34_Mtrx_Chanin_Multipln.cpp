@@ -33,7 +33,7 @@ int main()
     // Format
     // Either string or array
     // we have to find out the left side index and right side index 
-    int arr[]={4,11,5};
+    int arr[]={5,10,20};
     int n=sizeof(arr)/sizeof(arr[0]);
     int i=1;
     int j=n-1;

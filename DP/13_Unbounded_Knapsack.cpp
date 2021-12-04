@@ -29,9 +29,9 @@ int main()
 {
     ios::sync_with_stdio(0);
     cin.tie(0);
-    int W=5;
-    int val[] = {-1, -1, 4, 3, -1};
-    int wt[] = {1,2,3,4,5};
+    int W=40;
+    int val[] = {60,50,20};
+    int wt[] = {20,25,5};
     int n=sizeof(val)/sizeof(val[0]);
     cout<<" Maximum Value of Weight:" <<unboundedknapsac(W,n,val,wt);
     return 0;

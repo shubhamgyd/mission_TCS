@@ -31,9 +31,9 @@ int CountSumSubArray(int arr[],int sum,int n)
 
 int main()
 {
-    int n=6;
-    int arr[] = {9, 4, 20, 3, 10, 5};
-    int sum=33;
+    int n=1;
+    int arr[] = {0};
+    int sum=-1;
     //sort(arr,arr+n);
     cout<<"Number of subsets of given sum is : "<<(CountSumSubArray(arr,sum,n))<<endl;
     return 0;

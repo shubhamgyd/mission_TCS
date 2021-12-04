@@ -1,33 +1,41 @@
 #include <bits/stdc++.h>
+#define fast()                        \
+    ios_base::sync_with_stdio(false); \
+    cin.tie(NULL);                    \
+    cout.tie(NULL);
+#define int long long
+#define mod 1000000007
+#define MAX_N 1000001
 using namespace std;
 
-int subArrayExists(int arr[], int n)
+struct info
 {
-	unordered_set<int> sumSet;
-	int sum = 0;
-	for (int i = 0; i < n; i++)
-	{
-		sum += arr[i];
-		if (sum == 0
-			|| sumSet.find(sum)
-			!= sumSet.end())
-			return 1;
+    char name[50];
+    int age;
+    int id;
+}Info[10];
 
-		sumSet.insert(sum);
-	}
-	return 0;
-}
-
-int main()
+int32_t main()
 {
-    int N;
-    cin>>N;
-    int arr[N];
-    for(int i=0;i<N;i++)
+    fast();
+    int user;
+    deque<int>dq;
+    cout<<"Enter number of users: ";
+    cin>>user;
+    if(user<3)
     {
-        cin>>arr[i];
+        cout<<"Please enter number of users greter than 3..!!"<<endl;
+        main();
     }
-	int n = sizeof(arr) / sizeof(arr[0]);
-	cout<<subArrayExists(arr, n)<<endl;
-	return 0;
+    for(int i=0;i<user;i++)
+    {
+        cin>>Info[i].name;
+        cin>>Info[i].age;
+        cin>>Info[i].id;
+    }
+    for(int i=0;i<user;i++)
+    {
+        cout<<Info[i].name<<" "<<Info[i].age<<" "<<Info[i].id<<endl;
+    }
+    return 0;
 }

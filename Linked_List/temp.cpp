@@ -1,154 +1,128 @@
-// #include <bits/stdc++.h>
-// using namespace std;
-
-// struct Node
-// {
-//     int data;
-//     Node *next;
-
-//     Node(int val)
-//     {
-//         data = val;
-//         next = NULL;
-//     }
-// };
-
-// void Insert(Node *&head1, Node *&last, int data)
-// {
-//     struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
-//     newNode->data = data;
-//     newNode->next = NULL;
-
-//     if (last == NULL)
-//     {
-//         head1 = newNode;
-//     }
-//     else
-//     {
-//         last->next = newNode;
-//     }
-//     last = newNode;
-// }
-
-// Node* Reverse(Node *head)
-// {
-//     Node *curr = head;
-//     vector<int> res;
-//     while (curr != NULL)
-//     {
-//         res.push_back(curr->data);
-//         curr = curr->next;
-//     }
-//     int n = res.size();
-//     int k = n / 2 - 1;
-//     vector<int> ans;
-//     int i;
-//     for (i = 0; i < k; i++)
-//     {
-//         ans.push_back(res[i]);
-//     }
-//     reverse(ans.begin(), ans.end());
-//     ans.insert(ans.begin(), res[i++]);
-//     ans.insert(ans.begin() + 1, res[i++]);
-//     for (i; i < n; i++)
-//     {
-//         ans.insert(ans.begin(), res[i]);
-//     }
-//     Node *head1;
-//     Node *last = NULL;
-//     for (auto it : ans)
-//     {
-//         Insert(head1, last, it);
-//     }
-//     return head1;
-// }
-
-// int main()
-// {
-//     int n, num;
-//     cin >> n;
-
-//     Node *head, *tail;
-//     cin >> num;
-//     head = tail = new Node(num);
-
-//     for (int i = 0; i < n - 1; i++)
-//     {
-//         cin >> num;
-//         tail->next = new Node(num);
-//         tail = tail->next;
-//     }
-//     Node* head1=Reverse(head);
-//     while(head1!=NULL)
-//     {
-//         cout<<head1->data<<" ";
-//         head1=head1->next;
-//     }
-// }
-
-// #include <bits/stdc++.h>
-// using namespace std;
-
-// int FindMaxSum(int arr[], int n)
-// {
-
-//     if (n == 1)
-//     {
-//         return arr[0];
-//     }
-//     if (n == 2)
-//     {
-//         return max(arr[0], arr[1]);
-//     }
-//     int dp[n + 1];
-//     dp[1] = arr[0];
-//     dp[2] = max(arr[0], arr[1]);
-//     for (int i = 3; i <= n; i++)
-//     {
-//         dp[i] = max(dp[i - 1], dp[i - 2] + arr[i - 1]);
-//     }
-//     return dp[n];
-// }
-// int main()
-// {
-
-//     int n;
-//     cin>>n;
-//     int arr[n];
-//     for(int i=0;i<n;i++)
-//     {
-//         cin>>arr[i];
-//     }
-//     cout<<FindMaxSum(arr,n)<<endl;
-//     return 0;
-// }
-
 #include<bits/stdc++.h>
+
 using namespace std;
-int main()
-{
+
+class Node{
+    public:
+    int val;
+    Node * next;
+    Node(int data){
+        val = data;
+        next = NULL;
+    }
+};
+
+Node * createLL(int n){
+    Node * head = NULL;
+    Node * curr = NULL;
+    for(int i=0;i<n;i++){
+        int a;
+        cin>>a;
+        Node * temp = new Node(a);
+        if(curr == NULL){
+            curr = temp;
+            head = curr;
+        }
+        else{
+            curr->next = temp;
+            curr = curr->next;
+        }
+    }
+    return head;
+}
+
+void print(Node * root){
+    while(root != NULL){
+        cout<<root->val<<" ";
+        root = root->next;
+    }
+    cout<<endl;
+}
+Node * findMid(Node * root){
+    Node * slow = root;
+    Node * fast = root->next;
+    while(fast != NULL && fast->next == NULL){
+        slow = root->next;
+        fast = root->next->next;
+    }
+    return slow;
+}
+Node * merge(Node * root1,Node * root2){
+    Node * head1 = root1;
+    Node * head2 = root2;
+    
+    Node * res = NULL;
+    Node * curr = NULL;
+    while(head1 != NULL && head2 != NULL){
+        int d;
+        if(head1->val < head2->val){
+            d = head1->val;
+            head1 = head1->next;
+        }
+        else{
+            d = head2->val;
+            head2 = head2->next;
+        }
+        Node * temp = new Node(d);
+        if(curr == NULL){
+            curr = temp;
+            res = curr;
+        }
+        else{
+            curr->next = temp;
+            curr = curr->next;
+        }
+    }
+    if(head2 != NULL){
+        while(head2 != NULL){
+            int d = head2->val;
+            Node * temp = new Node(d);
+            curr->next = temp;
+            curr = curr->next;
+            
+            head2 = head2->next;
+        }
+    }
+    if(head1 != NULL){
+        while(head1 != NULL){
+            int d = head1->val;
+            Node * temp = new Node(d);
+            curr->next = temp;
+            curr = curr->next;
+            
+            head1 = head1->next;
+        }
+    }
+    return res;
+}
+Node * mergeSort(Node * root){
+    //Base case
+    if(root->next == NULL){
+        return root;
+    }
+    Node * mid = NULL;
+    Node * root1 = NULL;
+    mid = findMid(root);
+    
+    if(mid != NULL){
+        root1 = mid->next;
+    }
+    cout<<root1->val<<endl;
+
+    mid->next == NULL;
+    //Node * res = merge(mergeSort(root),mergeSort(root1));
+    return NULL;
+}
+int main(){
     int n;
     cin>>n;
-    int A[n];
-    for(int i=0;i<n;i++)
-    {
-        cin>>A[i];
+    Node * root = createLL(n);
+    print(root);
+    Node * curr = root;
+    while(curr->next != NULL){
+        curr = curr->next;
+        
     }
-    int min=0;
-    int max=0;
-    for(int j=0;j<n;j++)
-    {
-        if(j%2==0)
-        {
-            min+=A[j];
-        }
-        else
-        {
-            max+=A[j];
-        }
-    }
-    if(max>=min)
-        cout<<max;
-    else
-        cout<<min;
+    Node * ans = mergeSort(root);
+    
 }

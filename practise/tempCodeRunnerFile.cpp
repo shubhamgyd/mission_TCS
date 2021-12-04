@@ -48,6 +48,6 @@ void tugOfWar(int arr[],int n)
 }
 int main()
 {
-    cout<<ceil(1/2)<<endl;
+    
     return 0;
 }

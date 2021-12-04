@@ -36,18 +36,15 @@ void unionn(int u, int v, vector<int> &parent, vector<int> &rank) {
 }
 int main(){
 	int N,m;
-	cin >> N >> m;
-	vector<node> edges; 
+	cin>>N>>m;
+	vector<node>edges; 
 	for(int i = 0;i<m;i++) {
-	    int u, v,wt;
-	    cin >> u >> v>> wt; 
-		//wt=vec[u-1];
-	    edges.push_back(node(u, v, wt)); 
+	    int u,v,wt;
+	    cin>>u>>v>>wt;
+	    edges.push_back(node(u,v,wt)); 
 	}
-	sort(edges.begin(), edges.end(), comp); 
-	
+	sort(edges.begin(), edges.end(), comp);
 	vector<int> parent(N+1);
-
 	for(int i =0;i<=N;i++) 
 	    parent[i] = i; 
 

@@ -93,10 +93,10 @@ Space Somplexity: O(n*weight)
 
 int main()
 {
-    int wt[]={1,2,3,4,5,6 };
-    int val[]={1,1,1,1,1,1};
-    int W=9;
-    int n=6;
+    int wt[]={20,25,5 };
+    int val[]={60,50,20};
+    int W=40;
+    int n=3;
     memset(dp, -1, sizeof(dp));
     cout<<"Maximum total Value of the given knapsack is: "<<knapSack(W,wt,val,n)<<endl;
     cout<<"Maximum total Value of the given knapsack is: "<<knapsack(n,W,wt,val)<<endl;

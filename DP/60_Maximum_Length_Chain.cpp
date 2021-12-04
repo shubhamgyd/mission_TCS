@@ -45,7 +45,7 @@ struct val{
 
 /*You are required to complete this method*/
 
-bool cmp(const val&a,const val&b){
+static bool cmp(const val&a,const val&b){
 return(b.second>a.second);
 }
 int maxChainLen(struct val p[],int n)
@@ -57,11 +57,11 @@ int maxChainLen(struct val p[],int n)
     //int value=0;
     //int count=0;
     sort(p,p+n,cmp);
-    for(int i=0;i<n;i++)
-    {
-        cout<<p[i].first<<" "<<p[i].second<<endl;
-    }
-    cout<<endl;
+    // for(int i=0;i<n;i++)
+    // {
+    //     cout<<p[i].first<<" "<<p[i].second<<endl;
+    // }
+    // cout<<endl;
     for(int i=0;i<n;i++)
     {
         dp[i]=1;

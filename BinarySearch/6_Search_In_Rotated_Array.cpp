@@ -185,8 +185,8 @@ int main()
     // {
     //     cout<<"Element is not present in given array"<<endl;
     // }
-    vector<int>v1{1,0,1,1,1};
-    int target=0;
+    vector<int>v1{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11 };
+    int target=12;
     int a=search1(v1,target);
     if(a>=0)
     {

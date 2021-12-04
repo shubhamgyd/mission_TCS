@@ -36,7 +36,7 @@ int findPos(int arr[],int key)
     int low=0;
     int high=1;
     //int val=arr[0];
-    while(key>arr[high]) // iterating until the key is less than array of high
+    while(key>arr[high]) // iterating until the key is greater than array of high
     {
         low=high;
         high=2*high;

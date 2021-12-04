@@ -48,7 +48,7 @@ int main()
 {
     ios::sync_with_stdio(0);
     cin.tie(0);
-    string X="ababa"; 
+    string X="xyzxyz"; 
     // Just think about second string , it is not gien ....
     // Reminder the example of LCS , there we have given two strings ...so that we can easily find the LCS
     // But here we have given only one string ....so for second string , we have to just reverse the 

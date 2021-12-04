@@ -7,63 +7,28 @@ using namespace std;
 #define int long long
 
 
-int totalCycle(int vertices)
-{
-	int result = 0;
-
-
-	result = pow(vertices, 2) - (3 * vertices) + 3;
-
-	return result;
-}
-
-
-int Edges(int vertices)
-{
-	int result = 0;
-
-	result = 2 * (vertices - 1);
-
-	return result;
-}
-
-int Diameter(int vertices)
-{
-	int result = 0;
-
-	if (vertices == 4)
-		result = 1;
-	else
-		result = 2;
-
-	return result;
-}
-
 int32_t main()
 {
-    fast();
-	int t;
-    cin>>t;
-    while(t--)
+    vector<int>res={3,2,4,5,1,2,5,3,4,6};
+    int x=res[0];
+    for(int i=1;i<res.size();i++)
     {
-        int n,m,k;
-        cin>>n>>m>>k;
-        if(n==1 && m==0 && k==3)
+        x^=res[i];
+    }
+    x&=-x;
+
+    int y=0,z=0;
+    for(int i=0;i<res.size();i++)
+    {
+        if((res[i]&x)==0)
         {
-            cout<<"YES"<<endl;
-            continue;
-        }
-        int edges=Edges(n);
-        int dia=Diameter(n);
-        if(edges==m && dia<k-1)
-        {
-            cout<<"YES"<<endl;
+            y^=res[i];
         }
         else
         {
-            cout<<"NO"<<endl;
+            z^=res[i];
         }
     }
-
-	return 0;
+    cout<<y<<" "<<z<<endl;
+    return 0;
 }

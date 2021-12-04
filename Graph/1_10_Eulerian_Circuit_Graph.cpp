@@ -5,7 +5,7 @@
 //.....a) Means we apply dfs on graph and check wheather it is connected or not means if any list of node is not 
 //      visited then this graph is not eulerian graph
 //.....b) After that we count the degree of each node  ..i.e odd gegree means nodes which have odd number of incoming and outgoing edges
-//      if odd==0---> Graph is Eulerian Graph (Eulerian Circuit)
+//      if odd==0---> except end nodes Graph is Eulerian Graph (Eulerian Circuit)
 //      if odd==1---> Graph is Semi-Eulerain  (Eulerain Path)
 //      if odd>2 ---> Not Eulerain Graph
 
@@ -92,6 +92,9 @@ void find_Euler_Path(int n,vector<int>adj[])
 	else                     // Odd degree=0
 		cout<<"Graph is Eulerian (Euler circuit)\n";
 }
+// Time Complexity :O(V+E)
+// We have uses simply dfs here 
+
 
 int32_t main()
 {

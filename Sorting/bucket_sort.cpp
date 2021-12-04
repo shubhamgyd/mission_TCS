@@ -50,7 +50,7 @@ void BucketSort(vector<float>&res)
 
 int main()
 {
-    vector<float>res={0.897, 0.565, 0.656, 0.1234, 0.665, 0.3434};
+    vector<float>res={0.897, 0.565, 0.656, 0.1234, 0.565, 0.3434,0.565};
     BucketSort(res);
     return 0;
 }
