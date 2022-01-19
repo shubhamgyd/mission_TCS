@@ -27,6 +27,7 @@ int LCS(string X,string Y,int m,int n)
         {
             //IF both char matched of both the string , then add 1 to the upper left cross
             // block of that matrix and update it in current block
+            // Increase the length of LCS by 1
             if(X[i-1]==Y[j-1])
             {
                 dp[i][j]=1+dp[i-1][j-1];

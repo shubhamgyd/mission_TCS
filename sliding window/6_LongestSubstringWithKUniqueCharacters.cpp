@@ -43,8 +43,15 @@ int main()
             j++;
         }
     }
-    cout<<"Maximum length of the longest substring with k unique characters : "<<mx<<endl;
-    cout<<"Maximum Number of selected toys among the given condition : "<<mx<<endl;
+    if(mx!=INT_MIN)
+    {
+        cout<<"Maximum length of the longest substring with k unique characters : "<<mx<<endl;
+        cout<<"Maximum Number of selected toys among the given condition : "<<mx<<endl;
+    }
+    else
+    {
+        cout<<"Not Valid"<<endl;
+    }
     return 0;
 }
 

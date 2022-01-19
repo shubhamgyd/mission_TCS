@@ -1,67 +1,54 @@
-// In this problem we are going to generate all possible parenthesis 
-
-
 #include<bits/stdc++.h>
 using namespace std;
 
-class Solution {
-    void balanced(vector<string>&v,int open,int close,string op)
-    {
-        if(open==0 && close==0)
-        {
-            v.push_back(op);
-            return;
-        }
-        if(open!=0)
-        {
-            string op1=op;
-            op1.push_back('(');
-            balanced(v,open-1,close,op1);
-        }
-        if(close>open)
-        {
-            string op2=op;
-            op2.push_back(')');
-            balanced(v,open,close-1,op2);
-        }
-        return;
-    }
-    
-public:
-    vector<string> generateParenthesis(int n) {
-        int open=n;
-        int close=n;
-        vector<string>v;
-        string op="";
-        balanced(v,open,close,op);
-        return v;
-    }
-};
 
+int maxSubArraySum(vector<int>&a, int size)
+{
+    int max_so_far = INT_MIN, max_ending_here = 0,
+       start =0, end = 0, s=0;
+
+    for (int i=0; i< size; i++ )
+    {
+        max_ending_here += a[i];
+
+        if (max_so_far < max_ending_here)
+        {
+            max_so_far = max_ending_here;
+            start = s;
+            end = i;
+        }
+
+        if (max_ending_here < 0)
+        {
+            max_ending_here = 0;
+            s = i + 1;
+        }
+    }
+    int sum=max_so_far;
+    int mn=INT_MAX;
+    int len=0;
+    cout<<start<<" "<<end<<endl;
+    for(int i=start;i<end;i++)
+    {
+        mn=min(a[i],mn);
+        len++;
+    }
+    int ans=sum+mn*len;
+    return ans;
+    
+}
 
 int main()
 {
-// #ifndef ONLINE_JUDGE
-//     freopen("ip.txt", "r", stdin);
-//     freopen("op.txt", "w", stdout);
-// #endif
-    int t;
-    cin>>t;
-    while(t--)
+    int n;
+    cin>>n;
+    vector<int>res(n);
+    for(int i=0;i<n;i++)
     {
-        int n;
-        cin>>n;
-        Solution obj;
-        for(int i=0;i<n;i++)
-        {
-            int a;
-            cin>>a;
-            vector<string>vs={obj.generateParenthesis(a)};
-            for(auto ele:vs)
-            {
-                cout<<ele<<" ";
-            }
-            cout<<endl;
-        }
+        cin>>res[i];
     }
+    int ans=maxSubArraySum(res,n);
+    cout<<ans<<endl;
+    return 0;
+
 }

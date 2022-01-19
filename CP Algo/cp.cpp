@@ -1,40 +1,49 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
+#define fast() ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
+#define int long long 
+#define mod 1000000007
 using namespace std;
+#define endl '\n'
 
-int countDivisors(int n) { 
-    int sum=0;
-    int flag=0;
-    int cnt = 0; 
-    int f1=0;
-    for (int i = 1; i <= sqrt(n); i++) { 
-        if (n % i == 0) { 
-            // If divisors are equal, 
-            // count only one 
-            if (n / i == i) 
-            {   sum+=i;
-                cnt++; 
-            }
-            else // Otherwise count both 
-            {    
-                cnt = cnt + 2; 
-                sum+=i;
-                sum+=n/i;
-            }
-
-            // if(cnt>4)
-            // {
-            //     flag=1;
-            //     break;
-            // }
-        }
-        
-    }
-    return cnt==4?sum:0;
-    //return cnt; 
-} 
-
-int main()
+int32_t main()
 {
-    cout<<countDivisors(21)<<endl;
+#ifndef ONLINE_JUDGE
+    freopen("inputf.in", "r", stdin);
+    freopen("outputf.out", "w", stdout);
+#endif
+    fast();
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int n;
+        cin>>n;
+        int flag=0;
+        int low=1;
+        int high=cbrt(n);
+        while(low<=high)
+        {
+            int val=(low*low*low+high*high*high);
+            if(val==n)
+            {
+                cout<<"YES"<<endl;
+                flag=1;
+                break;
+            }
+            if(val<n)
+            {
+                low++;
+            }
+            else
+            {
+                high--;
+            }
+        }
+        if(!flag)
+        {
+            cout<<"NO"<<endl;
+        }
+
+    }
     return 0;
 }

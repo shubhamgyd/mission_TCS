@@ -174,9 +174,9 @@ void prefixSearch(struct Trie *root,string s)
     }
 
     prefixSuggestions(p,s);
-
-
 }
+
+
 int main ()
 {
     struct Trie *root= getNode();

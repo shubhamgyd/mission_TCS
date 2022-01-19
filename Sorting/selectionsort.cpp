@@ -1,6 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+// It will find the smallest element from the array and then sort it with the current element
 void SelectionSort(vector<int>&v,int n,int& swaps)
 {
     for(int i=0;i<n-1;i++)

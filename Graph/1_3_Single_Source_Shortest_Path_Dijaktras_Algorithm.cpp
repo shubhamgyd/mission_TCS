@@ -71,7 +71,7 @@ int main()
         cin>>u>>v>>w;
         addEdge(u,v,w);
     }
-    Dijaktras(1);
+    Dijaktras(0);
 }
 
 /*

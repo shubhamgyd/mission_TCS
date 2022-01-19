@@ -1,34 +1,31 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
-#define fast()                        \
-    ios_base::sync_with_stdio(false); \
-    cin.tie(NULL);                    \
-    cout.tie(NULL);
-#define int long long
 
 
-int32_t main()
+int main()
 {
-    vector<int>res={3,2,4,5,1,2,5,3,4,6};
-    int x=res[0];
-    for(int i=1;i<res.size();i++)
+    int n;
+    cin>>n;
+    int arr[n];
+    for(int i=0;i<2*n;i++)
     {
-        x^=res[i];
+        cin>>arr[i];
     }
-    x&=-x;
-
-    int y=0,z=0;
-    for(int i=0;i<res.size();i++)
+    int ct=0;
+    for(int i=0;i<n;i++)
     {
-        if((res[i]&x)==0)
+        for(int j=i+1;j<n;j++)
         {
-            y^=res[i];
-        }
-        else
-        {
-            z^=res[i];
+            for(int k=j+1;k<n;k++)
+            {
+                int n1=arr[i],n2=arr[j],n3=arr[k];
+                if(abs(n1-n2)+abs(n2-n3)==abs(n1-n3))
+                {
+                    ct++;
+                }
+            }
         }
     }
-    cout<<y<<" "<<z<<endl;
+    cout<<ct<<endl;
     return 0;
 }

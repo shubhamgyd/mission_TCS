@@ -55,7 +55,6 @@ here 1st INT_MAX is from the same row and 2nd one is from above row and same col
                 dp[i][j]=dp[i-1][j];
             }
         }
-
     }
     // If coins array contains only limited coins
     //i.e of array contains 2 as a coins and we want 3 as a sum then that time 

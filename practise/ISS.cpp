@@ -3,9 +3,7 @@ using namespace std;
 
 int main()
 {
-    vector<int>res;
-    res.resize(3);
-    res.push_back(10);
-    res.push_back(12);
-    cout<<res.back()<<endl;
+    int num=-2;
+    int val=3;
+    cout<<num/val<<endl;
 }

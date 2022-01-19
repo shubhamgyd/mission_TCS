@@ -1,32 +1,45 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define fast()                        \
-    ios_base::sync_with_stdio(false); \
-    cin.tie(NULL);                    \
-    cout.tie(NULL);
-#define int long long
 
-void solve(int a, int b)
+int main()
 {
-    while(true)
+    int n;
+    cin >> n;
+    vector<int> res(n);
+    for (int i = 0; i < n; i++)
     {
-        while(b%a!=0)
+        cin >> res[i];
+    }
+    int x;
+    cin >> x;
+    vector<int> ans(n), temp(n);
+    int turn = 0;
+    for (int i = 0; i < x; i++)
+    {   
+        int num=res[0];
+        for (int j = 0; j < n - 1; j++)
         {
-            b*=(b%a);
+            res[j] = abs(res[j] - res[j + 1]);
+        }
+        if(i!=0)
+        {
+            res[n-1]=abs(res[n-1]-num);
+        }
+        if(i==x-2)
+        {
+            temp=res;
         }
     }
-}
-
-int32_t main()
-{
-    fast();
-    int t;
-    cin >> t;
-    while (t--)
+    
+    for (int i = 0; i < n; i++)
     {
-        int a, b;
-        cin >> a >> b;
-        solve(a, b);
+        cout << res[i] << " ";
     }
+    cout<<endl;
+    for (int i = 0; i < n; i++)
+    {
+        cout << temp[i] << " ";
+    }
+    cout << endl;
     return 0;
 }
