@@ -34,7 +34,7 @@
 //     }
 //     int mn=INT_MAX;
 //     // Find the largest j such that dp[n][j]
-//     // is true where j loops from sum/2 t0 0
+//     // is true where j loops from sum/2 to 0
 //     for(int i=sum/2;i>=0;i--)
 //     {
 //         if(dp[n][i]==true)
@@ -43,12 +43,7 @@
 //             break;
 //         }
 //     }
-
 //     return mn;
-
-
-
-
 // }
 
 // int main()

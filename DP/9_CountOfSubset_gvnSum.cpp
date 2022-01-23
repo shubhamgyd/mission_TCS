@@ -1,6 +1,71 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+
+int CountSubsets(int arr[],int n,int i,int sum,int count)
+{
+    // base condition
+    // if we reached to the destination i.e. end  of the array, then return count
+    if(i==n)
+    {
+        if(sum==0)
+        {
+            count++;
+        }
+        return count;
+    }
+
+
+    // now we have two chioces for every element
+    // either we include it our sum or we can exclude it 
+    count=CountSubsets(arr,n,i+1,sum-arr[i],count);
+    count=CountSubsets(arr,n,i+1,sum,count);
+    return count;
+}
+// Time Complexity: Exponentional
+// Space Complxity:O(1)
+
+
+
+
+// Optimise 
+// Memoization
+#define maxN 20
+#define maxSum 50
+#define minSum 50
+#define base 50
+ 
+// To store the states of DP
+int dp[maxN][maxSum + minSum];
+bool v[maxN][maxSum + minSum];
+ 
+// Function to return the required count
+int findCnt(int* arr, int i, int required_sum, int n)
+{
+    // Base case
+    if (i == n) {
+        if (required_sum == 0)
+            return 1;
+        else
+            return 0;
+    }
+ 
+    // If the state has been solved before
+    // return the value of the state
+    if (v[i][required_sum + base])
+        return dp[i][required_sum + base];
+ 
+    // Setting the state as solved
+    v[i][required_sum + base] = 1;
+ 
+    // Recurrence relation
+    dp[i][required_sum + base]
+        = findCnt(arr, i + 1, required_sum, n)
+          + findCnt(arr, i + 1, required_sum - arr[i], n);
+    return dp[i][required_sum + base];
+}
+
+
 int CountSumSubArray(int arr[],int sum,int n)
 {
     int tab[n+1][sum+1];  // Initilization of array
@@ -25,9 +90,10 @@ int CountSumSubArray(int arr[],int sum,int n)
         }
     }
     return tab[n][sum];
-
-
 }
+// Time Complexity:O(n*sum)
+// Space Complexity:O(n*sum)
+
 
 int main()
 {
