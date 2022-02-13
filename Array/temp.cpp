@@ -4,38 +4,104 @@
     cin.tie(NULL);                    \
     cout.tie(NULL);
 #define int long long
-#define mod 1000000007
-#define MAX_N 1000001
+// #define mod 1000000007
 using namespace std;
+#define endl '\n'
 
-struct info
+
+
+void solve()
 {
-    char name[50];
-    int age;
-    int id;
-}Info[10];
+    int n;
+    cin>>n;
+    vector<int>res(2*n);
+    vector<int>first,second;
+    for(int i=0;i<2*n;i++)
+    {
+        cin>>res[i];
+        if(i<n)
+        {
+            first.push_back(res[i]);
+        }
+        else
+        {
+            second.push_back(res[i]);
+        }
+    }
+    int mx1=0;
+    sort(first.begin(),first.end());
+    sort(second.begin(),second.end());
+    int i=0;
+    for(;i<first.size();)
+    {
+        if(first[i]!=mx1)
+        {
+            break;
+        }
+        else if(mx1==first[i])
+        {
+            mx1++;
+            int j=i;
+            while(j<first.size() && first[i]==first[j])
+            {
+                j++;
+            }
+            i=j;
+        }
+    }
+    if(first.back()==mx1)
+    {
+        mx1++;
+    }
+    int  mx2=0;
+    i=0;
+    for(;i<second.size();)
+    {
+        if(second[i]!=mx2)
+        {
+            break;
+        }
+        else if(mx2==second[i])
+        {
+            mx2++;
+            int j=i;
+            while(j<second.size() && second[i]==second[j])
+            {
+                j++;
+            }
+            i=j;
+        }
+    }
+    if(second.back()==mx2)
+    {
+        mx2++;
+    }
+
+    if(mx1==mx2)
+    {
+        cout<<"YES"<<endl;
+    }
+    else
+    {
+        cout<<"NO"<<endl;
+    }
+
+    
+}
 
 int32_t main()
 {
+// #ifndef ONLINE_JUDGE
+//         freopen("inputf.in", "r", stdin);
+//         freopen("outputf.out", "w", stdout);
+// #endif
     fast();
-    int user;
-    deque<int>dq;
-    cout<<"Enter number of users: ";
-    cin>>user;
-    if(user<3)
+    int t;
+    cin >> t;
+    while (t--)
     {
-        cout<<"Please enter number of users greter than 3..!!"<<endl;
-        main();
+        solve();
     }
-    for(int i=0;i<user;i++)
-    {
-        cin>>Info[i].name;
-        cin>>Info[i].age;
-        cin>>Info[i].id;
-    }
-    for(int i=0;i<user;i++)
-    {
-        cout<<Info[i].name<<" "<<Info[i].age<<" "<<Info[i].id<<endl;
-    }
+    // solve();
     return 0;
 }

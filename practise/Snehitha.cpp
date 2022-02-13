@@ -1,119 +1,97 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
-#define endl '\n'
-// #define int long long
+const int mod=1000000007;
 
-// bool Prime(int n)
-// {
-//     bool isPrime=true;
-//     int i;
-//     if (n == 0 || n == 1) {
-//         isPrime = false;
-//     }
-//     else {
-//         for (i = 2; i <= n / 2; ++i) {
-//             if (n % i == 0) {
-//                 isPrime = false;
-//                 break;
-//             }
-//         }
-//     }
-//     if (isPrime)
-//         return true;
-//     return false;
-// }
-
-// bool cmp(pair<int,int>&a,pair<int,int>&b)
-// {
-//     if(a.first==b.first)
-//     {
-//         return b.second<a.second;
-//     }
-//     return a.first<b.first;
-// }
-// int nearestNum(int n)
-// {
-//     priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>pq;
-//     vector<pair<int,int>>res;
-//     int ct=0;
-//     int flag=0;
-//     for(int i=n;i>=1;i--)
-//     {
-//         if(Prime(i))
-//         {
-//             ct++;
-//             int diff=abs(n-i);
-//             // pq.push({diff,i});
-//             res.push_back({diff,i});
-//             if(ct==5)
-//             {
-//                 flag=1;
-//                 break;
-//             }
-//         }
-//         if(flag)
-//         {
-//             break;
-//         }
-//     }
-//     ct=0;
-//     flag=0;
-//     for(int i=n+1;i<=200000;i++)
-//     {
-//         if(Prime(i))
-//         {
-//             ct++;
-//             int diff=abs(n-i);
-//             // pq.push({diff,i});
-//             res.push_back({diff,i});
-//             if(ct==5)
-//             {
-//                 flag=1;
-//                 break;
-//             }
-//         }
-//         if(flag)
-//         {
-//             break;
-//         }
-//     }
-//     sort(res.begin(),res.end(),cmp);
-//     res.resize(5);
-//     int val=res[4].second;
-//     return val;
-
-// }
-
-
-
-static int CountTriplets(long long int a, long long  int b, long long int c)
+long long findFact(int num)
 {
-    const int mod=1000000007;
-    if (b < a)
-        swap(a, b);
-    if (c < b)
+    int i=1, fact=1;
+    while(i<=num)
     {
-        swap(c, b);
-        if (b < a)
-            swap(b, a);
+        fact = i*fact;
+        i++;
     }
-    a %= mod;
-    b = (b - 1) % mod;
-    c = (c - 2) % mod;
-    long long int  res = (a * b);
-    res %= mod;
-    res *= c;
-    res %= mod;
-    return res;
+    return fact;
+}
+
+int findNPR(int n, int r)
+{
+    long long numerator, denominator;
+    numerator = findFact(n);
+    denominator = findFact(n-r);
+    return (numerator/denominator);
+}
+
+
+int findNCR(int n, int r)
+{
+    int npr, ncr;
+    npr = findNPR(n, r);
+    ncr = npr/findFact(r);
+    return ncr;
+}
+
+int zeroSubsequences(vector<int>arr)
+{
+    int n=arr.size();
+    int lesser=0,greater=0;
+    long long ct=0;
+    
+    for(int i=0;i<n;i++)
+    {
+        if(arr[i]==0)
+        {
+            ct++;
+        }
+        if(arr[i]<0)
+        {
+            lesser++;
+        }
+        else if(arr[i]>0)
+        {
+            greater++;
+        }
+    }
+    if(ct>1)
+    {
+        int temp=ct-1;
+        // lesser+=temp;
+        // greater+=temp;
+    }
+    long long ans=0;
+    // long long temp=0;
+    if(ct)
+    {
+        for(int i=0;i<lesser+ct-1;i++)
+        {
+            ans=(ans%mod+(findNPR(lesser+ct-1,i+1)))%mod;
+            // temp=(temp%mod+(findNCR(lesser+ct-1,i+1)))%mod;
+        }
+        for(int i=0;i<greater+ct-1;i++)
+        {
+            ans=(ans%mod+(findNPR(greater+ct-1,i+1)))%mod;
+            // temp=(temp%mod+(findNCR(greater+ct-1,i+1)))%mod;
+        }
+        
+        // ans=((ans%mod)*(ct%mod))%mod;
+    }
+    if(ct==1)
+    {
+        ans=(ans%mod+1LL%mod)%mod;
+        // temp=(temp%mod+1LL%mod)%mod;
+    }
+    // cout<<ans<<" "<<temp<<endl;
+    return ans;
 }
 
 int main()
 {
-    ios::sync_with_stdio(false);
-    cin.tie(0);
-    cout.tie(0);
-    long long int a,b,c;
-    cin >>a>>b>>c;
-    cout << CountTriplets(a,b,c)<< endl;
+    int n;
+    cin>>n;
+    vector<int>arr(n);
+    for(int i=0;i<n;i++)
+    {
+        cin>>arr[i];
+    }
+    cout<<zeroSubsequences(arr)<<endl;
     return 0;
 }

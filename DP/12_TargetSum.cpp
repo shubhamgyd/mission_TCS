@@ -43,6 +43,10 @@ int CountSubWithDiff(int arr[],int n , int diff)
 
 int main()
 {
+#ifndef ONLINE_JUDGE
+    freopen("inputf.in", "r", stdin);
+    freopen("outputf.out", "w", stdout);
+#endif
     int arr[] ={1,1,1,1,1};
     int diff=3;
     int n=sizeof(arr)/sizeof(arr[0]);

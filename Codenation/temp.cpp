@@ -1,5 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
+const int mod=1000000007;
+
 
 int countUnique(int arr[], int n)
 {
@@ -8,9 +10,9 @@ int countUnique(int arr[], int n)
 	for (int i = 0; i < n; i++)
 		mp.insert(arr[i]);
 
-	int c = pow(mp.size(), 2);
+	int c = pow(mp.size()%mod, 2);
 
-	return c;
+	return c%mod;
 }
 
 int main()

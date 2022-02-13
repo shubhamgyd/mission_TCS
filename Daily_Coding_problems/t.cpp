@@ -1,62 +1,69 @@
 #include <bits/stdc++.h>
-#define fast() ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
-#define int long long 
-#define mod 1000000007
 using namespace std;
-#define endl '\n'
 
-
-void solve()
+class Node
 {
-    int n;
-    cin>>n;
-    string str;
-    cin>>str;
-    int q;
-    cin>>q;
-    for(int i=0;i<q;i++)
+public:
+    int value;
+    Node *left;
+    Node *right;
+    Node *nextRight;
+
+    Node() : value(0), left(NULL), right(NULL), nextRight(NULL) {}
+
+    Node(int _val) : value(_val), left(NULL), right(NULL), nextRight(NULL) {}
+
+    Node(int _val, Node *_left, Node *_right, Node *_next)
+        : value(_val), left(_left), right(_right), nextRight(_next) {}
+};
+
+class Solution
+{
+public:
+    Node *connect(Node *root)
     {
-        string s;
-        cin>>s;
-        int hash[26];
-        memset(hash,0,sizeof(hash));
-        for(auto it:s)
+        Node *pre = root, *cur;
+        while (pre)
         {
-            hash[(it)-'0']++;
-        }
-        int len=0;
-        for(int i=0;i<n;i++)
-        {
-            int flag=1;
-            hash[str[i]-'0']--;
-            for(int j=0;j<26;j++)
+            cur = pre;
+            while (cur && cur->left)
             {
-                if(hash[i])
+                cur->left->nextRight = cur->right;
+                if (cur->nextRight)
                 {
-                    flag=0;
-                    break;
+                    cur->right->nextRight = cur->nextRight->left;
                 }
+                cur = cur->nextRight;
             }
-            if(flag)
-            {
-                len=i+1;
-                break;
-            }
+            pre = pre->left;
         }
-        cout<<len<<endl;
+        return root;
     }
+};
+
+Node* connectNeighbour(Node *node)
+{
+    Node *now, *tail, *head;
+    
+    now = node;
+    head = tail = NULL;
+    while(now)
+    {
+        if (now->left)
+            if (tail) tail = tail->nextRight =now->left;
+            else head = tail = now->left;
+        if (now->right)
+            if (tail) tail = tail->nextRight =now->right;
+            else head = tail = now->right;
+        if(!(now = now->nextRight))
+        {
+            now = head;
+            head = tail=NULL;
+        }
+    }
+    return node;
 }
 
-
-
-int32_t main() {
-// #ifndef ONLINE_JUDGE
-//     freopen("inputf.in", "r", stdin);
-//     freopen("outputf.out", "w", stdout);
-// #endif
-    for(int i=-10;i++;)
-    {
-        cout<<"h"<<i<<endl;
-    }
-    return 0;
+int main()
+{
 }
