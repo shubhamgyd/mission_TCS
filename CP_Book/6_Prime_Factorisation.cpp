@@ -1,53 +1,75 @@
 // In this program we are going to see the prime factorisation of a number
 #include<bits/stdc++.h>
 using namespace std;
+#define int long long int
 
-vector<int> factors(int n) {
-    vector<int> f;
+set<int> factors(int n) {
+    set<int> f;
     for (int x = 2; x*x <=n; x++) 
     {
         while (n%x == 0) 
         {
-            //cout<<x<<" ";
-            f.push_back(x);
+            cout<<x<<" ";
+            f.insert(x);
             n /= x;
         }
     }
-    if (n > 1) f.push_back(n);
+    if (n > 1) f.insert(n);
     return f;
 }
 
-int main()
+int SumPrimeFactors(int n)
 {
-
-    // for(int i=101;i<=200;i++)
-    // {
-    int n;
-    cin>>n;
     if(n==1)
     {
         cout<<0<<endl;
         return 0;
     }
-    vector<int>v=factors(n);
-    sort(v.begin(),v.end());
+    set<int>v=factors(n);
+    int sum=0;
     for(auto it:v)
     {
-        cout<<it<<" ";
+        sum+=it;
     }
-    cout<<endl;
-    set<int>st;
-    for(int i=0;i<v.size();i++)
+    cout<<"sum of prime is: "<<sum<<endl;
+    return sum;
+}
+
+signed main()
+{
+
+    // for(int i=101;i<=200;i++)
+    // {
+    
+    int n;
+    cin>>n;
+    SumPrimeFactors(n);
+    if(n==1)
     {
-        if(st.find(n-v[i])!=st.end())
-        {
-            //return {v[i],n-v[i]};
-            cout<<v[i]<<" "<<n-v[i]<<endl;
-            break;
-        }
-        st.insert(v[i]);
+        cout<<0<<endl;
+        return 0;
     }
-    return {};
+    set<int>v=factors(n);
+    // sort(v.begin(),v.end());
+    int sum=0;
+    for(auto it:v)
+    {
+        sum+=it;
+    }
+    cout<<sum<<endl;
+    // cout<<endl;
+    // set<int>st;
+    // for(int i=0;i<v.size();i++)
+    // {
+    //     if(st.find(n-v[i])!=st.end())
+    //     {
+    //         //return {v[i],n-v[i]};
+    //         cout<<v[i]<<" "<<n-v[i]<<endl;
+    //         break;
+    //     }
+    //     st.insert(v[i]);
+    // }
+    // return {};
     //}
     return 0;
 }

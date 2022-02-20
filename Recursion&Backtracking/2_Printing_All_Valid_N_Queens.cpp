@@ -55,3 +55,88 @@ int main()
     }
     return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+Practice Mode:
+
+bool isValid(int row,int col,int n,vector<string<&nQeens)
+{
+    // if qeen is present in same column before
+    for(int int i=0;i<row;i++)
+    {
+        if(nQeens[i][col]=='Q')
+        {
+            return false;
+        }
+    }
+
+
+    // if queen is already present in left diagonal
+    for(int i=row-1,j=col-1;i>=0,j>=0,i--,j--)
+    {
+        if(nQeens[i][j]=='Q')
+        {
+            return false;
+        }
+    }
+
+    // if queen is already present in the left down diagonal
+    for(int i=row+1,j=col-1;i<n,j>=0;i++,j--)
+    if(nQeens[i][j]=='Q')
+    {
+        return false;
+    }
+
+    return true;
+}
+
+
+void Ways(vector<vector<string>>&ans,vector<string>&nQeens,int col,int n)
+{
+    if(col==n)
+    {
+        ans.push_back(nQeens);
+        return;
+    }
+    for(int row=0;row<n;row++)
+    {
+        if(isValid(row,col,n,nQeens))
+        {
+            nQeens[row][col]='Q';
+            Ways(as,nQeens,col+1,n);
+            nQeens[row][col]='.';
+        }
+    }
+}
+
+vector<vector<string>> solve(int n)
+{
+    vector<vector<string>>ans;
+    vector<string>nQeens(n,string('.'));
+    Ways(ans,nQeens,0,n);
+    return ans;
+}
+
+// Time Complexity:O(2^n)
+// Space Complexity:O(n*n)
+
+*/
