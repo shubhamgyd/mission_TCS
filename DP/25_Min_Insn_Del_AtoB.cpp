@@ -36,8 +36,8 @@ int main()
 {
     ios::sync_with_stdio(0);
     cin.tie(0);
-    string X="ecfbefdcfca";
-    string Y="badfcbebbf";
+    string X="codechef";
+    string Y="fehcedoc";
     int m=X.length();
     int n=Y.length();
     int lcs=LCS(X,Y,m,n);

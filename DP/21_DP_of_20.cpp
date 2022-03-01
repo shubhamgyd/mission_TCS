@@ -15,6 +15,7 @@ int LCS(string X,string Y,int m,int n)
             }
         }
     }
+    
     for(int i=1;i<=m;i++)
     {
         for(int j=1;j<=n;j++)
@@ -52,8 +53,8 @@ int main()
 {
     ios::sync_with_stdio(0);
     cin.tie(0);
-    string X="cde";
-    string Y="abc";
+    string X="abdeba";
+    string Y="abedba";
     int m=X.length();
     int n=Y.length();
     cout<<"Length of Longest common subsequence by using DP: "<<LCS(X,Y,m,n)<<"\n";

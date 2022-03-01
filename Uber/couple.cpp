@@ -1,86 +1,75 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
+#define fast()                        \
+    ios_base::sync_with_stdio(false); \
+    cin.tie(NULL);                    \
+    cout.tie(NULL);
+#define int long long
 using namespace std;
+#define endl '\n'
 
 
-int solve(vector<pair<int,int>>adj[],int s,vector<bool>&city,int n)
+
+
+
+void solve()
 {
-    // int dist[n+1];
-    vector<int>dist(n+1);
-    // vector<bool>visited(n+1,false);
-    bool visited[n+1];
-    for(int i=1;i<=n;i++)
+    
+    int n,k;
+    cin>>n>>k;
+    vector<int>res(k);
+    for(int i=0;i<k;i++)
     {
-        dist[i]=INT_MAX;
-        visited[i]=false;
+        cin>>res[i];
     }
-    priority_queue<pair<int,int>>pq;
-    dist[s]=0;
-    pq.push({0,s});
-    while(!pq.empty())
+    if(k==n)
     {
-        int u=pq.top().second;
-        pq.pop();
-        if(visited[u])
+        for(auto it:res)
         {
-            continue;
+            cout<<it<<" ";
+        }
+        return;
+    }
+    map<int,int>mp;
+    for(auto it:res)
+    {
+        mp[it]++;
+    }
+    int i=1;
+    while(i<=n)
+    {
+        if(mp.find(i)==mp.end())
+        {
+            res.push_back(i);
+            i++;
         }
         else
         {
-            visited[u]=true;
-            for(auto it:adj[u])
-            {
-                int v=it.first;
-                int w=it.second;
-                if(dist[v]>dist[u]+w)
-                {
-                    dist[v]=dist[u]+w;
-                    pq.push({-dist[v],v});
-                }
-            }
+            continue;
         }
     }
-
-    // sort(dist,dist+n+1);
-    // sort(dist.begin(),dist.end());
-    cout<<"for vertex: "<<s<<endl;
-    for(int i=1;i<=n;i++)
+    for(auto it:res)
     {
-        cout<<dist[i]<<endl;
+        cout<<it<<" ";
     }
     cout<<endl;
-    for(int i=1;i<=n;i++)
-    {
-        if(!city[i] && i!=s)
-        {
-            city[i]=true;
-            cout<<"dist: "<<dist[i]<<endl;
-            return dist[i];
-        }
-    }
-    return 0;
+
 
 }
 
-int main()
+
+signed main()
 {
-    int n;
-    cin>>n;
-    int m;
-    cin>>m;
-    vector<pair<int,int>>adj[n+1];
-    for(int i=0;i<m;i++)
+// #ifndef ONLINE_JUDGE
+//         freopen("inputf.in", "r", stdin);
+//         freopen("outputf.out", "w", stdout);
+// #endif
+    fast();
+    int t;
+    cin >> t;
+    while (t--)
     {
-        int u,v,w;
-        cin>>u>>v>>w;
-        adj[u].push_back({v,w});
-        adj[v].push_back({u,w});
+        solve();
     }
-    int sum=0;
-    vector<bool>city(n+1,false);
-    for(int i=1;i<=n;i++)
-    {
-        sum+=solve(adj,i,city,n);
-    }
-    cout<<sum<<endl;
+    // solve();
     return 0;
 }
