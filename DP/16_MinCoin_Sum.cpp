@@ -78,8 +78,8 @@ int main()
 {
     ios::sync_with_stdio(0);
     cin.tie(0);
-    int coin[] = {1,4,9};
-    int sum= 13;
+    int coin[] = {11,111,1111,11111,111111,1111111,11111111,111111111};
+    int sum= 69;
     int n=sizeof(coin)/sizeof(coin[0]);
     cout<<"Minimum number of coins required to make given sum: "<<CountCoin(coin,sum,n)<<"\n";
     return 0; 
