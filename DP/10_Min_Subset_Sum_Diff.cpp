@@ -122,7 +122,7 @@ bool subsetsum(int arr[],int n, int sum)
             }
         }
     }
-    // Final ans will get by usinng this block 
+    // Final ans will get by using this block 
     // Either true or false
     int range=total/2;
     vector<int>v;

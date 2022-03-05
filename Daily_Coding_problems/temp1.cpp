@@ -1,82 +1,71 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-// function find the factorial of a number
-unsigned factorial(unsigned int num)
-{
-	unsigned int res = 1, i;
-    for (i = 2; i <= num; i++)
-    {
-		res *= i;
-	}
-    return res;
-}
+// Utility function to take the array input until zero is encountered
+// and  reutrn it
 
-// function to find the gcd of two numbers
-int gcd(int a, int b)
+vector<int> Input()
 {
-    if (b == 0)
-        return a;
-    return gcd(b, a % b);
-}
-
-
-// function to check given number is prime or not
-bool isPrime(int n)
-{
-	int i;
-	bool is_prime=true;
-	if (n == 0 || n == 1) 
+	// vector is dynamic list to store the elements
+	vector<int>arr;
+	// we will take inout from user until 0 in encountered
+	while(true)
 	{
-    	is_prime = false;
- 	}
+		cout<<"Enter element: ";
+		int number;
+		cin>>number;
 
-  // loop to check if n is prime
-  for (i = 2; i <= n/2; ++i) {
-    if (n % i == 0) {
-      is_prime = false;
-      break;
-    }
-  }
-  
-  // if given number is prime , then return true
-  if (is_prime) return true;
+		// if input number is 0 then stop to take inout
+		if(number==0)
+		{
+			break;
+		}
+		else{
+			arr.push_back(number);
+		}
+	}
+	//  return the list
+	return arr;
+}
 
-  // else return false;
-  return false;
+
+// Utility function, which find the min and max element from the list and print them
+void findMinMax(vector<int>&arr)
+{
+	// mn will keep track on the minimum element
+	int mn=INT_MAX;
+	int n=arr.size();
+	for(int i=0;i<n;i++)
+	{
+		// here we are comparing each element to find the minimum element
+		mn=min(mn,arr[i]);
+	}
+
+	// mx will keep track on the maximum element
+	int mx=INT_MIN;
+	for(int i=0;i<n;i++)
+	{
+		// here we are comparing each element to find the maximum element;
+		mx=max(mx,arr[i]);
+	}
+
+	cout<<"List: ";
+	// printing the list as we taken from the user
+	for(int i=0;i<n;i++)
+	{
+		cout<<arr[i]<<" ";
+	}
+	cout<<"\nMinimum Element: "<<mn<<endl;
+	cout<<"Maximum Element: "<<mx<<endl;
 }
 
 int main()
 {
-	cout<<"Enter two numbers:";
-	int a,b;
-	cin>>a>>b;
+	// here we are taking the input list and storing it
+	vector<int>arr=Input();
+	
 
-	// finding the factorial of a and b
-	unsigned int fact1=factorial(a);
-	unsigned int fact2=factorial(b);
-
-	// finding gcd of a and b
-    cout<<endl;
-	int GCD=gcd(a,b);
-	cout<<a<<"!="<<fact1<<endl;
-	cout<<b<<"!="<<fact2<<endl;
-    cout<<endl;
-	if(GCD>1)
-	{
-		cout<<"GCD of "<<a<<" and "<<b<<" is = "<<GCD<<endl;
-		if(isPrime(GCD))
-		{
-			cout<<GCD<<" is a prime number."<<endl;
-		}
-		else
-		{
-			cout<<GCD<<" is not a prime number."<<endl;
-		}
-	}
-	else
-	{
-		cout<<"No GCD > 1 of "<<a<<" and "<<b<<" found!"<<endl;
-	}
+	//function to find the min and max
+	findMinMax(arr);
 	return 0;
 }
