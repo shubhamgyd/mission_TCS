@@ -44,6 +44,7 @@ int NotLCS(string X,int m,string Y,int n)
             {
                               // Replace         Delete      Insert
                 dp[i][j]=1+min(dp[i-1][j-1],min(dp[i-1][j],dp[i][j-1]));
+                         
             }
         }
     }
