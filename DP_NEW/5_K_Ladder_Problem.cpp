@@ -92,22 +92,24 @@ Space Complexity: O(k)
 // Optimise DP
 int Optimise_DP(int n,int k)
 {
-    int dp[100]={0};
+    const int mod=1000000000+7;
+    long long int dp[100001];
+    memset(dp,(long long)0,sizeof(dp));
 
     // Base case 
-    dp[0]=dp[1]=1;
+    dp[0]=dp[1]=(long long)1;
 
     for(int i=2;i<=k;i++)
     {
-        dp[i]=2*dp[i-1];
+        dp[i]=(2%mod*dp[i-1]%mod)%mod;
     }
 
     for(int i=k+1;i<=n;i++)
     {
-        dp[i]=2*dp[i-1]-dp[i-k-1];
+        dp[i]=(2%mod*dp[i-1]%mod-dp[i-k-1]%mod)%mod;
     }
 
-    return dp[n];
+    return dp[n]%mod;
     
 }
 /*
@@ -116,11 +118,28 @@ Space Complexity: O(k)
 */
 
 
+bool isPalindrome(string &s)
+{
+    int n=s.length();
+    int i=0;
+    int j=n-1;
+    while(i<j)
+    {
+        if(s[i]!=s[j])
+        {
+            return false;
+        }
+        i++;
+        j--;
+    }
+    return true;
+}
+
 int main()
 {
     memset(dp,0,sizeof(dp));
-    int n=60;
-    int k=3;
+    int n=40;
+    int k=8;
     // cout<<"Number of ways: "<<CountWays(n,k)<<endl;
     cout<<"Number of ways: "<<Optimise_DP(n,k)<<endl;
 }

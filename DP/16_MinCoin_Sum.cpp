@@ -87,35 +87,34 @@ int main()
 
 
 /*
-int coin1(int coin[],int sum,int n)
-{
-    int dp[n+1][sum+1];
-    for(int i=0;i<=n;i++)
-    {
-        for(int j=0;j<=sum;j++)
-        {
-            if(i==0|| j==0)
-            {
-                if(i==0)
-                {
-                    dp[i][j]=INT_MIN;
-                }
-                else if(j==0)
-                {
-                    dp[i][j]=0;
-                }
-            }
-            else if(coin[i-1]<=j)
-            {
-                dp[i][j]=max(1+dp[i][j-coin[i-1]],dp[i-1][j]);
-            }
-            else
-            {
-                dp[i][j]=dp[i-1][j];
-            }
-        }
-    }
-    return dp[n][sum]<0?0:dp[n][sum];
-}
+int minCoins(int coins[], int M, int V) 
+	{ 
+	    // Your code goes here
+	    int dp[M+1][V+1];
+	    for(int i=0;i<=M;i++)
+	    {
+	        dp[i][0]=0;
+	    }
+	    for(int j=1;j<=V;j++)
+	    {
+	        dp[0][j]=INT_MAX-1;
+	    }
+	    
+	    for(int i=1;i<=M;i++)
+	    {
+	        for(int j=1;j<=V;j++)
+	        {
+	            if(coins[i-1]<=j)
+	            {
+	                dp[i][j]=min(dp[i-1][j],dp[i][j-coins[i-1]]+1);
+	            }
+	            else
+	            {
+	                dp[i][j]=dp[i-1][j];
+	            }
+	        }
+	    }
+	    return dp[M][V]==INT_MAX-1?-1:dp[M][V];
+	} 
 
 */
