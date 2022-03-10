@@ -2,9 +2,7 @@
 using namespace std;
 #define int long long
 
-int cache1[10020][2][2];
-int N12;
-int A1[10020];
+int cache1[10020][2][2];int N12;int A1[10020];
 
 int dp123(int i, bool j, bool k1) {
     if (i >= N12)
