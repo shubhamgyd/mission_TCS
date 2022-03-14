@@ -80,41 +80,41 @@ int32_t main()
 // Alternative 
 //total path b/w the two vertix
 //the graph will be acyclic
-#include <bits/stdc++.h>
-using namespace std;
+// #include <bits/stdc++.h>
+// using namespace std;
 
-void addedge(list<int>l[],int u,int v){
-    l[u].push_back(v);
-}
+// void addedge(list<int>l[],int u,int v){
+//     l[u].push_back(v);
+// }
 
-int ct=0;
-int total_path(list<int>l[],vector<int>visit,int s,int e,int v){
+// int ct=0;
+// int total_path(list<int>l[],vector<int>visit,int s,int e,int v){
 
-    visit[s]=1;
-    for(auto x: l[s]){
-            if(x==e)
-             ct+=1;
-        if(visit[x]==0){
-        total_path(l,visit,x,e,v);
-        }
-    }
-}
-// Time Complexity : Exponential
+//     visit[s]=1;
+//     for(auto x: l[s]){
+//             if(x==e)
+//              ct+=1;
+//         if(visit[x]==0){
+//         total_path(l,visit,x,e,v);
+//         }
+//     }
+// }
+// // Time Complexity : Exponential
 
-int main(){
-     int v=5;
-     list<int> l[v];
-     vector<int>visit(v,0);
-    addedge(l,0, 1);
-    addedge(l,0, 4);
-    addedge(l,0, 3);
-    addedge(l,1, 3);
-    addedge(l,1, 2);
-    addedge(l,2, 3);
-    addedge(l,3, 4);
-    addedge(l,1, 4);
-    addedge(l,2, 4);
-    addedge(l,0, 2);
-    total_path(l,visit,0,4,v);
-    cout<<ct;
-}
+// int main(){
+//      int v=5;
+//      list<int> l[v];
+//      vector<int>visit(v,0);
+//     addedge(l,0, 1);
+//     addedge(l,0, 4);
+//     addedge(l,0, 3);
+//     addedge(l,1, 3);
+//     addedge(l,1, 2);
+//     addedge(l,2, 3);
+//     addedge(l,3, 4);
+//     addedge(l,1, 4);
+//     addedge(l,2, 4);
+//     addedge(l,0, 2);
+//     total_path(l,visit,0,4,v);
+//     cout<<ct;
+// }

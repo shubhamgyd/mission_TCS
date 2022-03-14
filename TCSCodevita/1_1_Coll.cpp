@@ -22,6 +22,26 @@ struct Student
     }
 };
 
+
+// class Solution
+// {
+//     int stdid;
+//     double stdpercentage;
+//     string college1;
+//     string college2;
+//     string college3;
+// public:
+//     Solution(int id,double percent,string c1,string c2,string c3)
+//     {
+//         stdid=id;
+//         stdpercentage=percent;
+//         college1=c1;
+//         college2=c2;
+//         college3=c3;
+//     }
+// };
+
+
 static bool cmp(Student a,Student b)
 {
     if(a.percentage==b.percentage)
@@ -30,6 +50,62 @@ static bool cmp(Student a,Student b)
     }
     return a.percentage>b.percentage;
 }
+
+// void Fun()
+// {
+//     int College,Student;
+//     cin>>College>>Student;
+//     vector<int>Temp(College+1);
+//     for(int i=1;i<=College;i++)
+//     {
+//         cin>>Temp[i];
+//     }
+//     // Solution obj;
+//     vector<Solution>Data;
+//     for(int i=0;i<Student+1;i++)
+//     {
+//         int stdid;
+//         double stdpercentage;
+//         string college1,college2,college3;
+//         string input;
+//         getline(cin,input);
+//         replace(input.begin(), input.end(), ',', ' ');
+//         int k=0;
+//         stringstream stream(input);
+//         string wording;
+//         while(stream>>wording)
+//         {
+//             if(k==0)
+//             {
+//                 string temp1=wording.substr(8);
+//                 stdid=stoi(temp1);
+//                 k++;
+//             }
+//             else if(k==1)
+//             {
+//                 stdpercentage=atof(wording.c_str());
+//                 k++;
+//             }
+//             else if(k==2)
+//             {
+//                 college1=wording;
+//                 k++;
+//             }
+//             else if(k==3)
+//             {
+//                 college2=wording;
+//                 k++;
+//             }
+//             else if(k==4)
+//             {
+//                 college3=wording;
+//                 k++;
+//             }
+//         }
+//         Data.push_back(Solution(stdid,stdpercentage,college1,college2,college3));
+//     }
+//     sort(Data.begin(),Data.end(),Comparator);
+// }
 
 void solve()
 {
