@@ -75,17 +75,6 @@ void dfs(vector<int>graph[],vector<int>&paths,int src,int destn,int weight,bool 
     paths.push_back(src);  
 	value|=src;                               
     if(src==destn){
-		// int Or=paths[0];
-		// for(int i=1;i<paths.size();i++)
-		// {
-		// 	Or|=paths[i];
-		// }
-		// if(Or>weight)
-		// {
-		// 	ok=true;
-		// 	ct=true;
-		// 	return;
-		// }
 		if(value>weight)
 		{
 			ok=true;
@@ -111,8 +100,14 @@ void dfs(vector<int>graph[],vector<int>&paths,int src,int destn,int weight,bool 
                                                 
 }
 
-vector<string> solution(int n,int m,vector<int>adj[],int q,vector<vector<int>>queries)
+vector<string> solution(int n,int m,vector<vector<int>>edges,int q,vector<vector<int>>queries)
 {
+	vector<int>adj[n+1];
+	for(int i=0;i<m;i++)
+	{
+		int u=edges[i][0];
+		int v=edges[i][1];
+	}
 	vector<string>ans;
 	vector<int>path;
 	for(int i=0;i<q;i++)

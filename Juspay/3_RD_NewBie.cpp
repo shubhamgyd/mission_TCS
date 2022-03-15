@@ -3,7 +3,6 @@ using namespace std;
 
 int main()
 {
-    /* Enter your code here. Read input from STDIN. Print output to STDOUT */
     unordered_map<int, vector<int>> map;
     unordered_map<int, int> visited;
     int N, M, x, y;

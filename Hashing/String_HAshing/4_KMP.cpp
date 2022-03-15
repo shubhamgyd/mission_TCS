@@ -80,8 +80,8 @@ void KMPSearch(string txt,string pat)
 
 int main()
 {
-    string txt="bearaabearc";
-    string pat="bear";
+    string txt="heavymetalisheavymetal";
+    string pat="metal";
     KMPSearch(txt,pat);
 }
 

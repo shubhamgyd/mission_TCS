@@ -1,73 +1,100 @@
-
-
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
+#include<sstream>
 using namespace std;
-
-void combinationSum(vector<int> &candidates, int target, vector<int> &combination, int begin, int n,int &mx1)
+class st
 {
-    if (!target)
-    {
-        if (combination.size() == n)
+public:
+        int ID1;
+        double PER1;
+        string COL1, COL2, COL3;
+        st(int ID2,double PER2,string COL11,string COL21,string COL31)
         {
-            // for(auto it:combination)
-            // {
-            //     cout<<it<<" ";
-            // }
-            // cout<<endl;
-            sort(combination.begin(),combination.end());
-            // res.push_back(combination);
-            int flag=0;
-            int mx=combination[0];
-            cout<<combination[0]<<" ";
-            for(int i=1;i<n;i++)
+            ID1=ID2;  PER1=PER2;
+            COL1=COL11;  COL2=COL21;  COL3=COL31;
+        }
+};
+
+static bool compare(st a,st b)
+{
+    if(a.PER1==b.PER1)
+        return a.ID1<b.ID1;
+    return a.PER1>b.PER1;
+}
+
+void RES()
+{
+    int C,N;
+    cin>>C>>N;
+    vector<int>myres(C+1);
+    for(int i=1;i<=C;i++)
+        cin>>myres[i];
+    vector<st>data;
+    for(int i=0;i<N+1;i++)
+    {
+        int ID, j=0;
+        double PER;
+        string C1,C2,C3,IN,w;
+        getline(cin,IN);
+        replace(IN.begin(), IN.end(), ',', ' ');
+        stringstream mystring(IN);
+        while(mystring>>w)
+        {
+            if(j==0)
             {
-                mx=max(mx,combination[i]);
-                cout<<combination[i]<<" ";
-                if (combination[i] >= combination[i - 1] && combination[i] <= 2 * combination[i - 1])
-                {
-                    continue;
-                }
-                else
-                {
-                    flag = 1;
-                }
+                string temp=w.substr(8);
+                ID=stoi(temp);  j++;
             }
-            cout<<endl;
-            if(flag==0)
+            else if(j==1)
             {
-                mx1=max(mx1,mx);
+                PER=atof(w.c_str());  j++;
+            }
+            else if(j==2)
+            {
+                C1=w;  j++;
+            }
+            else if(j==3)
+            {
+                C2=w;  j++;
+            }
+            else if(j==4)
+            {
+                C3=w;  j++;
             }
         }
-        return;
+        data.push_back(st(ID,PER,C1,C2,C3));
     }
-    for (int i = begin; i != candidates.size() && target >= candidates[i]; ++i)
+    sort(data.begin(),data.end(),compare);
+    vector<double>CutOff(C+1,200.00);
+    for(int i=0;i<N;i++)
     {
-        combination.push_back(candidates[i]);
-        combinationSum(candidates, target - candidates[i], combination, i, n,mx1);
-        combination.pop_back();
+        int id,c1,c2,c3;
+        id=data[i].ID1;
+        c1=stoi(data[i].COL1.substr(2));  c2=stoi(data[i].COL2.substr(2));  c3=stoi(data[i].COL3.substr(2));
+        if(myres[c1]>0)
+        {
+            // cout<<"Student-"<<id<<" "<<data[i].COL1<<'\n';
+            CutOff[c1]=min(CutOff[c1],data[i].PER1);
+            myres[c1]--;
+        }
+        else if(myres[c2]>0)
+        {
+            // cout<<"Student-"<<id<<" "<<data[i].COL2<<'\n';
+            CutOff[c2]=min(CutOff[c2],data[i].PER1);
+            myres[c2]--;
+        }
+        else if(myres[c3]>0)
+        {
+            // cout<<"Student-"<<id<<" "<<data[i].COL3<<'\n';
+            CutOff[c3]=min(CutOff[c3],data[i].PER1);
+            myres[c3]--;
+        }
     }
+    sort(CutOff.begin(),CutOff.end());
 }
 
-int  combinationSum(vector<int> &candidates, int target, int n)
-{
-    vector<int> combination;
-    int mx1=0;
-    combinationSum(candidates, target, combination, 0, n,mx1);
-    return mx1;
-}
 
 int main()
 {
-    int n;
-    cin >> n;
-    int target;
-    cin >> target;
-    vector<int> S(target);
-    for (int i = 0; i < target; i++)
-    {
-        S[i] = i + 1;
-    }
-    int ans=combinationSum(S, target, n);
-    cout<<ans<<endl;
+    RES();
     return 0;
 }

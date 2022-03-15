@@ -8,7 +8,7 @@ int main()
     vector<int> adj[n + 1];
     for (int i = 1; i <= n; i++)
     {
-         do {
+        do {
             int v;
             char sep;
             auto code = scanf("%d%c", &v, &sep);

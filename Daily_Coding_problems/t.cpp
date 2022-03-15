@@ -81,6 +81,7 @@ public:
     string degreeLevel;
 
     Student *next;
+    Student *prev;
 };
 
 Student *createNode(float point, int id)
@@ -91,6 +92,7 @@ Student *createNode(float point, int id)
     n->cgpa = point;
 
     n->next = NULL;
+    n->prev = NULL;
 
     n->id = id;
 

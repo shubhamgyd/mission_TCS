@@ -18,6 +18,7 @@ void dfs(vector<vector<int>>&graph,vector<vector<int>>&result,vector<int>&paths,
     else
         for(int ele:graph[src])
             dfs(graph,result,paths,ele,destn);        // Recursively checking the paths to the last node
+    // backtrack
     paths.pop_back();                           // If path  is not present from the current source to last node , then pop the element,
                                                 //  (i.e lastly pushed element is not valid ) , so we can check other vertex.
 }

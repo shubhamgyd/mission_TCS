@@ -101,3 +101,5 @@ int main()
 
 // Time complexity can be reduced further , by adding the bishops position into the queue and
 // do bfs , then it will reduced to :O(n^2)
+
+
