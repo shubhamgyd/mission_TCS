@@ -93,6 +93,26 @@ void LongestLength(vector<int>&res,int n)
 
 
 
+// Another O(n^2)
+
+int LongestSequence(vector<int>&res,int n)
+{
+    vector<int>ans(n,1);
+    for(int i=n-1;i>=0;i--)
+    {
+        for(int j=i+1;j<n;j++)
+        {
+            if(res[i]<res[j])
+            {
+                ans[i]=max(ans[i],1+ans[j]);
+            }
+        }
+    }
+    return (*max_element(ans.begin(),ans.end()));
+}
+
+
+
 void mxLength(vector<int>&res,int n)
 {
     set<int> s;
@@ -101,10 +121,14 @@ void mxLength(vector<int>&res,int n)
         if (s.find(a) != s.end()) continue;
         s.insert(a);
         auto it = s.upper_bound(a);
-        if (it != s.end()) s.erase(it);
+        cout<<"position: "<<*it<<endl;
+        if (it != s.end()){
+            s.erase(it);
+        }
     }
     cout<<s.size()<<endl;
 }
+
 // Time Complexity:O(nlogn)
 // Auxilay Space :O(n)
 

@@ -156,9 +156,7 @@ int optimalStrategyOfGame(
 						? table[i][j - 2]
 						: 0;
 
-			table[i][j] = max(
-				arr[i] + min(x, y),
-				arr[j] + min(y, z));
+			table[i][j] = max(arr[i] + min(x, y),arr[j] + min(y, z));
 		}
 	}
 

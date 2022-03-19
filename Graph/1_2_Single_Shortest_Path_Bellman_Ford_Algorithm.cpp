@@ -36,7 +36,7 @@ void BellmanFord(int s,int size,int nodes)
         }
     }
     cout<<"Below is the  shortest distance of a nodes from the single source of of a node "<<endl;
-    for(int i=0;i<=nodes;i++)
+    for(int i=1;i<=nodes;i++)
     {
         cout<<s<<"-->"<<i<<"="<<dist[i]<<endl;
     }

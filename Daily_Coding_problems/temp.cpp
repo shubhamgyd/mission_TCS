@@ -24,8 +24,6 @@ string StringChallenge(string str) {
       res1.push_back(str[i]);
     }
   }
-  cout<<"Strings: "<<endl;
-  cout<<res<<" "<<res1<<endl;
   string ans="";
   int sz1=res.length();
   int sz2=res1.length();

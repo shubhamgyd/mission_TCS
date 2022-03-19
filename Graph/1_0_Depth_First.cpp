@@ -75,7 +75,6 @@ void dfs(int s)
 void InterativeDFS(int s)
 {
     vector<bool>visited(N,false);
-
     stack<int>st;
     st.push(s);
     while(!st.empty())

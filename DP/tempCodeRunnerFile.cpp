@@ -99,7 +99,7 @@ void solve()
             temp/=10;
         }
         sum+=numSum;
-        if(sum>=n)
+        if(sum==n)
         {
             ans=mid;
             high=mid-1;

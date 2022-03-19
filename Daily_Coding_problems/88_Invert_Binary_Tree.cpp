@@ -46,6 +46,8 @@ Tree* InvertBinaryTree(Tree* root)
     temp->left=InvertBinaryTree(root->right);
     return temp;
 }
+// time complexity:O(n)
+// auxiliary space: O(n)
 
 
 

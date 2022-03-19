@@ -1,6 +1,6 @@
 /*
 Bucket sort is mainly useful when input is uniformly distributed over a range.
- For example, consider the following problem. 
+For example, consider the following problem. 
 */
 
 #include<bits/stdc++.h>
