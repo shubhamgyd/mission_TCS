@@ -47,8 +47,6 @@ void BellmanFord(int s,int size,int nodes)
 
 int main()
 {
-    // int nodes=5;
-    // int edge=7;
     int nodes;
     int edge;
     cin>>nodes>>edge;

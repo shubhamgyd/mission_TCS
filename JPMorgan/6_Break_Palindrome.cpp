@@ -25,3 +25,21 @@ using namespace std;
 //      }
     
 // }
+
+string breakPalindrome(string s) {
+      bool changed = false;
+      if(s.size() == 1)return "";
+      int i = 0, j = s.size() - 1;
+      bool leftA = true;
+      bool rightA= true;
+      while(i < j){
+         if(s[i] != 'a'){
+            s[i] = 'a';
+            return s;
+         }
+         i++;
+         j--;
+      }
+      s[s.size() - 1] = 'b';
+      return s;
+   }
