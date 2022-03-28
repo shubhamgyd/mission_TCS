@@ -8,7 +8,7 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
-    lli n=31;
+    lli n=140;
     cout<<"Prime Factorization of a number: number , time of occurance: "<<endl;
     for(int i=2;i<=sqrt(n);i++)
     {

@@ -41,11 +41,8 @@ void D(int num,int num1)
 
 void solve()
 {
-	int n;
-	cin >> n;
-	vector<int> res(n);
-	Input(res,n);
-	vector<int> evenArray, oddArray;
+	int n;cin >> n;
+	vector<int> res(n);Input(res,n);vector<int> evenArray, oddArray;
 	for (int i = 0; i < n; i++)
 	{
 		if (res[i] & 1) oddArray.push_back(res[i]);
@@ -53,24 +50,14 @@ void solve()
 	}
 	if (n == 1 && oddArray.size() == 1)
 	{
-		// cout << oddArray[0] << endl;
-		Disp(oddArray[0]);
-		return;
+		Disp(oddArray[0]); return;
 	}
 	if (oddArray.size() < 2)
 	{
-		// cout << -1 << endl;
-		Disp(-1);
-		return;
+		Disp(-1); return;
 	}
 	else if (oddArray.size() % 2)
-	{
-		if (evenArray.size() == 0)
-		{
-			// cout << -1 << endl;
-			Disp(-1); return;
-		}
-		// cout << oddArray[0] << " " << oddArray[1] << " ";
+	{if (evenArray.size() == 0){Disp(-1); return;}
 		D(oddArray[0],oddArray[1]);
 		for (int i = 0; i < evenArray.size(); i++) cout << evenArray[i] << " ";
 		for (int i = 2; i < oddArray.size(); i++) cout << oddArray[i] << " ";

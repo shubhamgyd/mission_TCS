@@ -15,12 +15,13 @@ int euclids_Algo(int a,int b)
     }
     return dividend;
 }
+
 int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
-    lli n=3,m=3;
+    lli n=999,m=345;
     cout<<"Common Divisor of both numbers is: "<<euclids_Algo(n,m)<<endl;
     return 0;
 

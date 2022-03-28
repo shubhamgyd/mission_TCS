@@ -1,47 +1,115 @@
-#include<vector>
-#include<queue>
-#include<utility>
-#include<iostream>
+#include<bits/stdc++.h>
 using namespace std;
 
-void input(vector<int> &v, int n) {
-	for (int i = 0 ; i < n ; i++) {
-		int x;
-		cin >> x;
-		v.push_back(x);
-	}
+// structure to store the information about the lake
+struct Lake
+{
+    string name;
+    double area;
+    double height;
+    double depth;
+    Lake(string lakeName,double lakeArea,double lakeHeight,double lakeDepth)
+    {
+        name=lakeName;
+        area=lakeArea;
+        height=lakeHeight;
+        depth=lakeDepth;
+    }
+};
+
+// Helper function which compares the depth of lakes and returns the the lake 
+// which have the greatest depth
+bool CompareDepth(Lake a, Lake b)
+{
+    return a.depth>b.depth;
 }
 
-int main() {
-	int n;
-	cin >> n;
+// Helper function which compares the area of lakes and returns the lake 
+// which have a smaller area
+bool CompareArea(Lake a,Lake b)
+{
+    return a.area<b.area;
+}
 
-	vector<int> segments;
-	input(segments,n);
 
-	long long total_sum = 0;
+// Helper function which compares the area of lakes and returns the lake 
+// which have the greatest area
+bool CompareArea1(Lake a,Lake b)
+{
+    return a.area>b.area;
+}
 
-	for (int i = 0 ; i < n ; i++) {
-		if (segments[i] == 0)
-			segments[i] = -1;
+// Utility function which prints the lake which has greatest depth
+void greatestDepth(vector<Lake>&Info)
+{
+    // sort the lakes according to depth of lakes
+    sort(Info.begin(),Info.end(),CompareDepth);
+    cout<<"Greatest depth of Lake is: "<<Info[0].name<<endl;
+    cout<<"Depth : "<<Info[0].depth<<endl;
+}
 
-		total_sum += segments[i];
-	}
 
-	int curr_sum = 0;
+// Utility function which prints the depth of lake which have the smallest area
+void lakeWithSmallestArea(vector<Lake>&Info)
+{
+    // sort the lakes according to area of lakes
+    sort(Info.begin(),Info.end(),CompareArea);
+    cout<<"Depth of the Lake which have smallest area: "<<Info[0].depth<<endl;
+    cout<<"Lake : "<<Info[0].name<<endl;
+}
 
-	if (curr_sum > total_sum - curr_sum)
-		return 0;
 
-	int idx = -1;
- 	for (int i = 0 ; i < n ; i++){
- 		curr_sum += segments[i];
+// Utility function which print the information about lake which have largest area
+void largestAreaLakeInfo(vector<Lake>&Info)
+{
+    // sort the lakes according to area of lakes
+    sort(Info.begin(),Info.end(),CompareArea1);
+    cout<<"Information about largest area lake: "<<endl;
+    cout<<"Name: "<<Info[0].name<<endl;
+    cout<<"Area: "<<Info[0].area<<endl;
+    cout<<"Depth: "<<Info[0].depth<<endl;
+    cout<<"Height from sea level: "<<Info[0].height<<endl;
+}
 
- 		if (curr_sum > total_sum - curr_sum) {
- 			idx = i;
- 			break;
- 		} 
- 	}
 
- 	cout << idx+1 << "\n"; 
+// Utility function which print the name of lakes whose depth is in given range
+void printLakeInRange(vector<Lake>&Info)
+{
+    double start=5;
+    double end=20;
+    cout<<"Name of the lakes whose depth is in range[5,20]: "<<endl;
+    int size=Info.size();
+    for(int i=0;i<size;i++)
+    {
+        if(Info[i].depth>=start && Info[i].depth<=end)
+        {
+            cout<<Info[i].name<<endl;
+        }
+    }
+}
+
+int main()
+{
+    // to store the information of lakes
+    vector<Lake>Info;
+
+    // append all data into the container
+    Info.push_back(Lake("Paravani",37.5,2073,3.3));
+    Info.push_back(Lake("Paliastomi",18.2,-0.3,3.2));
+    Info.push_back(Lake("Tabatskuri",14.2,1997,40.2));
+    Info.push_back(Lake("Jandari",10.6,291,7.2));
+    Info.push_back(Lake("Ritsa",1.49,884,101));
+    Info.push_back(Lake("Bazaleti",1.22,879,7));
+    cout<<endl;
+
+    // print the information about lakes according to tasks
+    greatestDepth(Info);
+    cout<<endl;
+    lakeWithSmallestArea(Info);
+    cout<<endl;
+    largestAreaLakeInfo(Info);
+    cout<<endl;
+    printLakeInRange(Info);
+    cout<<endl;
+    return 0;
 }

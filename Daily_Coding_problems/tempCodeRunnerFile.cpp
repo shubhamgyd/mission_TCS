@@ -1,3 +1,8 @@
-A N B
-B NE C
-C N A
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    bitset<8>b(13);
+    cout<<b<<endl;
+}

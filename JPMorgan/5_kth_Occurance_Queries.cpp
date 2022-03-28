@@ -14,6 +14,5 @@ int kthoccurence(vector<int>& arr, int fn, int k)
             return i+1;
         }
     }
-    
     return -1;
 }
