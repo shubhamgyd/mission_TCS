@@ -107,10 +107,7 @@ int main()
     root->left = getNode(2);
     root->right = getNode(3);
     root->left->left = getNode(4);
-    root->left->right = getNode(5);
- 
+    root->left->right = getNode(5); 
     MorrisTraversal(root);
- 
     return 0;
-
 }

@@ -21,7 +21,7 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
-    lli n=999,m=345;
+    lli n=230,m=200;
     cout<<"Common Divisor of both numbers is: "<<euclids_Algo(n,m)<<endl;
     return 0;
 

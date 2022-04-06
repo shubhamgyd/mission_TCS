@@ -226,8 +226,8 @@ int main()
 {
     ios::sync_with_stdio(0);
     cin.tie(0);
-    int coin[] = {2,3,4,5,6,7,8,9,10};
-    int sum= 10;
+    int coin[] = {1,2,3,4,5,6};
+    int sum= 4;
     int n=sizeof(coin)/sizeof(coin[0]);
     cout<<"Maximum ways to change coin :"<<CountCoin(coin,sum,n)<<"\n";
     return 0; 

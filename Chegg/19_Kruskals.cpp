@@ -1,10 +1,10 @@
 #include<bits/stdc++.h>
 using namespace std;
 struct node {
-    int u;
-    int v;
+    char u;
+    char v;
     int wt; 
-    node(int first, int second, int weight) {
+    node(char first, char second, int weight) {
         u = first;
         v = second;
         wt = weight;
@@ -15,7 +15,7 @@ bool comp(node a, node b) {
     return a.wt < b.wt; 
 }
 
-int findPar(int u, vector<int> &parent) {
+int findPar(char u, vector<int> &parent) {
     if(u == parent[u]) return u; 
     return findPar(parent[u], parent); 
 }

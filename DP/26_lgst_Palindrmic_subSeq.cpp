@@ -2,6 +2,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+
 int LCS(string X,string Y,int m,int n)
 {
     int dp[m+1][n+1]; // Initialazation of array to store the values
@@ -69,13 +70,14 @@ int main()
 {
     ios::sync_with_stdio(0);
     cin.tie(0);
-    string X="binarysearch"; 
+    string X="abbaxyzyx"; 
     // Just think about second string , it is not gien ....
     // Reminder the example of LCS , there we have given two strings ...so that we can easily find the LCS
     // But here we have given only one string ....so for second string , we have to just reverse the 
     // first the string and apply LCS on it
     // DP of top down-approach 
     string Y=string(X.rbegin(),X.rend());
+    cout<<Y<<endl;
     int m=X.length();
     int n=Y.length();
     cout<<"Length of Longest Palindromic Subsequence is: "<<LCS(X,Y,m,n)<<"\n";
