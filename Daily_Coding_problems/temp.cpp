@@ -1,57 +1,69 @@
-#include<bits/stdc++.h>
+// C++ program to evaluate a prefix expression.
+#include <bits/stdc++.h>
 using namespace std;
 
-string StringChallenge(string str) {
-  
-  // code goes here
-  string  res="";
-  string res1="";
-  int n=str.length();
-  bool ok=false;
-  for(int i=0;i<n;i++)
-  {
-    if(str[i]=='*')
-    {
-      ok=true;
-      continue;
-    }
-    if(ok==false)
-    {
-      res.push_back(str[i]);
-    }
-    if(ok)
-    {
-      res1.push_back(str[i]);
-    }
-  }
-  string ans="";
-  int sz1=res.length();
-  int sz2=res1.length();
-  int i=0;
-  int j=0;
-  while(i<sz1 || j<sz2)
-  {
-    if(i<sz1)
-    {
-      ans.push_back(res[i]);
-    }
-    if(j<sz2)
-    {
-      ans.push_back(res1[j]);
-    }
-    i++;
-    j++;
-  }
-  return ans;
-
+bool isOperand(char c)
+{
+	// If the character is a digit then it must
+	// be an operand
+	return isdigit(c);
 }
 
-int main(void) { 
-   
-  // keep this function call here
-  string str;
-  cin>>str;
-  cout << StringChallenge(str);
-  return 0;
-    
+double evaluatePrefix(string exprsn)
+{
+	stack<double> Stack;
+
+	for (int j = exprsn.size() - 1; j >= 0; j--) {
+
+		// Push operand to Stack
+		// To convert exprsn[j] to digit subtract
+		// '0' from exprsn[j].
+		if (isOperand(exprsn[j]))
+			Stack.push(exprsn[j] - '0');
+
+		else {
+
+			// Operator encountered
+			// Pop two elements from Stack
+			double o1 = Stack.top();
+			Stack.pop();
+			double o2 = Stack.top();
+			Stack.pop();
+
+			// Use switch case to operate on o1
+			// and o2 and perform o1 O o2.
+			switch (exprsn[j]) {
+			case '+':
+				Stack.push(o1 + o2);
+				break;
+			case '-':
+				Stack.push(o1 - o2);
+				break;
+			case '*':
+				Stack.push(o1 * o2);
+				break;
+			case '/':
+				Stack.push(o1 / o2);
+				break;
+			}
+		}
+	}
+
+	return Stack.top();
+}
+
+// Driver code
+int main()
+{
+  int a=200;
+  int b=110;
+  int ct=0;
+  while(a>=b)
+  {
+    ct++;
+    a--;
+    b++;
+  }
+  cout<<ct<<endl;
+	return 0;
 }

@@ -98,100 +98,100 @@ int main()
 
 
 
-#include <bits/stdc++.h>
-using namespace std;
-#define fast()                        \
-    ios_base::sync_with_stdio(false); \
-    cin.tie(NULL);                    \
-    cout.tie(NULL);
-#define int long long
+// #include <bits/stdc++.h>
+// using namespace std;
+// #define fast()                        \
+//     ios_base::sync_with_stdio(false); \
+//     cin.tie(NULL);                    \
+//     cout.tie(NULL);
+// #define int long long
 
-int dp[501][501];
-class Solution1
-{
-    int visited_all;
-public:
-    // void makeset(int n)
-    // {
-    //     this->visited_all=(1<<n)-1;
-    // }
-    Solution1(int n)
-    {
-        this->visited_all=(1<<n)-1;
-    }
-    int tsp(vector<vector<int>>&graph,int n,int mask,int pos)
-    {
-        if(mask==visited_all)
-        {
-            return graph[pos][0];
-        }
+// int dp[501][501];
+// class Solution1
+// {
+//     int visited_all;
+// public:
+//     // void makeset(int n)
+//     // {
+//     //     this->visited_all=(1<<n)-1;
+//     // }
+//     Solution1(int n)
+//     {
+//         this->visited_all=(1<<n)-1;
+//     }
+//     int tsp(vector<vector<int>>&graph,int n,int mask,int pos)
+//     {
+//         if(mask==visited_all)
+//         {
+//             return graph[pos][0];
+//         }
 
-        if(dp[mask][pos]!=-1)
-        {
-            return dp[mask][pos];
-        }
+//         if(dp[mask][pos]!=-1)
+//         {
+//             return dp[mask][pos];
+//         }
 
-        // We are going to find the minimum weight
-        int ans=INT_MAX;
+//         // We are going to find the minimum weight
+//         int ans=INT_MAX;
 
-        // Iterate each city
-        for(int city=0;city<n;city++)
-        {
-            // If city is not visited
-            if((mask&(1<<city))==0)
-            {
-                int newDist=graph[pos][city]+tsp(graph,n,(mask|(1<<city)),city);
+//         // Iterate each city
+//         for(int city=0;city<n;city++)
+//         {
+//             // If city is not visited
+//             if((mask&(1<<city))==0)
+//             {
+//                 int newDist=graph[pos][city]+tsp(graph,n,(mask|(1<<city)),city);
 
-                ans=min(ans,newDist);
-            }
+//                 ans=min(ans,newDist);
+//             }
 
-        }
-        return dp[mask][pos]=ans;
-    }
-};
+//         }
+//         return dp[mask][pos]=ans;
+//     }
+// };
 
   
-int32_t main()
-{
-#ifndef ONLINE_JUDGE
-    freopen("inputf.in", "r", stdin);
-    freopen("outputf.out", "w", stdout);
-#endif
-    fast();
-    int n,m;
-    cin>>n>>m;
-    vector<vector<int>>graph(n,vector<int>(n,0));
-    for(int i=0;i<m;i++)
-    {
-        int u,v,w;
-        cin>>u>>v>>w;
-        u--;
-        v--;
-        graph[u][v]=w;
-        graph[v][u]=w;
-    }
+// int32_t main()
+// {
+// #ifndef ONLINE_JUDGE
+//     freopen("inputf.in", "r", stdin);
+//     freopen("outputf.out", "w", stdout);
+// #endif
+//     fast();
+//     int n,m;
+//     cin>>n>>m;
+//     vector<vector<int>>graph(n,vector<int>(n,0));
+//     for(int i=0;i<m;i++)
+//     {
+//         int u,v,w;
+//         cin>>u>>v>>w;
+//         u--;
+//         v--;
+//         graph[u][v]=w;
+//         graph[v][u]=w;
+//     }
 
-    for(int i=0;i<n;i++)
-    {
-        for(int j=0;j<n;j++)
-        {
-            cout<<graph[i][j]<<" ";
-        }
-        cout<<endl;
-    }
+//     for(int i=0;i<n;i++)
+//     {
+//         for(int j=0;j<n;j++)
+//         {
+//             cout<<graph[i][j]<<" ";
+//         }
+//         cout<<endl;
+//     }
 
 
-    Solution1 obj(n);
-    // memset(dp,-1,sizeof(dp));
-    for(int i=0;i<(1<<n);i++)
-    {
-        for(int j=0;j<n;j++)
-        {
-            dp[i][j]=-1;
-        }
-    }
-    cout<<obj.tsp(graph,n,1,0)<<endl;
-    return 0;
-}
+//     Solution1 obj(n);
+//     // memset(dp,-1,sizeof(dp));
+//     for(int i=0;i<(1<<n);i++)
+//     {
+//         for(int j=0;j<n;j++)
+//         {
+//             dp[i][j]=-1;
+//         }
+//     }
+//     cout<<obj.tsp(graph,n,1,0)<<endl;
+//     return 0;
+// }
 
 

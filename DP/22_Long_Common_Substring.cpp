@@ -18,6 +18,9 @@ int LongSubStr(string X,string Y,int m,int n)
         }
     }
 
+
+
+
     int res=0;
     for(int i=1;i<=m;i++)
     {
@@ -45,8 +48,8 @@ int main()
 {
     ios::sync_with_stdio(false);
     cin.tie(0);
-    string X="sea";
-    string Y="eat";
+    string X="abc";
+    string Y="a";
     int m=X.length();
     int n=Y.length();
     cout<<"Length of longest common substring via DP: "<<LongSubStr(X,Y,m,n)<<'\n';

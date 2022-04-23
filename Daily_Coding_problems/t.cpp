@@ -6,105 +6,57 @@
 #define int  long long 
 using namespace std;
 #define endl '\n'
-const int mod=1e9+7;
 #define max_pq priority_queue<int>
 #define min_pq priority_queue<int,vector<int>,greater<int>>
 #define For(i,x,n) for(i=x; i<n; ++i)
 #define pb push_back
+const int mod=1e9+7;
+
+
+
 
 
 void solve()
 {
-    string str;
-    int x;
-    cin>>str;
-    cin>>x;
-    string w="";
-    int n=str.length();
-    w.resize(str.length());
-    vector<bool>visited(n,false);
-    for(int i=0;i<n;i++)
-    {
-        if(str[i]=='1')
+   string str;
+   getline(cin,str);
+   stringstream ss(str);
+   string word;
+   int pair=0;
+   int it=0;
+   while(ss>>word)
+   {
+        if(word=="pair")
         {
-            if(i-x>=0)
-            {
-                if(!visited[i-x])
-                {
-                    w[i-x]='1';
-                    visited[i-x]=true;
-                }
-                if(visited[i-x] && str[i-x]=='1')
-                {
-                    w[i]='1';
-                    visited[i]=true;
-                }
-            }
-            else if(i+x<n)
-            {
-                if(!visited[i+x])
-                {
-                    w[i+x]='1';
-                    visited[i+x]=true;
-                }
-            }
+            pair++;
         }
-        else if(str[i]=='0')
+        else
         {
-            
-            if(i-x>=0)
-            {
-                w[i-x]='0';
-                visited[i-x]=true;
-            }
-            if(i+x<n)
-            {
-                w[i+x]='0';
-                visited[i+x]=true;
-            }
-            w[i]='1';
-            visited[i]=true;
+            it++;
         }
-    }
-    string ans="";
-    ans.resize(n);
-    for(int i=0;i<n;i++)
-    {
-        if(i-x>=0 or i+x<n)
+   }
+   if(it-pair!=1)
+   {
+        cout<<"Error occurred"<<endl;
+   }
+   else
+   {
+        string s=",int>";
+        while(pair--)
         {
-            if(i-x>=0)
-            {
-                if(w[i-x]=='1')
-                {
-                    ans[i]='1';
-                }
-            }
-            if(i+x<n)
-            {
-                if(w[i+x]=='1')
-                {
-                    ans[i]='1';
-                }
-            }
-            else
-            {
-                ans[i]='0';
-            }
+            cout<<"pair<";
         }
-    }
-    cout<<ans<<endl;
-    cout<<str<<endl;
-    if(ans==str)
-    {
-        cout<<w<<endl;
-    }
-    else
-    {
-        cout<<-1<<endl;
-    }
-
+        cout<<"int";
+        it--;
+        while(it--)
+        {
+            cout<<s;
+        }
+        cout<<endl;
+   }
 
 }
+
 
 
 
@@ -114,14 +66,17 @@ signed main()
 //         freopen("inputf.in", "r", stdin);
 //         freopen("outputf.out", "w", stdout);
 // #endif
-    fast();
-    int t;
-    cin >> t;
-    while(t--)
-    {
-        solve();
-    }
-    // solve();
+    // fast();
+    // int t;
+    // cin >> t;
+    // int temp=t;
+    // while(t--)
+    // {
+    //     solve(temp);
+    // }
+    // int n;
+    // cin>>n;
+    solve();
     
     return 0;
 }

@@ -128,7 +128,7 @@ int minCost(vector<vector<int>>&res,int n,int m)
             }
             else
             {
-                current[j]=min(current[j-1],upper[j])+res[i-1][j-1];
+                current[j]=min(current[j-1],upper[j])+res[i][j];
             }
             
         }
