@@ -1,107 +1,100 @@
 #include <bits/stdc++.h>
-#define fast()                        \
+#define FASTIO                        \
     ios_base::sync_with_stdio(false); \
     cin.tie(NULL);                    \
     cout.tie(NULL);
-#define int long long
-// #define mod 1000000007
 using namespace std;
-#define endl '\n'
 
 
 
-void solve()
-{
-    int n;
-    cin>>n;
-    vector<int>res(2*n);
-    vector<int>first,second;
-    for(int i=0;i<2*n;i++)
-    {
-        cin>>res[i];
-        if(i<n)
-        {
-            first.push_back(res[i]);
-        }
-        else
-        {
-            second.push_back(res[i]);
-        }
-    }
-    int mx1=0;
-    sort(first.begin(),first.end());
-    sort(second.begin(),second.end());
-    int i=0;
-    for(;i<first.size();)
-    {
-        if(first[i]!=mx1)
-        {
-            break;
-        }
-        else if(mx1==first[i])
-        {
-            mx1++;
-            int j=i;
-            while(j<first.size() && first[i]==first[j])
-            {
-                j++;
+
+class Solution1 {
+public:
+    int numIslands(vector<vector<char>>& grid) {
+        int m = grid.size(), n = m ? grid[0].size() : 0, islands = 0, offsets[] = {0, 1, 0, -1, 0};
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] == '1') {
+                    islands++;
+                    grid[i][j] = '0';
+                    queue<pair<int, int>> todo;
+                    todo.push({i, j});
+                    while (!todo.empty()) {
+                        pair<int, int> p = todo.front();
+                        todo.pop();
+                        for (int k = 0; k < 4; k++) {
+                            int r = p.first + offsets[k], c = p.second + offsets[k + 1];
+                            if (r >= 0 && r < m && c >= 0 && c < n && grid[r][c] == '1') {
+                                grid[r][c] = '0';
+                                todo.push({r, c});
+                            }
+                        }
+                    }
+                }
             }
-            i=j;
         }
+        return islands;
     }
-    if(first.back()==mx1)
-    {
-        mx1++;
-    }
-    int  mx2=0;
-    i=0;
-    for(;i<second.size();)
-    {
-        if(second[i]!=mx2)
-        {
-            break;
-        }
-        else if(mx2==second[i])
-        {
-            mx2++;
-            int j=i;
-            while(j<second.size() && second[i]==second[j])
-            {
-                j++;
-            }
-            i=j;
-        }
-    }
-    if(second.back()==mx2)
-    {
-        mx2++;
-    }
+};
 
-    if(mx1==mx2)
-    {
-        cout<<"YES"<<endl;
-    }
-    else
-    {
-        cout<<"NO"<<endl;
-    }
 
-    
-}
-
-int32_t main()
+class Solution
 {
-// #ifndef ONLINE_JUDGE
-//         freopen("inputf.in", "r", stdin);
-//         freopen("outputf.out", "w", stdout);
-// #endif
-    fast();
-    int t;
-    cin >> t;
-    while (t--)
+    void dfs(vector<vector<int>> &grid, int i, int j, int n, int m)
     {
-        solve();
+        if (i >= n || i < 0 || j < 0 || j >= m || grid[i][j] == 0)
+        {
+            return;
+        }
+        grid[i][j] = 0;
+        dfs(grid, i + 1, j, n, m);
+        dfs(grid, i - 1, j, n, m);
+        dfs(grid, i, j + 1, n, m);
+        dfs(grid, i, j - 1, n, m);
     }
-    // solve();
+
+public:
+    int numIslands(vector<vector<int>> &grid)
+    {
+        int n = grid.size();
+        int m = grid[0].size();
+        int islands = 0;
+        if (grid.empty())
+        {
+            return islands;
+        }
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < m; j++)
+            {
+                if (grid[i][j] == 1)
+                {
+                    islands++;
+                    dfs(grid, i, j, n, m);
+                }
+            }
+        }
+        return islands;
+    }
+};
+
+int main()
+{
+    FASTIO;
+    cout << "Enter number of rows and column: ";
+    int n, m;
+    cin >> n >> m;
+    vector<vector<int>> grid(n, vector<int>(m));
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            cin >> grid[i][j];
+        }
+    }
+
+    Solution obj;
+    int number_of_Islands = obj.numIslands(grid);
+    cout << "Total number of islands: " << number_of_Islands << endl;
     return 0;
 }

@@ -1,87 +1,57 @@
-#include <bits/stdc++.h>
-#define fast()                        \
-	ios_base::sync_with_stdio(false); \
-	cin.tie(NULL);                    \
-	cout.tie(NULL);
-#define int long long
+#include<bits/stdc++.h>
 using namespace std;
-#define endl '\n'
-#define repFor(i, n) for (int i = 0; i < n; i++)
-#define repiFor(i, x, n) for (int i = x; i < n; i++)
-
-void DFS(int src, vector<int> adj[], vector<bool> &visited, int &end)
-{
-	end = src;
-	if (visited[src])
-		return;
-	visited[src] = true;
-	for (auto it : adj[src])
-	{
-		DFS(it, adj, visited, end);
-	}
-}
-
-void Disp(int num)
-{
-	cout<<num<<endl;
-}
-void Input(vector<int>&res,int n)
-{
-	for(int i=0;i<n;i++)
-	{
-		cin>>res[i];
-	}
-}
 
 
-void D(int num,int num1)
+int main()
 {
-	cout<<num<<" "<<num1<<" ";
-}
-
-void solve()
-{
-	int n;cin >> n;
-	vector<int> res(n);Input(res,n);vector<int> evenArray, oddArray;
-	for (int i = 0; i < n; i++)
+	string s,t;
+	cin>>s>>t;
+	int k;
+	cin>>k;
+	bool ok=true;
+	int n=s.length();
+	for(int i=k;i<n;i++)
 	{
-		if (res[i] & 1) oddArray.push_back(res[i]);
-		else evenArray.push_back(res[i]);
+		if(s[i]!=t[i])
+		{
+			ok=false;
+			break;
+		}
 	}
-	if (n == 1 && oddArray.size() == 1)
+	if(!ok)
 	{
-		Disp(oddArray[0]); return;
+		cout<<"No"<<endl;
+		return 0;
 	}
-	if (oddArray.size() < 2)
+	vector<int>res;
+	for(int i=0;i<k;i++)
 	{
-		Disp(-1); return;
+		int num1=s[i]-'a';
+		int num2=t[i]-'a';
+		if(num2<num1)
+		{
+			int temp=25+num2;
+			int ans=temp%26;
+			res.push_back(ans);
+		}
+		else
+		{
+			int ans=num2-num1;
+			res.push_back(ans);
+		}
 	}
-	else if (oddArray.size() % 2)
-	{if (evenArray.size() == 0){Disp(-1); return;}
-		D(oddArray[0],oddArray[1]);
-		for (int i = 0; i < evenArray.size(); i++) cout << evenArray[i] << " ";
-		for (int i = 2; i < oddArray.size(); i++) cout << oddArray[i] << " ";
-		cout << endl;
+	sort(res.begin(),res.end());
+	vector<int>moves(k);
+	for(int i=0;i<k;i++)
+	{
+		moves[i]=i+1;
+	}
+	if(res==moves)
+	{
+		cout<<"Yes"<<endl;
 	}
 	else
 	{
-		for (int i = 0; i < oddArray.size(); i++) cout << oddArray[i] << " ";
-		for (int i = 0; i < evenArray.size(); i++) cout << evenArray[i] << " ";
-		cout << endl;
-	}
-}
-
-signed main()
-{
-	// #ifndef ONLINE_JUDGE
-	//     freopen("input.txt", "r", stdin);
-	//     freopen("output.txt", "w", stdout);
-	// #endif
-	fast();
-	int t;
-	cin >> t;
-	while (t--)
-	{
-		solve();
+		cout<<"No"<<endl;
 	}
 }

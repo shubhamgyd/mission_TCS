@@ -3,11 +3,6 @@ using namespace std;
 
 int main()
 {
-// #ifndef ONLINE_JUDGE
-//     freopen("input.txt", "r", stdin);
-//     freopen("output.txt", "w", stdout);
-// #endif
-    //fast();
     int n;
     cin>>n;
     int arr[n+1];
@@ -48,6 +43,6 @@ int main()
             //ans+=(n-cycle);
         }
     }
-    cout<<"total number of swaps by using graph approach : "<<ans<<endl;
+    cout<<ans<<endl;
     return 0;
 }

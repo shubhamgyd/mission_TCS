@@ -2,6 +2,9 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+
+
+
 vector<int> nextPermutation(vector<int>&nums) {
     if(nums.size()==1)
         {

@@ -74,8 +74,8 @@ signed main()
     // {
     //     solve(temp);
     // }
-    // int n;
-    // cin>>n;
+    int n;
+    cin>>n;
     solve();
     
     return 0;

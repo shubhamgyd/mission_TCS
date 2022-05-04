@@ -21,9 +21,32 @@ void SelectionSort(vector<int>&v,int n,int& swaps)
     }
 }
 
+int* sele(int *array,int len)
+{
+    int x=0,y=0;
+    for(x=0;x<len-1;x++)
+    {
+        int index_of_min=x;
+        for(y=x+1;y<len;y++)
+        {
+            if(array[index_of_min]>array[y])
+            {
+                index_of_min=y;
+            }
+        }
+        int temp=array[x];
+        array[x]=array[index_of_min];
+        array[index_of_min]=temp;
+    }
+    
+    return array;
+}
+
 
 int main()
 {
+    int arr[5]={5,4,3,2,1};
+    sele(arr,5);
     vector<int>v;
     int n;
     cout<<" Enter a number: ";

@@ -1,160 +1,160 @@
-// // In this problem we are going to find the range minumum number by using the segment tree
+// In this problem we are going to find the range minumum number by using the segment tree
 
-// #include<bits/stdc++.h>
-// using namespace std;
+#include<bits/stdc++.h>
+using namespace std;
 
-// int seg_tree[500001],arr[500001];
+int seg_tree[500001],arr[500001];
 
-// void build(int seg_index,int seg_start,int seg_end)
-// {
-//     if(seg_start==seg_end)
-//     {
-//         seg_tree[seg_index]=arr[seg_start];
-//         return;
-//     }
+void build(int seg_index,int seg_start,int seg_end)
+{
+    if(seg_start==seg_end)
+    {
+        seg_tree[seg_index]=arr[seg_start];
+        return;
+    }
 
-//     int mid=(seg_end+seg_start)/2;       // Here for avoiding the integer overflow , we can use s+(l-s)/2
-//     //This is for dividing each segment into half 
+    int mid=(seg_end+seg_start)/2;       // Here for avoiding the integer overflow , we can use s+(l-s)/2
+    //This is for dividing each segment into half 
 
-//     build(2*seg_index,seg_start,mid);       // for left child i.e. 2*i  from start to mid
-//     build(2*seg_index+1 ,mid+1,seg_end);    // For right child i.e. 2*i+1 from mid +1 to end
+    build(2*seg_index,seg_start,mid);       // for left child i.e. 2*i  from start to mid
+    build(2*seg_index+1 ,mid+1,seg_end);    // For right child i.e. 2*i+1 from mid +1 to end
     
-//     seg_tree[seg_index]=min(seg_tree[2*seg_index],seg_tree[2*seg_index+1]);
-//     // Storing the minimum result from the left and right child in the curent index of segment index
-// }
+    seg_tree[seg_index]=min(seg_tree[2*seg_index],seg_tree[2*seg_index+1]);
+    // Storing the minimum result from the left and right child in the curent index of segment index
+}
 
-// int query(int seg_index,int seg_start,int seg_end,int ql,int qr)
-// {
-//     if(qr<seg_start || ql>seg_end)       // Completely outwords/beyond
-//     {
-//         return INT_MAX;
-//     }
+int query(int seg_index,int seg_start,int seg_end,int ql,int qr)
+{
+    if(qr<seg_start || ql>seg_end)       // Completely outwords/beyond
+    {
+        return INT_MAX;
+    }
 
-//     if(seg_start>=ql && seg_end<=qr)
-//     {
-//         return seg_tree[seg_index];
-//     }
+    if(seg_start>=ql && seg_end<=qr)
+    {
+        return seg_tree[seg_index];
+    }
 
-//     int mid=(seg_end+seg_start)/2;
+    int mid=(seg_end+seg_start)/2;
 
-//     int left=query(2*seg_index,seg_start,mid,ql,qr);        // if range is partial then , call to For left child
-//     int right=query(2*seg_index+1,mid+1,seg_end,ql,qr);     //if range if partial then , call to for right child
+    int left=query(2*seg_index,seg_start,mid,ql,qr);        // if range is partial then , call to For left child
+    int right=query(2*seg_index+1,mid+1,seg_end,ql,qr);     //if range if partial then , call to for right child
 
-//     return min(left,right);
-// }
-
-
-// void update(int seg_index,int seg_start,int seg_end,int q_index)
-// {
-//     if(seg_start==seg_end)               // means when we on the leaft node , because array elements are on the leaf nodes of tree
-//     {                                    // so we have to first update the leaf node element and then update the pathe nodes of tree,
-//         seg_tree[seg_index]=arr[seg_start];         // means here we have updated the query in desired node
-//         return;
-//     }
-//     int mid=(seg_start+seg_end)/2;       // take the half of the current segment and check wheather query index is less than mid or not
-//                                          // and then decide wheater go to left or right nodes
-//     if(q_index<=mid)
-//     {
-//         update(2*seg_index,seg_start,mid,q_index);          // if the query index is less than mid , then left call
-//     }
-//     else
-//     {
-//         update(2*seg_index+1,mid+1,seg_end,q_index);       // if the query index is greater than mid , then right call
-//     }
-
-//     //finally update the seg nodes ,i.e according to updated value
-//     seg_tree[seg_index]=min(seg_tree[2*seg_index],seg_tree[2*seg_index+1]);
-// }
+    return min(left,right);
+}
 
 
-// int getSum(int a,int b,int n)
-// {
-//     a+=n;
-//     b+=n;
-//     int sum=0;
-//     while(a<=b)
-//     {
-//         if (a%2 == 1) sum += seg_tree[a++];
-//         if (b%2 == 0) sum += seg_tree[b--];
-//         a /= 2; b /= 2;
-//     }
-//     return sum;
-// }
+void update(int seg_index,int seg_start,int seg_end,int q_index)
+{
+    if(seg_start==seg_end)               // means when we on the leaft node , because array elements are on the leaf nodes of tree
+    {                                    // so we have to first update the leaf node element and then update the pathe nodes of tree,
+        seg_tree[seg_index]=arr[seg_start];         // means here we have updated the query in desired node
+        return;
+    }
+    int mid=(seg_start+seg_end)/2;       // take the half of the current segment and check wheather query index is less than mid or not
+                                         // and then decide wheater go to left or right nodes
+    if(q_index<=mid)
+    {
+        update(2*seg_index,seg_start,mid,q_index);          // if the query index is less than mid , then left call
+    }
+    else
+    {
+        update(2*seg_index+1,mid+1,seg_end,q_index);       // if the query index is greater than mid , then right call
+    }
 
-// int getSumUtil(int ss, int se, int qs, int qe, int si)
-// {
-//     // If segment of this node is a part of given range, then return
-//     // the sum of the segment
-//     if (qs <= ss && qe >= se)
-//         return seg_tree[si];
+    //finally update the seg nodes ,i.e according to updated value
+    seg_tree[seg_index]=min(seg_tree[2*seg_index],seg_tree[2*seg_index+1]);
+}
+
+
+int getSum(int a,int b,int n)
+{
+    a+=n;
+    b+=n;
+    int sum=0;
+    while(a<=b)
+    {
+        if (a%2 == 1) sum += seg_tree[a++];
+        if (b%2 == 0) sum += seg_tree[b--];
+        a /= 2; b /= 2;
+    }
+    return sum;
+}
+
+int getSumUtil(int ss, int se, int qs, int qe, int si)
+{
+    // If segment of this node is a part of given range, then return
+    // the sum of the segment
+    if (qs <= ss && qe >= se)
+        return seg_tree[si];
  
-//     // If segment of this node is outside the given range
-//     if (se < qs || ss > qe)
-//         return 0;
+    // If segment of this node is outside the given range
+    if (se < qs || ss > qe)
+        return 0;
  
-//     // If a part of this segment overlaps with the given range
-//     int mid = (ss+se)/2;
-//     return getSumUtil( ss, mid, qs, qe, 2*si+1) +
-//         getSumUtil( mid+1, se, qs, qe, 2*si+2);
-// }
+    // If a part of this segment overlaps with the given range
+    int mid = (ss+se)/2;
+    return getSumUtil( ss, mid, qs, qe, 2*si+1) +
+        getSumUtil( mid+1, se, qs, qe, 2*si+2);
+}
 
-// int main()
-// {
-//     int n,q,l,r;
-//     cin>>n;
-//     for(int i=1;i<=n;i++)
-//     {
-//         cin>>arr[i];
-//     }
-//     cin>>q;
-//     build(1,1,n);           // Fucntion call to build the segment tree with seg_index,seg_start,seg_end
-//     //cin>>q;
-//     while(q--)
-//     {
-//         string s;
-//         cout<<"Enter Type: i.e min,update,sum: ";
-//         cin>>s;
-//         if(s=="min")
-//         {
-//             cin>>l>>r;
-//             cout<<query(1,1,n,l+1,r+1)<<endl;        // For range between l,r so we passes the seg_index 
-//             // segment starting  index segment end index , left and right.
-//         }
-//         else if(s=="update")
-//         {
-//             int indx,value;
-//             cin>>indx>>value;
-//             cout<<"Before update: "<<endl;
-//             for(int i=1;i<=n;i++)
-//             {
-//                 cout<<arr[i]<<" ";
-//             }
-//             cout<<endl;
-//             arr[indx]=value;
-//             cout<<"After update: "<<endl;
-//             for(int i=1;i<=n;i++)
-//             {
-//                 cout<<arr[i]<<" ";
-//             }
-//             cout<<endl;
-//             update(1,1,n,indx);
-//         }
-//         else if(s=="sum")
-//         {
-//             int a;
-//             int b;
-//             cin>>a>>b;
-//             if(a<0 || a>n || b<0 || b>n)
-//             {
-//                 cout<<"Invalid Input ..please enter valid output "<<endl;
-//             }
-//             cout<<getSumUtil(1,n,a,b,1)<<endl;
+int main()
+{
+    int n,q,l,r;
+    cin>>n;
+    for(int i=1;i<=n;i++)
+    {
+        cin>>arr[i];
+    }
+    cin>>q;
+    build(1,1,n);           // Fucntion call to build the segment tree with seg_index,seg_start,seg_end
+    //cin>>q;
+    while(q--)
+    {
+        string s;
+        cout<<"Enter Type: i.e min,update,sum: ";
+        cin>>s;
+        if(s=="min")
+        {
+            cin>>l>>r;
+            cout<<query(1,1,n,l+1,r+1)<<endl;        // For range between l,r so we passes the seg_index 
+            // segment starting  index segment end index , left and right.
+        }
+        else if(s=="update")
+        {
+            int indx,value;
+            cin>>indx>>value;
+            cout<<"Before update: "<<endl;
+            for(int i=1;i<=n;i++)
+            {
+                cout<<arr[i]<<" ";
+            }
+            cout<<endl;
+            arr[indx]=value;
+            cout<<"After update: "<<endl;
+            for(int i=1;i<=n;i++)
+            {
+                cout<<arr[i]<<" ";
+            }
+            cout<<endl;
+            update(1,1,n,indx);
+        }
+        else if(s=="sum")
+        {
+            int a;
+            int b;
+            cin>>a>>b;
+            if(a<0 || a>n || b<0 || b>n)
+            {
+                cout<<"Invalid Input ..please enter valid output "<<endl;
+            }
+            cout<<getSumUtil(1,n,a,b,1)<<endl;
 
-//         }
+        }
 
-//     }
+    }
 
-// }
+}
 
 
 

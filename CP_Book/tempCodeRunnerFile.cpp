@@ -1,7 +1,9 @@
-#include<bits/stdc++.h>
-#define fast ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+#include <bits/stdc++.h>
+#define fast                          \
+    ios_base::sync_with_stdio(false); \
+    cin.tie(NULL);                    \
+    cout.tie(NULL);
 using namespace std;
-
 
 bool checkPrime(int n)
 {
@@ -60,20 +62,39 @@ int SumOfPrimeDivisors(int n)
     return sum;
 }
 
+int arrayDivision(int N, int K, vector<int> A)
+{
+    vector<int> temp;
+    for (int i = 1; i < N; i++)
+    {
+        temp.push_back(A[i - 1] - A[i]);
+    }
+    sort(temp.begin(), temp.end());
+    int ans = A[N - 1] - A[0];
+    for (int i = 0; i < K - 1; ++i)
+    {
 
-int32_t main(){
-    int n;
-    cin>>n;
-    cout<<SumOfPrimeDivisors(n)<<endl;
-    // vector<int>res;
-    // for(int i=0;i<10;i++)
-    // {
-    //     res.push_back(i);
-    // }
-    // vector<int>temp(res.begin()+0,res.begin()+2+1);
-    // for(auto it:temp)
-    // {
-    //     cout<<it<<" ";
-    // }
+        ans += temp[i];
+    }
+    return ans;
+}
+
+int32_t main()
+{
+    const int MOD = 1e9 + 7;
+    int A, B;
+    cin >> A >> B;
+    long ans = 1;
+    long total = 1;
+    for (int i = 2; i <= A; i++)
+    {
+        long temp = (ans * B);
+        cout << temp << endl;
+        ans = temp;
+        total = (total + temp) % MOD;
+    }
+    int res = (total * (B - 1)) % MOD;
+    // cout<<res<<endl;
+    cout << res << endl;
     return 0;
 }
