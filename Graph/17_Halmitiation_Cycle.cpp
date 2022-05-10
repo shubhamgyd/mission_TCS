@@ -157,5 +157,5 @@ int main()
 Time cimplexity of the above solution is: O(n!)
 It try all the possible combination , hence if the no of vertexes are n the the no of possible combination are n!
 
-n! = O( n ^ n )
+n! != O( n ^ n )
 */

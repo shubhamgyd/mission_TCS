@@ -79,8 +79,6 @@ vector<int> NextSmaller(int arr[],int n)
     }
     reverse(right.begin(),right.end());
     return right;
-
-    
 }
 
 int main()
