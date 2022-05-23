@@ -79,8 +79,10 @@ while True:
         print("Students with Grade "+grade1+ ": ");
 
          # Printing Students with the respective grade
-        print(GradeNames[grade1])
-    
+        if not GradeNames[grade1]:
+            print("Empty data of resprective grade....\n");
+        else :
+            print(GradeNames[grade1])
         print("\n")
 
 

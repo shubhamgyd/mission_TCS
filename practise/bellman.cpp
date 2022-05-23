@@ -95,5 +95,5 @@ int main()
 }
 
 /*
-The time complexity of the Bellman–Ford algorithm is O(V × E), where V and E are the total number of vertices and edges in the graph, respectively.
+The time complexity of the Bellman-Ford algorithm is O(V × E), where V and E are the total number of vertices and edges in the graph, respectively.
 */

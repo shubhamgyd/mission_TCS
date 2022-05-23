@@ -1,21 +1,30 @@
+// #include<bits/stdc++.h>
+// using namespace std;
+
+
+// int main()
+// {
+//     int n;
+//     cin>>n;
+//     vector<int>res(n);
+//     for(int i=0;i<n;i++)
+//     {
+//         cin>>res[i];
+//     }
+//     for(int i=0;i<n;i++)
+//     {
+//         if(res[i]%2==1)
+//         {
+//             int num=res[i]*res[i]*res[i];
+//             cout<<num<<" ";
+//         }
+//     }
+//     return 0;
+// }
+
+
 #include<bits/stdc++.h>
 using namespace std;
-
-int maxGroups(int input1,int input2[])
-{
-    unordered_map<int,int>mp;
-    long long groups=0;
-    for(int i=0;i<input1;i++)
-    {
-        mp[input2[i]]++;
-        if( mp[input2[i]] == 2 ) 
-        {
-            groups++;
-            mp.clear();
-        }
-    }
-    return groups;
-}
 
 
 int main()
@@ -23,28 +32,19 @@ int main()
     int n;
     cin>>n;
     vector<int>res(n);
-    int arr[n];
     for(int i=0;i<n;i++)
     {
         cin>>res[i];
-        arr[i]=res[i];
     }
-    cout<<maxGroups(n,arr)<<endl;
-    map<int,int>mp;
-    for(auto it:res)
+    sort(res.begin(),res.end());
+    if(n<3)
     {
-        mp[it]++;
+        cout<<0<<endl;
+        return 0;
     }
-    int groups=0;
-    for(auto it:mp)
-    {
-        groups+=(it.second/2);
-    }
-    cout<<groups<<endl;
-    // int arr[6]={1,2,3,4};
-    // for(int i=0;i<6;i++)
-    // {
-    //     cout<<arr[i]<<" ";
-    // }
+    int num=res[0];
+    int num1=res[n-3];
+    cout<<num*num1<<endl;
+    
     return 0;
 }

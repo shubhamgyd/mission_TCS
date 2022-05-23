@@ -12,6 +12,8 @@ int main()
         cin>>res[i];
     }
     sort(res.begin(),res.end());
+
+    // Solution:1
     double mrt=0;
     for(int i=0;i<n;i++)
     {
@@ -26,6 +28,7 @@ int main()
     cout<<mrt<<endl;
 
 
+    // solution:2
     int prefix[n];
     memset(prefix,0,sizeof(prefix));
     prefix[0]=res[0];
@@ -35,7 +38,6 @@ int main()
         prefix[i]=prefix[i-1]+res[i];
         temp+=prefix[i];
     }
-    double ans=prefix[n-1];
     temp/=n;
     cout<<temp<<endl;
     return 0;

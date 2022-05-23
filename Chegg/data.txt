@@ -3,5 +3,4 @@ Student2 B
 Student3 C
 Student4 D
 Student5 A
-Student6 F
 Student7 A

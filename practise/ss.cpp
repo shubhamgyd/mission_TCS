@@ -1,22 +1,28 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+bool test(int x,int y)
+{
+    return abs(x%10)==abs(y%10);
+}
+
 
 int main()
 {
-    int n;
-    cin>>n;
-    vector<int>res(n);
-    for(int i=0;i<n;i++)
+    int i=1;
+    int j=1;
+    while(i<=3)
     {
-        cin>>res[i];
+        while(j<=3)
+        {
+            cout<<i;
+            j++;
+        }
+        i++;
+        cout<<j;
+        cout<<endl;
+        j=1;
     }
-    sort(res.begin(),res.end());
-    for(auto it:res)
-    {
-        cout<<it<<" ";
-    }
-    return 0;
 }
 /*
 Time Complexity:O(nlogn)
