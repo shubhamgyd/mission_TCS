@@ -1,44 +1,53 @@
 #include<bits/stdc++.h>
 using namespace std;
-#define int long long
+// #define int long long
 
-int backbencherAndBugs(int n,vector<int>&nums)
+string revers(string str)
 {
-    int questions=0;
-    int total_ways=0;
-    if(n==1)
-    {
-        return nums[0];
-    }
-    for(int i=0;i<n;i++)
-    {
-        total_ways+=nums[i];
-        total_ways+=questions*(nums[i]-1);
-        questions++;
-    }
-    return total_ways;
+    if(str.length()<=1) return str;
+    string s=string(1,str[0]);
+    string ss=string(str.substr(1));
+    return revers(ss)+s;
 }
 
-
-
-signed main()
+void solve(vector<string>&s)
 {
-    ios_base::sync_with_stdio(false); 
-    cin.tie(NULL);                    
-    cout.tie(NULL);
-    int t;
-    cin>>t;
-    while(t--)
+    for(int i=0;i<s.size();i++)
     {
-        int n;
-        cin>>n;
-        vector<int>res(n);
-        for(int i=0;i<n;i++)
+        if(s[i].size()==0)
         {
-            cin>>res[i];
+            s.erase(s.begin()+i);
         }
-        int ans=backbencherAndBugs(n,res);
-        cout<<ans<<endl;
     }
-    return 0;
 }
+
+template<typename A,typename B>
+void fun(A a,B& b)
+{
+    a+=1;
+    b.push_back(1);
+}
+
+
+
+
+int main()
+{
+    function<int(int)>f;
+    f=[&f](int n)->int{return (n<=1)?1:n*(f(n-1));};
+    int ans=f(4);
+    cout<<ans<<endl;
+    int a=0;
+    vector<int>b;
+    fun(a,b);
+    cout<<a<<"[";
+    for(auto it:b)
+    {
+        cout<<it;
+    }
+    cout<<"]";
+   
+}
+
+
+

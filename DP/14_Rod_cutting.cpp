@@ -10,10 +10,10 @@ int RodCut(int prices[],int n,int length[],int max_len)
     if(n==0 || max_len==0) return 0;
 
     // If the length of the rod is less
-    // than the maximum length, Max_lene will
+    // than the maximum length, Max_len will
     // consider it.Now depending 
     // upon the profit,
-    // either Max_lene  we will take 
+    // either Max_len  we will take 
     // it or discard it.
     if(length[n-1]<=max_len)
     {

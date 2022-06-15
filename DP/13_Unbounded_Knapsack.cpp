@@ -88,9 +88,9 @@ int main()
     ios::sync_with_stdio(0);
     cin.tie(0);
     memset(dp,-1,sizeof(dp));
-    int W=40;
-    int val[] = {60,50,20};
-    int wt[] = {20,25,5};
+    int W=15;
+    int val[] = {7,2,4};
+    int wt[] = {5,10, 20};
     int n=sizeof(val)/sizeof(val[0]);
     cout<<" Maximum Value of Weight:" <<unboundedknapsac(W,n,val,wt)<<endl;
     cout<<" Maximum Value of Weight:" <<Unbounded(wt,val,n,W)<<endl;

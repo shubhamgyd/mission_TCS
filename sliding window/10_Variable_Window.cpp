@@ -79,8 +79,8 @@ string minWindow(string s, string t) {
 
 int main()
 {
-    string str="12222133333332";
-    string s="123";
+    string str="abcdefg";
+    string s="cdex";
     cout<<minWindow(str,s)<<endl;
     return 0;
 }

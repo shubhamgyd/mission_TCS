@@ -1,100 +1,74 @@
-#include <bits/stdc++.h>
-#define fast                          \
-    ios_base::sync_with_stdio(false); \
-    cin.tie(NULL);                    \
-    cout.tie(NULL);
+#include<bits/stdc++.h>
 using namespace std;
 
-bool checkPrime(int n)
+bool isSorted(int a[], int n) 
+{ 
+    while ( --n > 1 ) 
+        if (a[n] < a[n-1]) 
+            return false; 
+    return true; 
+} 
+  
+
+void shuffle(int a[], int n) 
+{ 
+    for (int i=0; i < n; i++) 
+        swap(a[i], a[rand()%n]); 
+} 
+
+int bogosort(int a[], int n) 
+{ 
+
+    int ct=0;
+    while ( !isSorted(a, n) ) 
+    {
+        ++ct;
+        shuffle(a, n); 
+    }
+    return ct;
+} 
+int maxOperations(int *list,int n)
 {
-
-    if (n < 2)
-    {
-        return false;
-    }
-    else if (n == 2 || n == 3)
-        return true;
-
-    if (n % 2 == 0 || n % 3 == 0)
-    {
-        return false;
-    }
-
-    for (int i = 5; i * i <= n; i = i + 6)
-        if (n % i == 0 || n % (i + 2) == 0)
-        {
-            return false;
-        }
-
-    return true;
+    return bogosort(list,n);
 }
 
-int SumOfPrimeDivisors(int n)
+int main()
 {
-
-    long long int range = (long long int)sqrt(n);
-    int sum = 0;
-
-    for (int i = 1; i <= range; i++)
+    int n;
+    cin>>n;
+    int arr[n];
+    for(int i=0;i<n;i++)
     {
-        if (n % i == 0)
-        {
-
-            if (i == n / i && checkPrime(i))
-            {
-                sum += i;
-            }
-            else
-            {
-
-                if (checkPrime(i))
-                {
-                    sum += i;
-                }
-                if (checkPrime(n / i))
-                {
-                    sum += (n / i);
-                }
-            }
-        }
+        cin>>arr[i];
     }
-
-    return sum;
+    int ans=maxOperations(arr,n);
+    for(int i=0;i<n;i++)
+    {
+        cout<<arr[i]<<" ";
+    }
+    cout<<ans<<endl;
 }
 
-int arrayDivision(int N, int K, vector<int> A)
-{
-    vector<int> temp;
-    for (int i = 1; i < N; i++)
-    {
-        temp.push_back(A[i - 1] - A[i]);
-    }
-    sort(temp.begin(), temp.end());
-    int ans = A[N - 1] - A[0];
-    for (int i = 0; i < K - 1; ++i)
-    {
 
-        ans += temp[i];
-    }
-    return ans;
-}
+// int main()
+// {
+//     string parent;
+//     string sub;
+//     cin>>parent>>sub;
+//     transform(parent.begin(),parent.end(),parent.begin(),::tolower);
+//     transform(sub.begin(),sub.end(),sub.begin(),::tolower);
+//     int count=0;
+//     int n=parent.length();
+//     int m=sub.length();
+//     for(int i=0;i<n-m;i++)
+//     {
+//         string str=parent.substr(i,m);
+//         if(str==sub)
+//         {
+//             count++;
+//         }
+//     }
+//     cout<<count<<endl;
+//     return 0;
 
-int32_t main()
-{
-    const int MOD = 1e9 + 7;
-    int A, B;
-    cin >> A >> B;
-    long ans = 1;
-    long total = 1;
-    for (int i = 2; i <= A; i++)
-    {
-        long temp = (ans * B);
-        cout << temp << endl;
-        ans = temp;
-        total = (total + temp) % MOD;
-    }
-    int res = (total * (B - 1)) % MOD;
-    // cout<<res<<endl;
-    cout << res << endl;
-    return 0;
-}
+// }

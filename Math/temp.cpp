@@ -3,137 +3,213 @@
     ios_base::sync_with_stdio(false); \
     cin.tie(NULL);                    \
     cout.tie(NULL);
-#define int  long long 
+#define int long long
 using namespace std;
 #define endl '\n'
 #define max_pq priority_queue<int>
-#define min_pq priority_queue<int,vector<int>,greater<int>>
-#define For(i,x,n) for(i=x; i<n; ++i)
+#define min_pq priority_queue<int, vector<int>, greater<int>>
+#define For(i, x, n) for (i = x; i < n; ++i)
 #define pb push_back
-const int mod=32768;
 
-int test=1;
-
-int Operations(int a)
+int binpow(int a, int b)
 {
-    cout<<a<<endl;
-    if(a==0){
-        return INT_MAX;
-    }
-    if(a==mod)
+    int res = 1;
+    while (b > 0)
     {
-        return INT_MAX;
+        if (b & 1)
+            res = res * a;
+        a = a * a;
+        b >>= 1;
     }
-    if(a>mod)
-    {
-        a=a%mod;
-    }
-    // int a1=Operations((a+1)%mod);
-    // int a2=Operations((a*2)%mod);
-    return 1+min(Operations((a+1)),Operations((a*2)));
-    // return 1+min(a1,a2);
+    return res;
 }
 
-
-const int mod = 32768;
-double begintime, endtime;
-
-using namespace std;
-
-int n, x, a[mod+8];
-vector<int>l[mod+8];
-queue<int>s;
-int main()
+int gcd(int a, int b)
 {
-    
-   // ios_mod::sync_with_stdio(0);
-    cin.tie(0);
-    cout.tie(0);
-    memset(a, -1, sizeof(a));
-    for(int i = 0; i < mod; i++)
+    if (b == 0)
+        return a;
+    return gcd(b, a % b);
+}
+
+string to_upper(string &a)
+{
+    for (int i = 0; i < (int)a.size(); ++i)
+        if (a[i] >= 'a' && a[i] <= 'z')
+            a[i] -= 'a' - 'A';
+    return a;
+}
+
+string to_lower(string &a)
+{
+    for (int i = 0; i < (int)a.size(); ++i)
+        if (a[i] >= 'A' && a[i] <= 'Z')
+            a[i] += 'a' - 'A';
+    return a;
+}
+
+const int mod = 1e9 + 7;
+const int INF = 1e9;
+
+
+
+
+bool dfs(int i,int j,int n,int m,vector<vector<bool>>&dp,vector<vector<char>>&res,vector<vector<bool>>&visited)
+{
+    if(i<0 or i>=n or j<0 or j>=m or res[i][j]=='B' or res[i][j]=='#' or visited[i][j]) return false;
+
+    visited[i][j]=true;
+    if(i==n-1 and j==m-1)
     {
-        l[(i+1)%mod].push_back(i);
-        l[(i*2)%mod].push_back(i);
+        return dp[i][j]=true;
     }
-    a[0] = 0;
-    s.push(0);
-    while(!s.empty())
+    if(dp[i][j])
     {
-        x = s.front();
-        s.pop();
-        for(int tmp : l[x])
-            if(a[tmp] == -1)
-            {
-                a[tmp] = a[x]+1;
-                s.push(tmp);
-            }
+        return dp[i][j];
     }
-    cin>>n;
-    while(n--)
-    {
-        cin>>x;
-        cout<<a[x]<<' ';
-    }
-    return 0;
+    bool l=dfs(i,j-1,n,m,dp,res,visited);
+    bool r=dfs(i,j+1,n,m,dp,res,visited);
+    bool u=dfs(i-1,j,n,m,dp,res,visited);
+    bool d=dfs(i+1,j,n,m,dp,res,visited);
+    return dp[i][j]=(l or r or u or d);
 }
 
 void solve()
 {
-    int n;
-    cin>>n;
+    int n, m;
+    cin >> n >> m;
+    vector<vector<char>> res(n, vector<char>(m, '.'));
+    int bad1 = 0;
+    int good1 = 0;
+    for (int i = 0; i < n; i++)
+    {
+
+        for (int j = 0; j < m; j++)
+        {
+            cin >> res[i][j];
+            if (res[i][j] == 'B')
+                bad1++;
+            else if (res[i][j] == 'G')
+                good1++;
+        }
+    }
+    // for (int i = 0; i < n; i++)
+    // {
+    //     for (int j = 0; j < m; j++)
+    //     {
+    //         cout << res[i][j] << " ";
+    //     }
+    //     cout << endl;
+    // }
+    if (res[n - 1][m - 1] == 'B')
+    {
+        cout << "No" << endl;
+        return;
+    }
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            if (res[i][j] == 'B')
+            {
+                // cout<<"here"<<endl;
+                if (i - 1 >= 0 and res[i - 1][j] == 'G')
+                {
+                    cout << "No" << endl;
+                    return;
+                }
+                else
+                {
+                    if ( i-1>=0 and res[i - 1][j] == '.')
+                    {
+                        res[i - 1][j] = '#';
+                    }
+                }
+
+                if (i + 1 < n and res[i + 1][j] == 'G')
+                {
+                    cout << "No" << endl;
+                    return;
+                }
+                else
+                {
+                    if (i+1<n and res[i + 1][j] == '.')
+                    {
+                        res[i + 1][j] = '#';
+                    }
+                }
+
+                if (j - 1 >= 0 and res[i][j - 1] == 'G')
+                {
+                    cout << "No" << endl;
+                    return;
+                }
+                else
+                {
+                    if (j-1>=0 and res[i][j - 1] == '.')
+                    {
+                        res[i][j-  1] = '#';
+                    }
+                }
+
+                if (j + 1 < m and res[i][j + 1] == 'G')
+                {
+                    cout << "No" << endl;
+                    return;
+                }
+                else
+                {
+                    if (j+1<m and res[i][j + 1] == '.')
+                    {
+                        res[i][j + 1] = '#';
+                    }
+                }
+            }
+        }
+    }
+
+    queue<pair<int,int>>q;
+    cout<<endl;
     for(int i=0;i<n;i++)
     {
-        int a;
-        cin>>a;
-        cout<<a<<endl;
-        int ans=Operations(a);
-        cout<<ans<<endl;
+        for(int j=0;j<m;j++)
+        {
+            // cout<<res[i][j]<<" ";
+            if(res[i][j]=='G')
+            {
+                q.push({i,j});
+            }
+        }
+        // cout<<endl;
     }
-
-
+    
+    bool ok=true;
+    vector<vector<bool>>dp(n,vector<bool>(m,false));
+    while(!q.empty())
+    {
+        auto p=q.front();
+        q.pop();
+        int i=p.first;
+        int j=p.second;
+        vector<vector<bool>>visited(n,vector<bool>(m,false));
+        if(!dfs(i,j,n,m,dp,res,visited))
+        {
+            cout<<"No"<<endl;
+            return;
+        }
+    }
+    cout<<"Yes"<<endl;
 }
-
-int n;
-    scanf("%d",&n);
-    int mx=0;
-    vector<int> v(n);
-    for(auto &x:v){
-      scanf("%d",&x);
-      mx=max(mx,x);
-    }
-    ll res=1e18;
-    for(int h=mx;h<=mx+3;++h){
-      ll two=0, one=0;
-      for(auto &x:v){
-        two += (h-x)/2;
-        one += (h-x)%2;
-      }
-      ll all=one+two*2;
-      ll days=all/3*2;
-      if(all%3==1)
-        ++days;
-      if(all%3==2)
-        days+=2;
-      res=min(res,max(one*2-1, days));
-    }
-    printf("%lld\n",res);
-
-
 
 signed main()
 {
-// #ifndef ONLINE_JUDGE
-//         freopen("inputf.in", "r", stdin);
-//         freopen("outputf.out", "w", stdout);
-// #endif
     fast();
-    // int t;
-    // cin >> t;
-    // while(t--)
-    // {
-    //     solve();
-    // }
-    solve();
-    
+    int t;
+    cin >> t;
+    while (t--)
+    {
+        solve();
+    }
+    // solve();
+
     return 0;
 }

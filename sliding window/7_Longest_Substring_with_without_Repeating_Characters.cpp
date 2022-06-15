@@ -43,7 +43,7 @@ int MaxLength(string str)
 int main()
 {
     string str="abdefgabef";
-    cout<<"Maximum length of wondow size ,with unique characters: "<<MaxLength(str)<<endl;
+    cout<<"Maximum length of window size ,with unique characters: "<<MaxLength(str)<<endl;
     return 0;
 }
 

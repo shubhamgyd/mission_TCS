@@ -1,76 +1,32 @@
-// #include<bits/stdc++.h>
-// using namespace std;
-
-// int main()
-// {
-//     int n;
-//     cin>>n;
-//     vector<int>res(n);
-//     int one=0;
-//     int zero=0;
-//     for(int i=0;i<n;i++)
-//     {
-//         cin>>res[i];
-//         if(res[i]==1)
-//         {
-//             one++;
-//         }
-//         else
-//         {
-//             zero++;
-//         }
-//     }
-//     if(n%2==1)
-//     {
-//         if(one>0 && zero>0 && one-zero==1)
-//         {
-//             cout<<"YES"<<endl;
-//         }
-//         else
-//         {
-//             cout<<"NO"<<endl;
-//         }
-//     }
-//     else
-//     {
-//         if(one>0 && zero>0 && one-zero==0)
-//         {
-//             cout<<"YES"<<endl;
-//         }
-//         else
-//         {
-//             cout<<"NO"<<endl;
-//         }
-//     }
-//     return 0;
-// }
-
-
 #include<bits/stdc++.h>
 using namespace std;
 
-
 int main()
 {
-    string str;
-    getline(cin,str);
-    map<string,int>mp;
-    stringstream ss(str);
-    string word;
-    while(ss>>word)
+    int n;
+    cin>>n;
+    vector<int>res(n),res1(n);
+    map<int,pair<int,int>>mp,mp1;
+    for(int i=0;i<n;i++)
     {
-        mp[word]++;
+        cin>>res[i];
+        mp[res[i]].first++;
+        mp[res[i]].second=i;
     }
-    int mx=0;
-    string ans="";
-    for(auto it:mp)
+    for(int i=0;i<n;i++)
     {
-        if(it.second>mx)
+        cin>>res1[i];
+        mp1[res1[i]].first++;
+        mp1[res1[i]].second=i;
+    }
+    int total_ct=0;
+    for(int i=0;i<n;i++)
+    {
+        if(mp1.find(res1[i])!=mp.end() and mp[res[i]].first==1 and mp1[res1[i]].first==1 and i!=mp1[res1[i]].second)
         {
-            mx=it.second;
-            ans=it.first;
+            total_ct++;
         }
     }
-    cout<<ans<<endl;
-    return 0;
+
+    // int num1=
 }

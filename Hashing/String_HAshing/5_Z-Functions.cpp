@@ -3,6 +3,9 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+
+
+
 void z_function(string str)
 {
     int n=str.length();
