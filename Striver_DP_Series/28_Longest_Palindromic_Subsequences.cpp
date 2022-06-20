@@ -20,30 +20,45 @@ adebc
 dcadb
 Sample Output 1 :
 3
+Explanation Of The Sample Output 1 :
+Both the strings contain a common subsequence 'adb', which is the longest common subsequence with length 3. 
+Sample Input 2 :
+ab
+defg
+Sample Output 2 :
+0
+
 */
+
+
+// Just is the variation of LCS 
+// Think one string is given what for other
+// other is just the reverse of original one
+// so just find the LCS 
+
 
 #include<bits/stdc++.h>
 using namespace std;
 
-int main()
+int LCS(string X,string Y,int m,int n)
 {
-    string s,t;
-    cin>>s>>t;
-    int n=s.length();
-    int m=t.length();
-    int dp[n+1][m+1];
-    for(int i=0;i<=n;i++)
+    int dp[m+1][n+1]; // Initialazation of array to store the values
+    for(int i=0;i<=m;i++) //Filling first row and column as zero
     {
-        for(int j=0;j<=m;j++)
+        for(int j=0;j<=n;j++)
         {
-            if(i==0 or j==0) dp[i][j]=0;
+            if(i==0||j==0)
+            {
+                dp[i][j]=0;
+            }
         }
     }
-    for(int i=1;i<=n;i++)
+    
+    for(int i=1;i<=m;i++)
     {
-        for(int j=1;j<=m;j++)
+        for(int j=1;j<=n;j++)
         {
-            if(s[i-1]==t[j-1])
+            if(X[i-1]==Y[j-1])
             {
                 dp[i][j]=1+dp[i-1][j-1];
             }
@@ -53,34 +68,19 @@ int main()
             }
         }
     }
-    cout<<dp[n][m]<<endl;
-    string str="";
-    int i=n;
-    int j=m;
-    while(i>0 and j>0 )
-    {
-        if(s[i-1]==t[j-1])
-        {
-            str.push_back(s[i-1]);
-            i--;
-            j--;
-            // cout<<s[i-1]<<" ";
-        }
-        else
-        {
-            if(dp[i-1][j]>dp[i][j-1])
-            {
-                i--;
-            }
-            else
-            {
-                j--;
-            }
-        }
-    }
-    reverse(str.begin(),str.end());
-    cout<<str<<endl;
+
+    return dp[m][n];
+}
+
+int main()
+{
+    string s;
+    cin>>s;
+    string t=s;
+    reverse(t.begin(),t.end());
+    int n=s.length();
+    int m=t.length();
+    int ans=LCS(s,t,n,m);
+    cout<<ans<<endl;
     return 0;
 }
-// Time Complexity:O(n*m)
-// Space Complexity:O(max(LCS))

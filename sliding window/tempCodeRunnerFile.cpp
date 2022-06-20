@@ -1,31 +1,40 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
 int main()
 {
     int n;
-    cin>>n;
-    vector<int>res(n);
-    for(int i=0;i<n;i++)
+    cin >> n;
+
+    vector<int> input(n);
+
+    for (int i = 0; i < n; i++)
     {
-        cin>>res[i];
+        cin >> input[i];
     }
-    sort(res.begin(),res.end());
-    int num=res[n-1];
-    int i=n-1;
-    int cnt=1;
-    while(i>=0 and res[i]==num and cnt!=3)
+
+    vector<bool> check_ans(n, false);
+    for (int i = 0; i < n; i++)
     {
-        i--;
+        if (check_ans[i] == false)
+        {
+            check_ans[i] = i;
+        }
     }
-    int num1=res[i];
-    cnt++;
-    while(i>=0 and res[i]==num1 and cnt!=3)
+
+    vector<int> ans(n);
+    for (int i = 0; i < check_ans.size(); i++)
     {
-        i--;
+        if (check_ans[i] == false)
+        {
+            ans.push_back(check_ans[i]);
+        }
     }
-    cnt++;
-    int num2=res[i];
-    cout<<num-num2<<endl;
+
+    for (int i = 0; i < ans.size(); i++)
+    {
+        cout << ans[i] << " ";
+    }
+    cout << endl;
     return 0;
 }
