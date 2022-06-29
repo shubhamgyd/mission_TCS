@@ -1,70 +1,57 @@
-#include <bits/stdc++.h>
-#define fast()                        \
-    ios_base::sync_with_stdio(false); \
-    cin.tie(NULL);                    \
-    cout.tie(NULL);
-#define int  long long 
+#include<bits/stdc++.h>
 using namespace std;
-#define endl '\n'
 
 
-void solve()
+int main()
 {
-    int n,m;
-    cin>>n>>m;
-    vector<vector<int>>res(n,vector<int>(m));
-    for(int i=0;i<n;i++)
+    cout<<(3^2^5)<<endl;
+    string str;
+    cin>>str;
+    int n=str.length();
+
+    // Solution 1: Brute Force
+    bool ok=false;
+    for(int i=1;i<n;i++)
     {
-        for(int j=0;j>m;j++)
+        int zero=0;
+        int one=0;
+        for(int j=0;j<i;j++)
         {
-            cin>>res[i][j];
-        }
-    }
-    priority_queue<pair<int,pair<int,int>>,vector<pair<int,pair<int,int>>>,greater<pair<int,pair<int,int>>>>start;
-    for(int i=0;i<n;i++)
-    {
-        for(int j=0;j<m;j++)
-        {
-            if(res[i][j]==1)
+            if(str[j]=='0') zero++;
+            else one++;
+            if(one==zero)
             {
-                int dist=i+j;
-                start.push({dist,{i,j}});
+                cout<<2*zero<<endl;
+                ok=true;
+                break;
             }
         }
+        if(ok) break;
     }
-    priority_queue<pair<int,pair<int,int>>,vector<pair<int,pair<int,int>>>,greater<pair<int,pair<int,int>>>>end;
-    for(int i=n-1;i>=0;i--)
-    {
-        for(int j=m-1;j>=0;j--)
-        {
-            if(res[i][j]==1)
-            {
-                int dist=abs((n-1)-i)+abs((m-1)-j);
-                end.push({dist,{i,j}});
-            }
-        }
+    if(!ok) {
+        cout<<-1<<endl;
     }
-    int cost=start.top().first;
-    int cost2=end.top().first;
-    cout<<cost+cost2<<endl;
-}
-
-
-
-signed main()
-{
-// #ifndef ONLINE_JUDGE
-//         freopen("inputf.in", "r", stdin);
-//         freopen("outputf.out", "w", stdout);
-// #endif
-    fast();
-    // int t;
-    // cin >> t;
-    // while (t--)
-    // {
-    //     solve();
-    // }
-    solve();
     
-    return 0;
+
+    // Solution 2: Using Hashing
+    unordered_map<int,int>mp;
+    int sum=0;
+    int start=0;
+    mp[0]=-1;
+    int range=0;
+    for(int i=0;i<n;i++)
+    {
+        if(str[i]=='1') sum+=1;
+        else sum-=1;
+        if(mp.find(sum)==mp.end())
+        {
+            mp[sum]=i;
+        }
+        range=i-mp[sum];
+    }
+    if(range==0)
+    {
+        cout<<-1<<endl;
+    }
+    else cout<<range<<endl;
 }
