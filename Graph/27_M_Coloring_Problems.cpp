@@ -19,7 +19,7 @@ bool isSafe(int node,int color[],bool graph[101][101],int N,int col)
 
 bool solve(int src,int color[],bool graph[101][101],int m,int N)
 {
-    if(src==N)                      // We check if the current node is equal to the last node or not
+    if(src==N)                      // we reached last node with all possibilities
     {
         return true;
     }
