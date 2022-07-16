@@ -15,8 +15,9 @@ using namespace std;
 
 int32_t main()
 {
-    int n,r,p;
-    cin>>n>>r>>p;
+	int p=1e9+7;
+    int n,r;
+    cin>>n>>r;
     int fact[n+1];
     int pr=1;
     fact[1]=1;
@@ -83,12 +84,12 @@ int nCrModp(int n, int r, int p)
 }
 
 // Driver program
-int32_t main()
-{
-	int n = 10, r = 2, p = 13;
-	cout << "Value of nCr % p is " << nCrModp(n, r, p);
-	return 0;
-}
+// int32_t main()
+// {
+// 	int n = 10, r = 2, p = 13;
+// 	cout << "Value of nCr % p is " << nCrModp(n, r, p);
+// 	return 0;
+// }
 /*
 Time complexity of above solution is O(n*r) and it requires O(r) space. 
 There are more and better solutions to above problem

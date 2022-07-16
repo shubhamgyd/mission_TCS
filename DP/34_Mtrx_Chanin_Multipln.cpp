@@ -39,5 +39,4 @@ int main()
     int j=n-1;
     cout<<"Minimum number of Multiplication is: "<<MCM(arr,i,j)<<'\n';
     return 0;
-    
 }

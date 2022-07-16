@@ -20,7 +20,7 @@ Output for each test case will be printed on a separate line.
 Note :
 You are not required to print anything; it has already been taken care of. Just implement the function.
 Constraints :
-1 ≤ T ≤ 10      
+1 ≤ T ≤ 10
 1 ≤ N ≤ 2000
 1 ≤ ARR[i] ≤ 10 ^ 6
 
@@ -42,42 +42,62 @@ For test case 2 :
 The length of LIS is 3 and there is only one such LIS, which is [3, 4, 6].
 */
 
-
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
+int leastInterval(vector<int> &t, int n)
+{
+    vector<char>tasks(n);
+    for(int i=0;i<n;i++)
+    {
+        tasks[i]=(t[i]+'A');
+    }
+    unordered_map<char, int> mp;
+    int count = 0;
+    for (auto e : tasks)
+    {
+        mp[e]++;
+        count = max(count, mp[e]);
+    }
+
+    int ans = (count - 1) * (n + 1);
+    for (auto e : mp)
+        if (e.second == count)
+            ans++;
+    return max((int)tasks.size(), ans);
+}
 
 int findNumberOfLIS(vector<int> &arr)
 {
     // Write your code here.
-    int n=arr.size();
-    vector<int>dp(n,1);
-    vector<int>count(n,1);
-    int mx=0;
-    for(int i=1;i<n;i++)
+    int n = arr.size();
+    vector<int> dp(n, 1);
+    vector<int> count(n, 1);
+    int mx = 0;
+    for (int i = 1; i < n; i++)
     {
-        dp[i]=1;
-        for(int j=0;j<i;j++)
+        dp[i] = 1;
+        for (int j = 0; j < i; j++)
         {
-            if(arr[j]<arr[i] and dp[j]+1>dp[i])
+            if (arr[j] < arr[i] and dp[j] + 1 > dp[i])
             {
-                dp[i]=dp[j]+1;
-                count[i]=count[j];
+                dp[i] = dp[j] + 1;
+                count[i] = count[j];
             }
-            
+
             // if same length.. increase count
-            else if(arr[j]<arr[i] and dp[j]+1==dp[i])
+            else if (arr[j] < arr[i] and dp[j] + 1 == dp[i])
             {
-                count[i]+=count[j];
+                count[i] += count[j];
             }
         }
-        mx=max(mx,dp[i]);
+        mx = max(mx, dp[i]);
     }
-    int cnt=0;
-    for(int i=0;i<n;i++)
+    int cnt = 0;
+    for (int i = 0; i < n; i++)
     {
-        if(dp[i]==mx) cnt+=count[i];
+        if (dp[i] == mx)
+            cnt += count[i];
     }
     return cnt;
-    
 }

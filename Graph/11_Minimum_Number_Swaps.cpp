@@ -23,6 +23,7 @@ int main()
     int start=0;
     int end=0;
     int mn=INT_MAX;
+    int diff=0;
     for(int i=0;i<n;i++)
     {
         if(visited[i] || num[i].second==i)
@@ -35,6 +36,7 @@ int main()
         {
             visited[j]=1;
             j=num[j].second;
+            if(i!=j) diff=abs(num[j].first-num[i].first);
             cycle++;
         }
         if(cycle>0)
@@ -43,6 +45,7 @@ int main()
             //ans+=(n-cycle);
         }
     }
+    cout<<diff<<endl;
     cout<<ans<<endl;
     return 0;
 }

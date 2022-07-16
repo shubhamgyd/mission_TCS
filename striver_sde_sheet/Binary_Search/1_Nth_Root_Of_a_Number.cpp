@@ -63,7 +63,6 @@ int main()
         }
         else
         {
-
             num = mid;
             break;
         }

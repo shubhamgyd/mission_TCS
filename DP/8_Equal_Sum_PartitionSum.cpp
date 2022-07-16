@@ -99,7 +99,7 @@ int main()
 {
     ios::sync_with_stdio(0);
     cin.tie(0);
-    int arr[]={1,3,3,2,3,2};
+    int arr[]={1,2,3,4,5};
     int sum=0;
     int n=sizeof(arr)/sizeof(arr[0]);
     for(int i=0;i<n;i++)
