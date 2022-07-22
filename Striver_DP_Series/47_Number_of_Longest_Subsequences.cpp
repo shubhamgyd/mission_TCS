@@ -45,27 +45,7 @@ The length of LIS is 3 and there is only one such LIS, which is [3, 4, 6].
 #include <bits/stdc++.h>
 using namespace std;
 
-int leastInterval(vector<int> &t, int n)
-{
-    vector<char>tasks(n);
-    for(int i=0;i<n;i++)
-    {
-        tasks[i]=(t[i]+'A');
-    }
-    unordered_map<char, int> mp;
-    int count = 0;
-    for (auto e : tasks)
-    {
-        mp[e]++;
-        count = max(count, mp[e]);
-    }
 
-    int ans = (count - 1) * (n + 1);
-    for (auto e : mp)
-        if (e.second == count)
-            ans++;
-    return max((int)tasks.size(), ans);
-}
 
 int findNumberOfLIS(vector<int> &arr)
 {

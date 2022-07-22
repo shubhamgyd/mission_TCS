@@ -3,9 +3,7 @@ using namespace std;
 
 int main()
 {
-    int x=0;
-    for(x=0;x=5;x++)
-    {
-        cout<<x;
-    }
+    map<int,pair<bool,int>>mp;
+    mp[1].first=false;
+    mp[1].second=1;
 }

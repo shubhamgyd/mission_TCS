@@ -1,122 +1,86 @@
-
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
 
-struct TreeNode
+
+string solve(string str)
 {
-    int data;
-    struct TreeNode *left, *right;
-};
-
-struct TreeNode *newNode(int data)
-{
-    struct TreeNode *node = new (struct TreeNode);
-    node->data = data;
-    node->left = node->right = NULL;
-    return (node);
-}
-
-int max(int a, int b)
-{
-    return (a >= b) ? a : b;
-}
-
-int maxPathSum(struct TreeNode *root, int &res)
-{
-
-    if (root == NULL)
+    stringstream ss(str);
+    string word;
+    string ans="";
+    int lenAns=0;
+    while(ss>>word)
     {
-        return 0;
-    }
-    if (!root->left && !root->right)
-    {
-        return root->data;
-    }
-    int leftSum = maxPathSum(root->left, res);
-    int rightSum = maxPathSum(root->right, res);
-
-    if (root->left && root->right)
-    {
-        res = max(res, leftSum + rightSum + root->data);
-        return max(leftSum, rightSum) + root->data;
-    }
-    return (!root->left) ? rightSum + root->data : leftSum + root->data;
-}
-
-int MaxNodesSum(struct TreeNode *root)
-{
-    int res = INT_MIN;
-    int val = maxPathSum(root, res);
-    if (root->left && root->right)
-    {
-        return res;
-    }
-    return max(res, val);
-}
-
-struct Job
-{
-    int st;
-    int et;
-    int profit;
-};
-
-int MaxProfit(struct Job *jobs, int m)
-{
-    vector<int> startTime(m);
-    vector<int> endTime(m);
-    vector<int> profit(m);
-    for (int i = 0; i < m; i++)
-    {
-        int start = jobs[i].st;
-        int end = jobs[i].et;
-        int pf = jobs[i].profit;
-        startTime[i] = start;
-        endTime[i] = end;
-        profit[i] = pf;
-    }
-    map<int, int> times;
-    unordered_map<int, vector<pair<int, int>>> jobSchedular;
-    int n=m;
-    for (int i = 0; i < n; i++)
-    {
-        times[startTime[i]] = 0;
-        jobSchedular[startTime[i]].push_back({endTime[i], profit[i]});
-    }
-    int max_profit = 0;
-    for (auto it = rbegin(times); it != rend(times); ++it)
-    {
-        for (auto job : jobSchedular[it->first])
+        int len=0;
+        string temp="";
+        for(auto it:word)
         {
-            auto it = times.lower_bound(job.first);
-            max_profit = max(max_profit, (it == end(times) ? 0 : it->second) + job.second);
+            if(!ispunct(it))
+            {
+                temp.push_back(it);
+                len++;
+            }
         }
-        it->second = max_profit;
+        if(len>lenAns)
+        {
+            lenAns=len;
+            ans=temp;
+        }
     }
-    return max_profit;
+    return ans;
+}
+
+
+string StringChallenge(int num)
+{
+    string str=to_string(num);
+    string ans="";
+    int n=str.length();
+    for(int i=1;i<n-1;i+=2)
+    {
+        // cout<<i<<endl;
+        int num0=str[i-1]-'0';
+        int num1=str[i]-'0';
+        int num2=str[i+1]-'0';
+        if(num0%2==0 and num1%2==0 and num0!=0 and num1!=0)
+        {
+            ans.push_back(str[i-1]);
+            ans.push_back('*');
+            ans.push_back(str[i]);
+        }
+        if(num0%2==1 and num1%2==1 and num0!=0 and num1!=0)
+        {
+            ans.push_back(str[i-1]);
+            ans.push_back('-');
+            ans.push_back(str[i]);
+        }
+        if(num1%2==0 and num2%2==0 and num1!=0 and num2!=0)
+        {
+            ans.push_back(str[i]);
+            ans.push_back('*');
+        }
+        if(num1%2==1 and num2%2==1 and num1!=0 and num2!=0)
+        {
+            if(num0!=0 and num0%2==1) ans.push_back('-');
+            ans.push_back(str[i]);
+            ans.push_back('-');
+        }
+        else
+        {
+            ans.push_back(str[i-1]);
+            ans.push_back(str[i]);
+        }
+    }
+    return ans;
 }
 
 int main()
 {
-    // struct TreeNode *root = newNode(8);
-    // root->left = newNode(7);
-    // root->right = newNode(-10);
-    // root->left->left = newNode(-3);
-    // root->left->right = newNode(9);
-    // root->left->left->left = newNode(6);
-    // root->left->left->right = newNode(1);
-    // root->right->left = newNode(1);
-    // root->right->right = newNode(-2);
-    // cout << "Max pathSum of the given binary tree is "
-    //      << MaxNodesSum(root);
-    int m;
-    cin>>m;
-    struct Job job[m];
-    // vector<Job*>job(m);
-    for(int i=0;i<m;i++)
-    {
-        cin>>job[i].st>>job[i].et>>job[i].profit;
-    }
-    int ans=MaxProfit(job,m);
-    cout<<ans<<endl;
+    int str;
+    cin>>str;
+    // getline(cin,str);
+    // string ans=solve(str);
+    // cout<<ans<<endl;
+
+    cout<<StringChallenge(str)<<endl;
+    return 0;
 }

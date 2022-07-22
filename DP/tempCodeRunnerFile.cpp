@@ -1,7 +1,25 @@
 #include<iostream>
+#include<bits/stdc++.h>
 using namespace std;
 int main()
 {
+    string str;
+    unordered_map<string,int>mp;
+    stringstream ss(str);
+    string word;
+    while(ss>>word)
+    {
+        mp[word]++;
+    }
+    vector<string>res;
+    for(auto it:mp)
+    {
+        if(it.second>1)
+        {
+            res.push_back(it.first);
+        }
+    }
+    
     long long fact=1, numerator, denominator;
     int perm, n, r, i=1, sub;
     cout<<"Enter the Value of n: ";

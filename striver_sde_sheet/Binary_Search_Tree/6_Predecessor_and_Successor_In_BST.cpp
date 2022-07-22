@@ -1,6 +1,6 @@
 
 
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
 struct TreeNode
@@ -13,36 +13,33 @@ struct TreeNode
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
-
-void findPreSuc(TreeNode* root, TreeNode*& pre, TreeNode*& suc, int key)
+void findPreSuc(TreeNode *root, TreeNode *&pre, TreeNode *&suc, int key)
 {
-        if(!root) return;
-        else if(key==root->val)
+    if (!root)
+        return;
+    else if (key == root->val)
+    {
+        if (root->right)
         {
-            if(root->right)
-            {
-                suc=root->right; 
-                while(suc->left)
-                    suc=suc->left;
-                
-            }
-            if(root->left)
-            {
-                pre=root->left; 
-                while(pre->right)
-                    pre=pre->right;
-                
-            }
+            suc = root->right;
+            while (suc->left)
+                suc = suc->left;
         }
-        else if(key<root->val)
+        if (root->left)
         {
-            suc=root; 
-            findPreSuc(root->left,pre,suc,key);
+            pre = root->left;
+            while (pre->right)
+                pre = pre->right;
         }
-        else
-        {
-            pre=root; 
-            findPreSuc(root->right,pre,suc,key);
-        }
-
+    }
+    else if (key < root->val)
+    {
+        suc = root;
+        findPreSuc(root->left, pre, suc, key);
+    }
+    else
+    {
+        pre = root;
+        findPreSuc(root->right, pre, suc, key);
+    }
 }
