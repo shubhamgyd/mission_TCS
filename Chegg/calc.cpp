@@ -1,131 +1,79 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
 
-void calc()
+void minimumPath(int n,int m,vector<vector<int>>&connections)
 {
-    cout<<"Enter a expression: "<<endl;
-    long double num1, num2;
-
-    long double lastResult;
-    char operation;
-    bool stop = false;
-    vector<long double>res;
-    std::cin >> num1 >> operation >> num2;
-    do
+    vector<int>graph[n+1];
+    for(auto it:connections)
     {
-        switch (operation)
+        int u=it[0];
+        int v=it[1];
+        graph[u].push_back(v);
+        graph[v].push_back(u);
+    }
+    queue<int>Q;
+    vector<bool>visited(n+1,false);
+    int pathLength[n+1];
+    visited[1]=true;
+    int parent[n+1];
+    parent[1]=-1;
+    pathLength[1]=0;
+    Q.push(1);
+    while(!Q.empty())
+    {
+        int u=Q.front();
+        Q.pop();
+        for(auto it:graph[u])
         {
-
-        case '+':
-        {
-            num2 += num1;
-            break;
-        }
-
-        case '-':
-        {
-            num2 -= num1;
-            break;
-        }
-
-        case '/':
-        {
-            num2 /= num1;
-            break;
-        }
-
-        case '*':
-        {
-            num2 *= num1;
-            break;
-        }
-
-        
-
-        default:
-            std::cout << "Not a valid operation. Try again.";
-            break;
-        }
-
-        res.push_back(num2);
-
-        std::cout <<"\nResult: "<< num2 << std::endl;
-        cout<<endl;
-
-
-        // Skip till the end of the line.
-        while (std::cin.get() != '\n');
-
-        // Read the next operation.
-        cout<<"+ = add"<<endl;
-        cout<<"- = substract"<<endl;
-        cout<<"* = multipliply"<<endl;
-        cout<<"/ = divide"<<endl;
-        cout<<"q = for stoping program"<<endl;
-        cout<<"K = for clear screen and roll back result"<<endl;
-        cout<<"C = for clear memory and code"<<endl;
-        cout<<"S = for Square root of result"<<endl;
-        cout<<"N = for changing the sign of result"<<endl;
-        cout<<"Enter next operation: "<<endl;
-        std::cin >> operation;
-        if (operation == 'q')
-        {
-            stop = true;
-        }
-        else if(operation=='K')
-        {
-            if(res.size()<2)
+            if(!visited[it])
             {
-                cout<<"Please do at least two operations.."<<endl;
+                visited[it]=true;
+                pathLength[it]=pathLength[u]+1;
+                parent[it]=u;
+                Q.push(it);
+
             }
-            else
-            {
-                cout<<"Rolling back of result..."<<endl;
-                num2=res[res.size()-2];
-
-                cout<<"Rolledback to last result by eliminating the current operator..."<<endl;
-                cout <<"\033[2J\033[1;1H";
-                fflush(stdin);
-                cout<<"Last Result: "<<num2<<endl;
-            }
-            // break;
         }
+    }
+    if(visited[n]==false)
+    {
+        cout<<"NOT RECHABLE"<<endl;
+        return;
+    }
+    int minPathLength=pathLength[n];
+    vector<int>path;
+    path.push_back(n);
+    int node=n;
+    while(node!=1)
+    {
+        node=parent[node];
+        path.push_back(node);
+    }
+    reverse(path.begin(),path.end());
+    cout<<minPathLength+1<<endl;
+    for(int i=0;i<path.size();i++)
+    {
+        cout<<path[i]<<" ";
+    }
+    cout<<endl;
 
-        
-        else if(operation=='C')
-        {
-            fflush(stdin);
-            cout << "\033[2J\033[1;1H";
-            calc();
-            // break;
-        }
 
-        else if(operation=='S' or operation=='s')
-        {
-            long double squareRoot=sqrt(num2);
-            cout<<"Square Root of Result: "<<squareRoot<<endl;
-            // break;
-        }
-
-        else if(operation=='N')
-        {
-            cout<<"Result before changing the sign: "<<num2<<endl;
-            long double temp=num2;
-            cout<<"Result after chaning sign: "<<-1*temp<<endl;
-            // break;
-        }
-        else
-        {
-            cout<<"Enter a number: "<<endl;
-            std::cin >> num1;
-        }
-        cout<<endl;
-
-    } while (std::cin.good() && !std::cin.eof() && !stop);
 }
 
 int main()
 {
-    calc();
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    int n,m;
+    cin>>n>>m;
+    vector<vector<int>>connections;
+    for(int i=0;i<m;i++)
+    {
+        int a,b;
+        cin>>a>>b;
+        connections.push_back({a,b});
+    }
+    minimumPath(n,m,connections);
     return 0;
 }

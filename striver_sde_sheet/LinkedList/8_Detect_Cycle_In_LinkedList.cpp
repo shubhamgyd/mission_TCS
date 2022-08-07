@@ -74,7 +74,6 @@ Reason: All nodes present in the list are stored in a hash table.
 // We will take two pointers, namely fast and slow. Fast pointer takes 2 steps ahead and slow pointer takes 2 points ahead.
 // Iterate through the list until the fast pointer is equal to NULL. This is because NULL indicates that there is no cycle present in the given list.
 // Cycle can be detected when fast and slow pointers collide.
-
 //utility function to detect cycle
 bool cycleDetect(ListNode* head) {
     if(head == NULL) return false;

@@ -144,7 +144,7 @@ bitset<1000001>can;
 
 int main()
 {
-    int arr[]={1,5,6};
+    int arr[]={4,1,3,2};
     int n=sizeof(arr)/sizeof(arr[0]);
     //int sum=9;
     int finalS=0;

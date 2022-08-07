@@ -1,31 +1,13 @@
-# Python3 program to check if a string
-# contains any special character
-
-# import required package
-import re
-
-# Function checks if the string
-# contains any special character
-def run(string):
-
-	# Make own character set and pass 
-	# this as argument in compile method
-	regex = re.compile('[@_!#$%^&*()<>?/\|}{~:]')
-	
-	# Pass the string in search 
-	# method of regex object. 
-	if(regex.search(string) == None):
-		print("String is accepted")
-		
-	else:
-		print("String is not accepted.")
-	
-
-# Driver Code
-if __name__ == '__main__' :
-	
-	# Enter the string
-	string = "45"
-	
-	# calling run function 
-	run(string)
+a=0
+b=4
+for i in range(7):                             #iterate rows
+    for j in range(7):                         #iterate columns
+        if j==0 or (i==j+2 and j>1):
+            print("@",end="")                  #display symbol
+        elif((i==a and j==b) and j>0):
+            print("@",end="")                  #display symbol
+            a=a+1
+            b=b-1
+        else:
+            print(end=" ")
+    print()
