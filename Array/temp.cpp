@@ -1,68 +1,110 @@
 #include <bits/stdc++.h>
-#define FASTIO                        \
-    ios_base::sync_with_stdio(false); \
-    cin.tie(NULL);                    \
-    cout.tie(NULL);
 using namespace std;
 
-
-class Solution
+bool isPrime(int n)
 {
-    void dfs(vector<vector<int>> &grid, int i, int j, int n, int m)
-    {
-        if (i >= n || i < 0 || j < 0 || j >= m || grid[i][j] == 0)
-        {
-            return;
-        }
-        grid[i][j] = 0;
-        dfs(grid, i + 1, j, n, m);
-        dfs(grid, i - 1, j, n, m);
-        dfs(grid, i, j + 1, n, m);
-        dfs(grid, i, j - 1, n, m);
-    }
 
-public:
-    int numIslands(vector<vector<int>> &grid)
+	if (n <= 1)
+		return false;
+	if (n <= 3)
+		return true;
+	if (n % 2 == 0 || n % 3 == 0)
+		return false;
+
+    // O(sqrt(n))
+	for (int i = 5; i * i <= n; i = i + 6)
+		if (n % i == 0 || n % (i + 2) == 0)
+			return false;
+
+	return true;
+}
+
+int nextPrime(int N)
+{
+    // base condition
+	if (N <= 1)
+	{
+		return 2;
+	}
+
+	int num = N;
+	bool found = false;
+
+	while (!found)
+	{
+		num++;
+		if (isPrime(num))
+		{
+			found = true;
+		}
+	}
+	return num;
+}
+
+
+int prevPrime(int n)
+{
+    if (n & 1)
     {
-        int n = grid.size();
-        int m = grid[0].size();
-        int islands = 0;
-        if (grid.empty())
+		n -= 2;
+	}
+    else
+    {
+		n--;
+	}
+    int i, j;
+    for (i=n;i>=2;i-=2) 
+	{
+        if (i%2==0)
         {
-            return islands;
-        }
-        for (int i = 0; i < n; i++)
-        {
-            for (int j = 0; j < m; j++)
+			continue;
+		}
+        for (j=3;j<=sqrt(i); j+=2) 
+		{
+            if (i % j == 0)
             {
-                if (grid[i][j] == 1)
-                {
-                    islands++;
-                    dfs(grid, i, j, n, m);
-                }
-            }
+				break;
+			}
         }
-        return islands;
+        if (j>sqrt(i))
+        {
+			return i;
+		}
     }
-};
+    return -1;
+}
 
 int main()
 {
-    FASTIO;
-    cout << "Enter number of rows and column: ";
-    int n, m;
-    cin >> n >> m;
-    vector<vector<int>> grid(n, vector<int>(m));
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < m; j++)
-        {
-            cin >> grid[i][j];
-        }
-    }
-
-    Solution obj;
-    int number_of_Islands = obj.numIslands(grid);
-    cout << "Total number of islands: " << number_of_Islands << endl;
-    return 0;
+	int n;
+	cin >> n;
+	int nextPrimeNumber=nextPrime(n);
+	int prevPrimeNumber=prevPrime(n);
+	
+	if(nextPrimeNumber!=-1 and prevPrimeNumber!=-1)
+	{
+		int diff1=abs(n-prevPrimeNumber);
+		int diff2=abs(n-nextPrimeNumber);
+		if(diff1==diff2)
+		{
+			cout<<prevPrimeNumber<<" "<<nextPrimeNumber<<endl;
+		}
+		else if(diff1<diff2)
+		{
+			cout<<prevPrimeNumber<<endl;
+		}
+		else
+		{
+			cout<<nextPrimeNumber<<endl;
+		}
+	}
+	else if(prevPrimeNumber==-1)
+	{
+		cout<<nextPrimeNumber<<endl;
+	}
+	else
+	{
+		cout<<prevPrimeNumber<<endl;
+	}
+	return 0;
 }

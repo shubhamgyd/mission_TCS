@@ -1,108 +1,68 @@
-#include <bits/stdc++.h>
-using namespace std;
+// #include<bits/stdc++.h>
+// using namespace std;
 
-void smallest(vector<int> &nums, int n)
-{
-    sort(nums.begin(), nums.end());
-}
 
-// void solve(int arr[2][2])
+// int main()
 // {
-//     for(int i=0;i<2;i++)
+//     ios_base::sync_with_stdio(0);
+//     cout.tie(0);
+//     cout.tie(0);
+//     int n;
+//     cin>>n;
+//     vector<int>nums(n);
+//     for(int i=0;i<n;++i)
 //     {
-//         for(int j=0;j<2;j++)
+//         cin>>nums[i];
+//     }
+//     int cnt=0;
+//     while(true)
+//     {
+//         int zr= 0;
+//         int i; 
+//         for (i=0; i<n; i++)
 //         {
-//             System.out.print(arr[i][j]+" "+);
+//             if (nums[i] & 1) break;
+//             else if (nums[i] == 0) zr++;
 //         }
-//         System.out.println();
+//         if (zr== n)
+//         {
+//             cout<<cnt<<endl;
+//             return 0;
+//         }
+//         if (i==n)
+//         {
+//             for (int j=0; j<n; j++) nums[j] = nums[j]/2;
+//             cnt++;
+//         }
+//         for (int j=i; j<n; j++)
+//         {
+//            if (nums[j] & 1)
+//            {
+//               nums[j]--;
+//               cnt++;
+//            }
+//         }
 //     }
+//     return 0;
 // }
 
-// string solve(string s)
-// {
-//     string ans="";
-//     int n=s.length();
-//     int carry=0;
-//     for(int i=n-1;i>=0;i--)
-//     {
-//         int num=(s[i]-'0');
-//         num*=2;
-//         num+=carry;
-//         int temp=num%10;
-//         ans.push_back((temp+'0'));
-//         carry=num/10;
-//     }
-//     if(carry)
-//     {
-//         ans.push_back((carry+'0'));
-//     }
-//     reverse(ans.begin(),ans.end());
-//    while(!ans.empty() and ans[0]=='0') ans.erase(ans.begin()+0);
-//    return ans;
 
-// }
-
-void solve(int arr[], int n, int q, int query[])
-{
-    int prefix[n];
-    prefix[0] = arr[0];
-    for (int i = 1; i < n; i++)
-    {
-        prefix[i] = prefix[i - 1] + arr[i];
-    }
-    for (int i = 0; i < q; i++)
-    {
-        int ind = query[i] - 1;
-        cout << prefix[ind] << endl;
-    }
-}
-
-int mxCount(vector<int> &arr)
-{
-    int n = arr.size();
-    unordered_map<int, int> mp;
-    for (int i = 0; i < n; ++i)
-    {
-        int binaryNum[32];
-        memset(binaryNum,0,sizeof(binaryNum));
-        int j = 0;
-        int num = arr[i];
-        int temp=arr[i];
-        while (num > 0)
-        {
-            binaryNum[j] = num % 2;
-            num = num / 2;
-            j++;
-        }
-        for (int k = 0; k < 32; k++)
-        {
-            if(binaryNum[k]) mp[k]++;
-        }
-    }
-    int mx=0;
-    for(auto it:mp)
-    {
-        if(it.second>mx)
-        {
-            mx=it.second;
-        }
-    }
-    return mx;
-}
+#include<bits/stdc++.h>
+using namespace std;
 
 int main()
 {
-    int i=3,j=5;
-    if((i=0) and (j++))
+    int sum;
+    cin>>sum;
+    do
     {
-        cout<<"1 "<<i<<" "<<j<<endl;
-    }
-    else if((i++) and (j-5))
-    {
-        cout<<"2 "<<i<<" "<<j<<endl;
-    }
-    else
-    {
-        cout<<"3 "<<i<<" "<<j<<endl;
-    }
+        int ans=0;
+        while(sum!=0)
+        {
+            ans+=sum%10;
+            sum/=10;
+        }
+        sum=ans;
+    }while(sum>10);
+    cout<<sum<<endl;
 }

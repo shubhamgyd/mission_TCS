@@ -3,8 +3,10 @@ using namespace std;
 
 void BubbleSort(vector<int>&v,int n,int& sw)
 {
+    int itr=0;
     for(int i=0;i<n-1;i++)  // Outer  loop run till n-1 , coz we are comparing next adjacent element
     {
+        itr++;
         int flag=0;  // FOR  array already sorted
         for(int j=0;j<n-i-1;j++) // inner loop run till unsorted element , 
                                  //it means  onward at particular position elements are sorted then no need to sort them
@@ -21,6 +23,7 @@ void BubbleSort(vector<int>&v,int n,int& sw)
             break;
         }
     }
+    cout<<itr<<endl;
 }
 
 int main()

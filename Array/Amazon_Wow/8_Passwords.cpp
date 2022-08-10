@@ -43,7 +43,6 @@ int solve(vector<string>&res)
     for(auto it:res)
     {
         string hash=decodeString(it);
-        // cout<<"string: "<<it<<" hash: "<<hash<<endl;
         if(st.find(hash)==st.end())
         {
             st.insert(hash);
