@@ -45,7 +45,7 @@ int main()
     int size {0};
     cin>>size;
     cin.ignore();
-
+    unique_ptr<TestActivity[]> createTestActivityArray(int count);
     for(int index=0;index<size;++index)
     {
         char DELIM=',';

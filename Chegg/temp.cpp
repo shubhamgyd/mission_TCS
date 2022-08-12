@@ -229,50 +229,49 @@
 
 using namespace std;
 
-void hack_code(int arr[], int n, int* x, int* y)
+void hack_code(int arr[], int n, int *x, int *y)
 {
 
-int X = arr[0] ;
+    int X = arr[0];
 
-int no;
+    int no;
 
-int i;
+    int i;
 
-*x = 0;
+    *x = 0;
 
-*y = 0;
+    *y = 0;
 
-for(int i= 1 ;i < n ;i++)
-{
-    X ^= arr[i];
-}
-
-no =X&~(X-1);
-for(int i=0;i<n;i++)
-{
-    if(arr[i]&no)
+    for (int i = 1; i < n; i++)
     {
-        *x=*x^arr[i];
+        X ^= arr[i];
     }
-    else
-    {
-        *y=*y^arr[i];
-    }
-}
-}
 
+    no = X & ~(X - 1);
+    for (int i = 0; i < n; i++)
+    {
+        if (arr[i] & no)
+        {
+            *x = *x ^ arr[i];
+        }
+        else
+        {
+            *y = *y ^ arr[i];
+        }
+    }
+}
 
 int main()
 {
 
-int arr[] = { 2, 5, 7, 9, 11, 2, 4, 11 };
+    int arr[] = {2, 5, 7, 9, 11, 2, 4, 11};
 
-int n = sizeof(arr) / sizeof(*arr);
+    int n = sizeof(arr) / sizeof(*arr);
 
-int* x = new int[(sizeof(int))];
+    int *x = new int[(sizeof(int))];
 
-int* y = new int[(sizeof(int))]; 
-hack_code(arr, n, x, y);
+    int *y = new int[(sizeof(int))];
+    hack_code(arr, n, x, y);
 
-cout << *x << " and " << *y;
+    cout << *x << " and " << *y;
 }
