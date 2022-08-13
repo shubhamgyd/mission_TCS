@@ -28,6 +28,10 @@ void BubbleSort(vector<int>&v,int n,int& sw)
 
 int main()
 {
+// #ifndef ONLINE_JUDGE
+//         freopen("inputf.in", "r", stdin);
+//         freopen("outputf.out", "w", stdout);
+// #endif
     vector<int>v;
     int n;
     cout<<" Enter a number: ";

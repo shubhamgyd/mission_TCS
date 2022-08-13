@@ -1,6 +1,58 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+string solve(string str,int n)
+{
+    while(true)
+    {
+        int cnt=0;
+        string ans="";
+        int close=0;
+        int open=0;
+        int start=-1;
+        int end=-1;
+        for(int i=0;i<str.length();i++)
+        {
+            if(str[i]=='(')
+            {
+                open++;
+                if(start==-1)
+                {
+                    start=i;
+                }
+            }
+            else if(str[i]==')')
+            {
+                close++;
+                end=i;
+            }
+            if(close==n)
+            {
+                break;
+            }
+        }
+        if(close!=n)
+        {
+            return str;
+        }
+        else
+        {
+            // end++;
+            int temp=end-1-n;
+            for(int i=0;i<temp;i++)
+            {
+                ans.push_back(str[i]);
+            }
+            for(int i=end+1;i<str.length();i++)
+            {
+                ans.push_back(str[i]);
+            }
+            str=ans;
+        }
+    }
+    return str;
+}
+
 void minimumPath(int n,int m,vector<vector<int>>&connections)
 {
     vector<int>graph[n+1];
@@ -65,15 +117,20 @@ int main()
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
-    int n,m;
-    cin>>n>>m;
-    vector<vector<int>>connections;
-    for(int i=0;i<m;i++)
-    {
-        int a,b;
-        cin>>a>>b;
-        connections.push_back({a,b});
-    }
-    minimumPath(n,m,connections);
+    string str;
+    cin>>str;
+    int n;
+    cin>>n;
+    cout<<solve(str,n)<<endl;
+    // int n,m;
+    // cin>>n>>m;
+    // vector<vector<int>>connections;
+    // for(int i=0;i<m;i++)
+    // {
+    //     int a,b;
+    //     cin>>a>>b;
+    //     connections.push_back({a,b});
+    // }
+    // minimumPath(n,m,connections);
     return 0;
 }
