@@ -1,43 +1,32 @@
-#include<bits/stdc++.h>
+#include<iostream>
 using namespace std;
-
-bool test(int x,int y)
-{
-    return abs(x%10)==abs(y%10);
-}
-
 
 int main()
 {
-    int i=1;
-    int j=1;
-    while(i<=3)
+    string largeString,smallString;
+    cin>>largeString>>smallString;
+    int len=largeString.length();
+    int j=0;
+    for(int i=0;i<smallString.length();i++)
     {
-        while(j<=3)
+        char currChar=smallString[i];
+        bool found=false;
+        while(j<len)
         {
-            cout<<i;
+            if(largeString[j]==currChar)
+            {
+                found=true;
+                break;
+            }
             j++;
         }
-        i++;
-        cout<<j;
-        cout<<endl;
-        j=1;
+        if(!found)
+        {
+            cout<<"No\n";
+            return 0;
+        }
+        j++;
     }
+    cout<<"Yes\n";
+    return 0;
 }
-/*
-Time Complexity:O(nlogn)
-Auxilary Space : O(1)
-
-
-
-Input and Output:
-Input:
-5
-4 2 8 3 1
-
-
-Output:
-1 2 3 4 8 
-
-
-*/

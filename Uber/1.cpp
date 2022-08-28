@@ -51,8 +51,59 @@ for (int i = 1; i <= m; i++)
 return lookup[m][n];
 }
 
+void findMinAndMax(int arr[],int n)
+{
+    int mn=INT_MAX;
+    int mx=INT_MIN;
+    for(int i=0;i<n;i++)
+    {
+        mn=min(mn,arr[i]);
+        mx=max(mx,arr[i]);
+    }
+    cout<<"Maximum Element : "<<mx<<endl;
+    cout<<"Minimum Element : "<<mn<<endl;
+}
+
+void isPalindrome(int num)
+{
+    string str=to_string(num);
+    int len=str.length();
+    int i=0;
+    int j=len-1;
+    bool isPal=true;
+    while(i<j)
+    {
+        if(str[i]!=str[j])
+        {
+            isPal=false;
+            break;
+        }
+        i++;
+        j--;
+    }
+    if(isPal)
+    {
+        cout<<"This number is palindrome!"<<endl;
+    }
+    else
+    {
+        cout<<"Not a palindrome!"<<endl;
+    }
+}
+
 int main()
 {
+    int a=10;
+    int b=25;
+    int c=15;
+    int res=0;
+    while(b>0)
+    {
+        res+=(a%c)+(c%a);
+        b-=a%c;
+        swap(a,c);
+    }
+    cout<<res<<endl;
     string s,t;
     cin>>s>>t;
     unordered_map<char,int>mp1,mp2;

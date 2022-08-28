@@ -62,6 +62,10 @@ void minimumPath(int n,int m,vector<vector<int>>&connections)
 
 int main()
 {
+    int num=pow(2,31)-1;
+    int num1=pow(-2,31);
+    cout<<num<<endl;
+    cout<<num1<<endl;
     int n,m;
     cin>>n>>m;
     vector<vector<int>>connections;

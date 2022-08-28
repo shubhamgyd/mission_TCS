@@ -1,82 +1,82 @@
-#include <bits/stdc++.h>
-#define fast()                        \
-    ios_base::sync_with_stdio(false); \
-    cin.tie(NULL);                    \
-    cout.tie(NULL);
-#define int  long long 
+// #include<bits/stdc++.h>
+// using namespace std;
+
+// int solve(int a,int d,int N)
+// {
+//     return (a + (N - 1) * d);
+// }
+
+// int main()
+// {
+//     int a,d,n;
+//     cin>>a>>d>>n;
+//     int ans=solve(a,d,n);
+//     cout<<ans<<endl;
+//     return 0;
+// }
+
+
+// #include<bits/stdc++.h>
+// using namespace std;
+
+// int MinMaxTwoArrays(int arr1[],int arr2[],int n,int m,int k)
+// {
+//     int x=0;
+//     int y=0;
+//     for(int i=0;i<n;i++)
+//     {
+//         if(arr1[i]>k) x++;
+//     }
+//     for(int i=0;i<m;i++)
+//     {
+//         if(arr2[i]<k) y++;
+//     }
+//     return max(x,y);
+// }
+
+// int main()
+// {
+//     int n;
+//     cin>>n;
+//     int arr1[n];
+//     for(int i=0;i<n;i++)
+//     {
+//         cin>>arr1[i];
+//     }
+//     int m;
+//     cin>>m;
+//     int arr2[m];
+//     for(int i=0;i<m;i++)
+//     {
+//         cin>>arr2[i];
+//     }
+//     int k;
+//     cin>>k;
+//     int ans=MinMaxTwoArrays(arr1,arr2,n,m,k);
+//     cout<<ans<<endl;
+//     return 0;
+// }
+
+#include<bits/stdc++.h>
 using namespace std;
-#define endl '\n'
-#define max_pq priority_queue<int>
-#define min_pq priority_queue<int,vector<int>,greater<int>>
-#define For(i,x,n) for(i=x; i<n; ++i)
-#define pb push_back
-const int mod=1e9+7;
 
-
-
-
-
-void solve()
+int solve(int a,int b,int c)
 {
-   string str;
-   getline(cin,str);
-   stringstream ss(str);
-   string word;
-   int pair=0;
-   int it=0;
-   while(ss>>word)
-   {
-        if(word=="pair")
-        {
-            pair++;
-        }
-        else
-        {
-            it++;
-        }
-   }
-   if(it-pair!=1)
-   {
-        cout<<"Error occurred"<<endl;
-   }
-   else
-   {
-        string s=",int>";
-        while(pair--)
-        {
-            cout<<"pair<";
-        }
-        cout<<"int";
-        it--;
-        while(it--)
-        {
-            cout<<s;
-        }
-        cout<<endl;
-   }
-
+    vector<int>arr;
+    arr.push_back(a);
+    arr.push_back(b);
+    arr.push_back(c);
+    sort(arr.rbegin(),arr.rend());
+    int num=0;
+    num=100*arr[0]+10*arr[1]+arr[2];
+    return num;
 }
 
-
-
-
-signed main()
+int main()
 {
-// #ifndef ONLINE_JUDGE
-//         freopen("inputf.in", "r", stdin);
-//         freopen("outputf.out", "w", stdout);
-// #endif
-    // fast();
-    // int t;
-    // cin >> t;
-    // int temp=t;
-    // while(t--)
-    // {
-    //     solve(temp);
-    // }
-    int n;
-    cin>>n;
-    solve();
-    
+    int a,b,c;
+    cin>>a>>b>>c;
+    int ans=solve(a,b,c);
+    cout<<ans<<endl;
     return 0;
 }
