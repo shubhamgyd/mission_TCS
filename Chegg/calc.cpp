@@ -1,28 +1,22 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
-
-int temp;
-void solve(int n)
-{
-    if(n==0) return;
-    if(n>temp) return;
-    if(n<=temp)
-    {
-        solve(n-1);
-        cout<<n<<endl;
-    }
-    else
-    {
-        solve(n+1);
-        cout<<n<<endl;
-    }
-}
 
 int main()
 {
+
     int n;
-    cin>>n;
-    temp=n;
-    solve(n);
+    cin >> n;
+    vector<int> nums(n);
+    for (int i = 0; i < n; i++)
+    {
+        cin >> nums[i];
+    }
+    int curMax = 0, maxTillNow = INT_MIN;
+    for (auto c : nums)
+    {
+        curMax = max(c, curMax + c),
+        maxTillNow = max(maxTillNow, curMax);
+    }
+    cout << maxTillNow << endl;
     return 0;
-}   
+}

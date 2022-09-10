@@ -71,7 +71,7 @@ int main()
     //     }
     //     cout<<endl;
     // }
-    auto result = routePairs(10,{{1,3}, {2,5}, {3,7},{4,10}}, {{1,2},{2,3},{3,4},{4,5}});
+    auto result = routePairs(7,{{1,2}, {2,4}, {3,6},}, {{1,2},});
 
 	for(auto vec: result)
 	{

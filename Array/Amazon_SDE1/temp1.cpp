@@ -1,27 +1,30 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
-
-int countUnique(int arr[], int n)
-{
-
-	unordered_set<int> mp;
-	for (int i = 0; i < n; i++)
-		mp.insert(arr[i]);
-
-	int c = pow(mp.size(), 2);
-
-	return c;
-}
 
 int main()
 {
     int n;
     cin>>n;
-	int arr[n];
-	for(int i=0;i<n;i++)
+    vector<vector<int>>nums(n,vector<int>(2));
+    for(int i=0;i<n;i++)
     {
-        cin>>arr[i];
+        for(int j=0;j<2;j++)
+        {
+            cin>>nums[i][j];
+        }
     }
-	cout << countUnique(arr, n);
-	return 0;
+    int q;
+    cin>>q;
+    while(q--)
+    {
+        int l,r,x;
+        cin>>l>>r>>x;
+        int cnt=0;
+        for(int i=l;i<=r;i++)
+        {
+            if(nums[i][1]>x) cnt++;
+        }
+        cout<<cnt<<endl;
+    }
+    return 0;
 }
