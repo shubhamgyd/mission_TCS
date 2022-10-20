@@ -1,24 +1,18 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-const int MOD = 1e9 + 7;
-
 int main()
 {
-	int n;
-	cin >> n;
-	vector<int> nums(n);
-	for (int i = 0; i < n; i++)
-	{
-		cin >> nums[i];
-	}
-	unordered_set<int> st;
-	for (auto it : nums)
-	{
-		st.insert(it);
-	}
-	int size = st.size();
-	int ans = ((size % MOD) * (size % MOD));
-	cout << ans << endl;
-	return 0;
+    // int_fast64_t x=9;
+    double x = pow(9, 10);
+    double x_2 = x * x;
+    double num = x * x + 17;
+    double num1 = sqrt(num);
+    double num2 = num1 * x;
+    cout << x << endl;
+    cout << x_2 << endl;
+    cout << num << endl;
+    cout << num1 << endl;
+    cout << num2 << endl;
+    cout << fixed << setprecision(6) << num2 - x_2 << endl;
 }

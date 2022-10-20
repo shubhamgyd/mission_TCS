@@ -12,16 +12,17 @@ using namespace std;
 #define pb push_back
 #define yes cout << "YES"
 #define no cout << "NO"
-#define int long long
+// #define int long long
 #define ff first
 #define ss second
 #define pb push_back
-#define mp make_pair
+// #define mp make_pair
 #define sz(v) (int)(v.size())
 #define all(v) (v).begin(), (v).end()
 // #define y cout<<"Yes"
 // #define nn cout<<"No"
 #define ll long long
+#define limit1 30
 
 int binpow(int a, int b)
 {
@@ -91,77 +92,34 @@ string to_lower(string &a)
 const int mod = 1e9 + 7;
 const int INF = 1e9;
 
-int cnt = 0;
-void dfs(int src, vector<int> adj[], int visited[])
-{
-    visited[src] = cnt;
-    if (adj[src].size() > 0)
-    {
-        for (auto it : adj[src])
-        {
-            if (visited[it] == 0)
-                dfs(it, adj, visited);
-        }
-    }
-    return;
-}
-
+const int N = (int)4e5 + 9;
+int x[N], y[N], z[N];
 void solve()
 {
-    int n,m;
-    cin>>n>>m;
-    string s,t;
-    cin>>s;
-    cin>>t;
-    bool ok=false;
-    int i=0;
-    int j=0;
-    while(i<n and j<m)
+    string str;
+    cin >> str;
+    int n = str.length();
+    x[0] = y[0] = z[0] = 0;
+    for (int i = 0; i < n; ++i)
     {
-        if(isalpha(s[i]) and isalpha(t[j]))
-        {
-            if(s[i]!=t[j])
-            {
-                cout<<"NO\n";
-                return;
-            }
-            i++;
-            j++;
-        }
+        x[i + 1] = x[i] + (str[i] == 'x');
+        y[i + 1] = y[i] + (str[i] == 'y');
+        z[i + 1] = z[i] + (str[i] == 'z');
+    }
+    int q;
+    cin >> q;
+    while (q--)
+    {
+        int l, r;
+        cin >> l >> r;
+        l--;
+        int a = x[r] - x[l];
+        int b = y[r] - y[l];
+        int c = z[r] - z[l];
+        if (r - l <= 2 or max({a, b, c}) - min({a, b, c}) <= 1)
+            cout << "YES\n";
         else
-        {
-            int sum=0;
-            int cnt=0;
-            while(j<m and isdigit(t[j]))
-            {
-                sum+=(t[j]-'0');
-                j++;
-                cnt++;
-            }
-			
-            sum+=(i);
-            if(sum>=n and j<m)
-            {
-                i+=cnt+1;
-            }
-			else if(sum>=n and j>=m)
-			{
-				cout<<"YES\n";
-				return;
-			}
-            else
-            {
-                i=sum;
-            }
-        }
-    }
-    if(i>=n and j>=m)
-    {
-        cout<<"YES\n";
-    }
-    else
-    {
-        cout<<"NO\n";
+            cout << "NO\n";
     }
 }
 
@@ -172,13 +130,13 @@ signed main()
     //         freopen("outputf.out", "w", stdout);
     // #endif
     fast();
-    int t;
-    cin >> t;
-    while (t--)
-    {
-        solve();
-    }
-    // solve();
+    // int t;
+    // cin >> t;
+    // while (t--)
+    // {
+    //     solve();
+    // }
+    solve();
 
     return 0;
 }

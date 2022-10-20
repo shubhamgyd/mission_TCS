@@ -1,35 +1,64 @@
 
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
-int MaxSum(vector<vector<int>>&res,int n)
+int maxEnergy(vector<vector<int>> &mat)
 {
-    int dp[n][n+2];
-    memset(dp,0,sizeof(dp));
-    for(int i=0;i<1;i++)
+    int n = mat.size();
+    int m = mat[0].size();
+    int result = 0;
+
+    int dp[n][m + 2];
+
+    memset(dp, 0, sizeof(dp));
+    for (int i = 0; i < n; i++)
     {
-        for(int j=0;j<n;j++)
+        dp[0][i + 1] = mat[0][i];
+    }
+
+    for (int i = 1; i < n; i++)
+    {
+        for (int j = 1; j <= m; j++)
         {
-            dp[i][j]=res[i][j];
+            dp[i][j] = min(dp[i - 1][j - 1], min(dp[i - 1][j], dp[i - 1][j + 1])) + mat[i][j - 1];
         }
     }
 
-    for(int i=1;i<n;i++)
+    for (int i = 0; i <= n; i++)
     {
-        for(int j=1;j<=n;j++)
+        result = max(result, dp[n - 1][i]);
+    }
+
+    return 100 - result;
+}
+
+int MaxSum(vector<vector<int>> &res, int n)
+{
+    int dp[n][n + 2];
+    memset(dp, 0, sizeof(dp));
+    for (int i = 0; i < 1; i++)
+    {
+        for (int j = 0; j < n; j++)
         {
-            dp[i][j]=max(dp[i-1][j-1],dp[i-1][j+1])+res[i][j];
+            dp[i][j] = res[i][j];
         }
     }
-    
-    int sum=0;
-    for(int i=0;i<=n;i++)
+
+    for (int i = 1; i < n; i++)
     {
-        sum=max(sum,dp[n-1][i]);
+        for (int j = 1; j <= n; j++)
+        {
+            dp[i][j] = max(dp[i - 1][j - 1], dp[i - 1][j + 1]) + res[i][j];
+        }
+    }
+
+    int sum = 0;
+    for (int i = 0; i <= n; i++)
+    {
+        sum = max(sum, dp[n - 1][i]);
     }
     return sum;
 }
-
 
 int main()
 {
@@ -38,18 +67,18 @@ int main()
     freopen("outputf.out", "w", stdout);
 #endif
     int n;
-    cin>>n;
-    vector<vector<int>>res(n,vector<int>(n));
-    for(int i=0;i<n;i++)
+    cin >> n;
+    vector<vector<int>> res(n, vector<int>(n));
+    for (int i = 0; i < n; i++)
     {
-        for(int j=0;j<n;j++)
+        for (int j = 0; j < n; j++)
         {
             int a;
-            cin>>a;
-            res[i][j]=a;
+            cin >> a;
+            res[i][j] = a;
             // cin>>res[i][j];
         }
     }
-    cout<<MaxSum(res,n)<<endl;
+    cout << MaxSum(res, n) << endl;
     return 0;
 }

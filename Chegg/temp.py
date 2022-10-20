@@ -1,10 +1,39 @@
-import numpy as np
-import sys
-arr_1=([1,4,9,16], [25,39,25,2,3], [1,54,96,236,458])
-arr=np.array(arr_1) 
-arr_2= np.array([1,23,4545,3,5,5648])
-for array in arr.flat: 
-    print (array)
-print(arr_2.argmax(axis=0), arr.argsort())
-print(arr.ndim, arr_2.nbytes, arr_2.reshape(3,2))
-print(arr_2.argmin(axis=1))
+import random
+
+# a
+
+
+def generateA():
+    return random.randint(0, 5)  # using random module
+
+# b
+
+
+def generateB():
+    return random.randint(0, 8)  # using random module
+
+# c
+
+
+def useBotA():
+    num = generateB() % 6
+    print("Random number is :", num)  # using generateB function
+    return num
+
+# d
+
+
+def useAtoB():
+    num = (generateA()+generateA()) % 9  # using generateA functions
+    print("Random number is: ", num)
+    return num
+
+
+print("Call generateA() function.")
+print("Random number is: ", generateA())
+print("Call generateB() function.")
+print("Random Number is: ", generateB())
+print("Call useAtoB() function")
+useAtoB()
+print("Call userBtoA function")
+useBotA()

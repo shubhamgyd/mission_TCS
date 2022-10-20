@@ -1,30 +1,29 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
 int main()
 {
-    int n;
-    cin>>n;
-    vector<vector<int>>nums(n,vector<int>(2));
-    for(int i=0;i<n;i++)
+    map<int, int> mp;
+
+    // insert elements in random order
+    mp.insert({2, 30});
+    mp.insert({3, 10});
+    mp.insert({5, 50});
+    mp.insert({4, 40});
+    for (auto it = mp.begin(); it != mp.end(); it++)
     {
-        for(int j=0;j<2;j++)
-        {
-            cin>>nums[i][j];
-        }
+        cout << (*it).first << " " << (*it).second << endl;
     }
-    int q;
-    cin>>q;
-    while(q--)
+
+    // when 2 is present
+    auto it = mp.lower_bound(1);
+    --it;
+    if (it == mp.end())
     {
-        int l,r,x;
-        cin>>l>>r>>x;
-        int cnt=0;
-        for(int i=l;i<=r;i++)
-        {
-            if(nums[i][1]>x) cnt++;
-        }
-        cout<<cnt<<endl;
+        cout << "here" << endl;
+        return 0;
     }
+    cout << "The lower bound of key 1 is ";
+    cout << (*it).first << " " << (*it).second << endl;
     return 0;
 }

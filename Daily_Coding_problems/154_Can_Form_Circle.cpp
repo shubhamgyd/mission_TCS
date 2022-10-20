@@ -14,7 +14,7 @@ using namespace std;
 
 void dfs(int start, vector<int> adj[], vector<bool> &visited)
 {
-    
+
     visited[start] = true;
     for (auto it : adj[start])
     {
@@ -43,7 +43,7 @@ int solve(vector<string> &res, int n)
 {
     vector<int> adj[26];
     vector<bool> mark(26, false);
-    vector<int>indegree(26,0),outdegree(26,0);
+    vector<int> indegree(26, 0), outdegree(26, 0);
     for (int i = 0; i < n; i++)
     {
         string str = res[i];
@@ -67,6 +67,7 @@ int solve(vector<string> &res, int n)
 
 int main()
 {
+
     int n;
     cin >> n;
     vector<string> res(n);

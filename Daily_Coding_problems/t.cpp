@@ -1,82 +1,52 @@
-// #include<bits/stdc++.h>
-// using namespace std;
-
-// int solve(int a,int d,int N)
-// {
-//     return (a + (N - 1) * d);
-// }
-
-// int main()
-// {
-//     int a,d,n;
-//     cin>>a>>d>>n;
-//     int ans=solve(a,d,n);
-//     cout<<ans<<endl;
-//     return 0;
-// }
-
-
-// #include<bits/stdc++.h>
-// using namespace std;
-
-// int MinMaxTwoArrays(int arr1[],int arr2[],int n,int m,int k)
-// {
-//     int x=0;
-//     int y=0;
-//     for(int i=0;i<n;i++)
-//     {
-//         if(arr1[i]>k) x++;
-//     }
-//     for(int i=0;i<m;i++)
-//     {
-//         if(arr2[i]<k) y++;
-//     }
-//     return max(x,y);
-// }
-
-// int main()
-// {
-//     int n;
-//     cin>>n;
-//     int arr1[n];
-//     for(int i=0;i<n;i++)
-//     {
-//         cin>>arr1[i];
-//     }
-//     int m;
-//     cin>>m;
-//     int arr2[m];
-//     for(int i=0;i<m;i++)
-//     {
-//         cin>>arr2[i];
-//     }
-//     int k;
-//     cin>>k;
-//     int ans=MinMaxTwoArrays(arr1,arr2,n,m,k);
-//     cout<<ans<<endl;
-//     return 0;
-// }
-
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
-int solve(int a,int b,int c)
+int solve(vector<int> &nums, int low, int high, int rating)
 {
-    vector<int>arr;
-    arr.push_back(a);
-    arr.push_back(b);
-    arr.push_back(c);
-    sort(arr.rbegin(),arr.rend());
-    int num=0;
-    num=100*arr[0]+10*arr[1]+arr[2];
-    return num;
+    if (low > high)
+    {
+        return -1;
+    }
+    if (rating >= nums[high])
+    {
+        return high;
+    }
+    int mid = (low + high) / 2;
+    if (nums[mid] == rating)
+    {
+        return mid;
+    }
+    if (mid > 0 and nums[mid - 1] <= rating and rating < nums[mid])
+    {
+        return mid - 1;
+    }
+    if (rating < nums[mid])
+        return solve(nums, low, mid - 1, rating);
+    return solve(nums, mid + 1, high, rating);
 }
 
 int main()
 {
-    int a,b,c;
-    cin>>a>>b>>c;
-    int ans=solve(a,b,c);
-    cout<<ans<<endl;
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+    int n;
+    cin >> n;
+    vector<int> nums(n);
+    for (int i = 0; i < n; i++)
+    {
+        cin >> nums[i];
+    }
+    int rating;
+    cin >> rating;
+    int index = solve(nums, 0, n - 1, rating);
+    if (index < 0)
+    {
+        cout << 0 << endl;
+    }
+    else
+    {
+        cout << (index + 1) << endl;
+    }
     return 0;
 }

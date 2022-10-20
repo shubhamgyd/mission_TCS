@@ -1,6 +1,5 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
-
 
 // public class SumOfDigits {
 //    public static String breakPalindrome(String palindrome) {
@@ -13,7 +12,7 @@ using namespace std;
 //                 ch[i] = 'a';
 //                 return new String(ch);
 //             }
-            
+
 //         }
 //         ch[ch.length-1] = 'b';
 //         return new String(ch);
@@ -23,23 +22,27 @@ using namespace std;
 //          String s="aaabbaaa";
 //         System.out.print(breakPalindrome(s));
 //      }
-    
+
 // }
 
-string breakPalindrome(string s) {
-      bool changed = false;
-      if(s.size() == 1)return "";
-      int i = 0, j = s.size() - 1;
-      bool leftA = true;
-      bool rightA= true;
-      while(i < j){
-         if(s[i] != 'a'){
-            s[i] = 'a';
-            return s;
-         }
-         i++;
-         j--;
+string breakPalindrome(string s)
+{
+   bool changed = false;
+   if (s.size() == 1)
+      return "";
+   int i = 0, j = s.size() - 1;
+   bool leftA = true;
+   bool rightA = true;
+   while (i < j)
+   {
+      if (s[i] != 'a')
+      {
+         s[i] = 'a';
+         return s;
       }
-      s[s.size() - 1] = 'b';
-      return s;
+      i++;
+      j--;
    }
+   s[s.size() - 1] = 'b';
+   return s;
+}
