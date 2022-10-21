@@ -1,41 +1,35 @@
 #include <bits/stdc++.h>
-
 using namespace std;
 
-// This functions outputs the required
-// order and Minimum Retrieval Time
-void findOrderMRT(int L[], int n)
-{
-	// Here length of i'th program is L[i]
-	sort(L, L + n);
-
-	// Lengths of programs sorted according to increasing
-	// lengths. This is the order in which the programs
-	// have to be stored on tape for minimum MRT
-	cout << "Optimal order in which programs are to be"
-			"stored is: ";
-	for (int i = 0; i < n; i++)
-		cout << L[i] << " ";
-	cout << endl;
-
-	// MRT - Minimum Retrieval Time
-	double MRT = 0;
-	for (int i = 0; i < n; i++) {
-		int sum = 0;
-		for (int j = 0; j <= i; j++)
-			sum += L[j];
-		MRT += sum;
-	}
-	MRT /= n;
-	cout << "Minimum Retrieval Time of this"
-		" order is " << MRT;
-}
-
+// int main()
+// {
+// 	int n;
+// 	cin >> n;
+// 	vector<int> nums(n);
+// 	int num = 0;
+// 	for (int i = 0; i < n; i++)
+// 	{
+// 		cin >> nums[i];
+// 		num = max(num, abs(nums[i]));
+// 	}
+// 	cout << num << endl;
+// 	return 0;
+// }
 
 int main()
 {
-	int L[] = { 2, 5, 4 };
-	int n = sizeof(L) / sizeof(L[0]);
-	findOrderMRT(L, n);
-	return 0;
+	int n;
+	cin >> n;
+	int arr[n];
+	for (int i = 0; i < n; i++)
+	{
+		cin >> arr[i];
+	}
+	int q;
+	cin >> q;
+	while (q--)
+	{
+		int a, b;
+		cin >> a >> b;
+	}
 }
