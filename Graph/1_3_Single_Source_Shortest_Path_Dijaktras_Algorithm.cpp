@@ -1,61 +1,57 @@
 // In this program we are going to find the shortest distances of each nodes form the source point
 
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
-
-
-const int N=100;
-vector<pair<int,int>>adj[N];
+const int N = 100;
+vector<pair<int, int>> adj[N];
 int dist[N];
-priority_queue<pair<int,int>>pq;
+priority_queue<pair<int, int>> pq;
 bool visited[N];
 
 int nodes;
 int edges;
 
-
-void addEdge(int u,int v,int w)
+void addEdge(int u, int v, int w)
 {
-    adj[u].push_back({v,w});
-    adj[v].push_back({u,w});
+    adj[u].push_back({v, w});
+    adj[v].push_back({u, w});
 }
-
 
 void Dijaktras(int s)
 {
-    for(int i=0;i<=nodes;i++)
+    for (int i = 0; i <= nodes; i++)
     {
-        dist[i]=INT_MAX;
+        dist[i] = INT_MAX;
     }
-    dist[s]=0;
-    pq.push({0,s});
-    while(!pq.empty())
+    dist[s] = 0;
+    pq.push({0, s});
+    while (!pq.empty())
     {
-        int u=pq.top().second;pq.pop();
-        if(visited[u]) continue;
+        int u = pq.top().second;
+        pq.pop();
+        if (visited[u])
+            continue;
         else
         {
-        visited[u]=true;
-        for(auto ele:adj[u])
-        {
-            int v=ele.first,w=ele.second;
-            if(dist[u]+w<dist[v])
+            visited[u] = true;
+            for (auto ele : adj[u])
             {
-                dist[v]=dist[u]+w;
-                pq.push({-dist[v],v});
+                int v = ele.first, w = ele.second;
+                if (dist[u] + w < dist[v])
+                {
+                    dist[v] = dist[u] + w;
+                    pq.push({-dist[v], v});
+                }
             }
-            
-        }
         }
     }
 
-
-    cout<<"Distances of nodes from the source node are : "<<endl;
-    cout<<"Source node is: "<<s<<endl;
-    for(int i=0;i<=nodes;i++)
+    cout << "Distances of nodes from the source node are : " << endl;
+    cout << "Source node is: " << s << endl;
+    for (int i = 0; i <= nodes; i++)
     {
-        cout<<i<<"   "<<dist[i]<<endl;
+        cout << i << "   " << dist[i] << endl;
     }
 }
 
@@ -63,13 +59,13 @@ int main()
 {
     // nodes=6;
     // edges=8;
-    cout<<"Enter number of vertex and edges: ";
-    cin>>nodes>>edges;
-    for(int i=0;i<edges;i++)
+    cout << "Enter number of vertex and edges: ";
+    cin >> nodes >> edges;
+    for (int i = 0; i < edges; i++)
     {
-        int u,v,w;
-        cin>>u>>v>>w;
-        addEdge(u,v,w);
+        int u, v, w;
+        cin >> u >> v >> w;
+        addEdge(u, v, w);
     }
     Dijaktras(0);
 }

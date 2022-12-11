@@ -1,110 +1,62 @@
 #include <bits/stdc++.h>
 using namespace std;
-
-bool isPrime(int n)
+vector<int> findAnagrams(string s, string p)
 {
-
-	if (n <= 1)
-		return false;
-	if (n <= 3)
-		return true;
-	if (n % 2 == 0 || n % 3 == 0)
-		return false;
-
-    // O(sqrt(n))
-	for (int i = 5; i * i <= n; i = i + 6)
-		if (n % i == 0 || n % (i + 2) == 0)
-			return false;
-
-	return true;
-}
-
-int nextPrime(int N)
-{
-    // base condition
-	if (N <= 1)
+	vector<int> v;
+	unordered_map<char, int> ump;
+	int varp = 0;
+	for (int i = 0; p[i] != '\0'; i++)
 	{
-		return 2;
+		ump[p[i]]++;
 	}
-
-	int num = N;
-	bool found = false;
-
-	while (!found)
+	int k = p.length();
+	varp = ump.size();
+	int b = 0;
+	unordered_map<char, int> ums;
+	int vars = 0;
+	int i = 0, j = 0;
+	while (j < s.length())
 	{
-		num++;
-		if (isPrime(num))
+		if (ump[s[j]] >= 1)
 		{
-			found = true;
-		}
-	}
-	return num;
-}
-
-
-int prevPrime(int n)
-{
-    if (n & 1)
-    {
-		n -= 2;
-	}
-    else
-    {
-		n--;
-	}
-    int i, j;
-    for (i=n;i>=2;i-=2) 
-	{
-        if (i%2==0)
-        {
-			continue;
-		}
-        for (j=3;j<=sqrt(i); j+=2) 
-		{
-            if (i % j == 0)
-            {
-				break;
+			ums[s[j]]++;
+			vars++;
+			if (ums[s[j]] == ump[s[j]])
+			{
+				b++;
 			}
-        }
-        if (j>sqrt(i))
-        {
-			return i;
 		}
-    }
-    return -1;
+		if ((j - i + 1) < k)
+			j++;
+		else if ((j - i + 1) == k)
+		{
+			if (b == varp and vars == k)
+			{
+				v.push_back(i);
+			}
+			if (ump[s[i]] >= 1 and ums[s[i]] >= 1)
+			{
+				vars--;
+				if (ums[s[i]] == ump[s[i]])
+				{
+					b--;
+				}
+				ums[s[i]]--;
+			}
+			i++;
+			j++;
+		}
+	}
+	return v;
 }
-
 int main()
 {
-	int n;
-	cin >> n;
-	int nextPrimeNumber=nextPrime(n);
-	int prevPrimeNumber=prevPrime(n);
-	
-	if(nextPrimeNumber!=-1 and prevPrimeNumber!=-1)
+	string s, t;
+	cin >> s >> t;
+	vector<int> ans = findAnagrams(s, t);
+	for (auto it : ans)
 	{
-		int diff1=abs(n-prevPrimeNumber);
-		int diff2=abs(n-nextPrimeNumber);
-		if(diff1==diff2)
-		{
-			cout<<prevPrimeNumber<<" "<<nextPrimeNumber<<endl;
-		}
-		else if(diff1<diff2)
-		{
-			cout<<prevPrimeNumber<<endl;
-		}
-		else
-		{
-			cout<<nextPrimeNumber<<endl;
-		}
-	}
-	else if(prevPrimeNumber==-1)
-	{
-		cout<<nextPrimeNumber<<endl;
-	}
-	else
-	{
-		cout<<prevPrimeNumber<<endl;
+		cout << it << " ";
 	}
 	return 0;
 }

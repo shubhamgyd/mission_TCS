@@ -1,0 +1,17 @@
+mobile
+laptop
+and
+cars
+mouse
+keyboard
+lions
+notebook
+quit
+pen
+wait
+ink
+number
+integer
+string
+paper
+your

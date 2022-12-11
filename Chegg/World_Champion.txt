@@ -1,0 +1,22 @@
+Year\tCountry\tCoach\tCaptain\n
+1930\tUruguay\tAlberto Suppici\tJose Nasazzi\n
+1934\tItaly\tVittorio Pozzo\tGianpiero Combi\n
+1938\tItaly\tVittorio Pozzo\tGiuseppe Meazza\n
+1950\tUruguay\tJuan Lopez\tObdulio Varela\n
+1954\tGermany\tSepp Herberger\tFritz Walter\n
+1958\tBrazil\tVicente Feola\tHilderaldo Bellini\n
+1962\tBrazil\tAymore Moreira\tMauro Ramos\n
+1966\tEngland\tAlf Ramsey\tBobby Moore\n
+1970\tBrazil\tMário Zagallo\tCarlos Alberto\n
+1974\tGermany\tHelmut Schon\tFranz Beckenbauer\n
+1978\tArgentina\tCesar Luis Menotti\tDaniel Passarella\n
+1982\tItaly\tEnzo Bearzot\tDino Zoff\n
+1986\tArgentina\tCarlos Bilardo\tDiego Maradona\n
+1990\tGermany\tFranz Beckenbauer\tLothar Matthaus\n
+1994\tBrazil\tCarlos Alberto Parreira\tDunga\n
+1998\tFrance\tAime Jacquet\tDidier Deschamps\n
+2002\tBrazil\tLuiz Felipe Scolari\tCafu\n
+2006\tItaly\tMarcello Lippi\tFabio Cannavaro\n
+2010\tSpain\tVicente del Bosque\tIker Casillas\n
+2014\tGermany\tJoachim Low\tPhilipp Lahm\n
+2018\tFrance\tDidier Deschamps\tHugo Lloris\n

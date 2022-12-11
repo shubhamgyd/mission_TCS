@@ -1,68 +1,68 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int solve(int source, int destination)
+int main()
 {
-    // cout << source << destination << endl;
-    int n = 8;
-    map<int, pair<int, int>> mp;
-    int num = 0;
-    for (int i = 0; i < 8; i++)
+    int n;
+    cin >> n;
+    vector<string> dir(n);
+    for (int i = 0; i < n; i++)
     {
-        for (int j = 0; j < 8; j++)
-        {
-            mp[num] = {i, j};
-            num++;
-        }
+        cin >> dir[i];
     }
-    int x1 = mp[source].first;
-    int y1 = mp[source].second;
-
-    int x2 = mp[destination].first;
-    int y2 = mp[destination].second;
-    if (x1 == x2 and y1 == y2)
+    string currDir = "East";
+    string prevDir = "East";
+    int totalSpins = 0;
+    for (int i = 0; i < n; i++)
     {
-        return 0;
-    }
-    queue<pair<pair<int, int>, int>> q;
-    vector<vector<int>> visited(n, vector<int>(n, 0));
-    q.push({{x1, y1}, 0});
-    visited[x1][y1] = 1;
-    int dir_x[] = {-1, -2, -2, -1, 1, 1, 2, 2};
-    int dir_y[] = {-2, -1, 1, 2, -2, 2, -1, 1};
-    while (!q.empty())
-    {
-        int x = q.front().first.first;
-        int y = q.front().first.second;
-        int steps = q.front().second;
-        q.pop();
-        if (x == x2 && y == y2)
+        if (dir[i] == "right")
         {
-            return steps;
-        }
-        for (int i = 0; i < 8; i++)
-        {
-            int newx = x + dir_x[i];
-            int newy = y + dir_y[i];
-            if (newx >= 0 && newx < n && newy >= 0 && newy < n && visited[newx][newy] == 0)
+            if (currDir == "North")
             {
-                q.push({{newx, newy}, steps + 1});
-                visited[newx][newy] = 1;
+                currDir = "East";
+            }
+            else if (currDir == "East")
+            {
+                currDir = "South";
+            }
+            else if (currDir == "South")
+            {
+                currDir = "West";
+            }
+            else
+            {
+                currDir = "North";
+            }
+            if (currDir == prevDir)
+            {
+                totalSpins++;
+            }
+        }
+        else
+        {
+            if (currDir == "North")
+            {
+                currDir = "West";
+            }
+            else if (currDir == "West")
+            {
+                currDir = "South";
+            }
+            else if (currDir == "South")
+            {
+                currDir = "East";
+            }
+            else
+            {
+                currDir = "North";
+            }
+            if (currDir == prevDir)
+            {
+                totalSpins++;
             }
         }
     }
-    return -1;
-}
-
-int main()
-{
-    ios_base::sync_with_stdio(false);
-    cin.tie(0);
-    cout.tie(0);
-    int n = 8;
-    int source, destination;
-    cin >> source >> destination;
-    int ans = solve(source, destination);
-    cout << ans << endl;
+    cout << "Toal Spint count = " << totalSpins << endl;
+    cout << "Direction person is facing in the end = " << currDir << endl;
     return 0;
 }

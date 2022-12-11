@@ -3,27 +3,31 @@ using namespace std;
 
 int main()
 {
-    map<int, int> mp;
-
-    // insert elements in random order
-    mp.insert({2, 30});
-    mp.insert({3, 10});
-    mp.insert({5, 50});
-    mp.insert({4, 40});
-    for (auto it = mp.begin(); it != mp.end(); it++)
+    int n;
+    cin >> n;
+    vector<int> nums(n);
+    for (int i = 0; i < n; i++)
     {
-        cout << (*it).first << " " << (*it).second << endl;
+        cin >> nums[i];
     }
-
-    // when 2 is present
-    auto it = mp.lower_bound(1);
-    --it;
-    if (it == mp.end())
+    int k;
+    cin >> k;
+    for (int i = 0; i < n; i++)
     {
-        cout << "here" << endl;
-        return 0;
+        int sum = 0;
+        for (int j = i; j < n; j++)
+        {
+
+            sum += nums[j];
+            if (sum == k)
+            {
+                for (int k = i; k < j; k++)
+                {
+                    cout << nums[k] << ",";
+                }
+                cout << nums[j] << endl;
+            }
+        }
     }
-    cout << "The lower bound of key 1 is ";
-    cout << (*it).first << " " << (*it).second << endl;
     return 0;
 }

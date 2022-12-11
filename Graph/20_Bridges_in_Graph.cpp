@@ -5,7 +5,7 @@
 
 // void dfs(int src,vector<vector<int>>graph , int *disc,int *low, int *parent,vector<pair<int,int>>&bridges)
 // {
-//     static int time=0 ; 
+//     static int time=0 ;
 //     disc[src]=low[src]=time++;
 //     vector<int>::iterator it;
 //     for(it=graph[src].begin();it!=graph[src].end();it++)
@@ -20,7 +20,7 @@
 //                 bridges.push_back(make_pair(src,*it));
 //             }
 //         }
-//         else if(parent[src]!=*it)                      // check wheater parent of src if child or not means via in cycle, then update the low of src        
+//         else if(parent[src]!=*it)                      // check wheater parent of src if child or not means via in cycle, then update the low of src
 //         {
 //             low[src]=min(low[src],disc[*it]);
 //         }
@@ -65,99 +65,62 @@
 //     return 0;
 // }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Effiecient
-
 
 #include <bits/stdc++.h>
 using namespace std;
-void dfs(int node, int parent, vector<int> &vis, vector<int> &tin, vector<int> &low, int &timer, vector<int> adj[]) {
-    vis[node] = 1; 
-    tin[node] = low[node] = timer++; 
-    for(auto it: adj[node]) {
-        if(it == parent) continue;
-        
-        if(!vis[it]) {
-            dfs(it, node, vis, tin, low, timer, adj); 
-            low[node] = min(low[node], low[it]); 
-            if(low[it] > tin[node]) {
+void dfs(int node, int parent, vector<int> &vis, vector<int> &tin, vector<int> &low, int &timer, vector<int> adj[])
+{
+    vis[node] = 1;
+    tin[node] = low[node] = timer++;
+    for (auto it : adj[node])
+    {
+        if (it == parent)
+            continue;
+
+        if (!vis[it])
+        {
+            dfs(it, node, vis, tin, low, timer, adj);
+            low[node] = min(low[node], low[it]);
+            if (low[it] > tin[node])
+            {
                 cout << node << " " << it << endl;
             }
-        } else {
-            low[node] = min(low[node], tin[it]); 
+        }
+        else
+        {
+            low[node] = min(low[node], tin[it]);
         }
     }
 }
-int main() {
+int main()
+{
     int n, m;
-    cin >> n >> m; 
-	vector<int> adj[n+1]; 
-	for(int i = 0;i<m;i++) {
-	    int u, v;
-	    cin >> u >> v; 
-	    adj[u].push_back(v);
-	    adj[v].push_back(u); 
-	}
-	
-	vector<int> tin(n+1, -1);
-	vector<int> low(n+1, -1); 
-	vector<int> vis(n+1, 0); 
-	int timer = 0; 
-    cout<<endl;
-	for(int i = 0;i<n;i++) {
-	    if(!vis[i]) {
-	        dfs(i, -1, vis, tin, low, timer, adj); 
-	    }
-	}
-	
-	return 0;
+    cin >> n >> m;
+    vector<int> adj[n + 1];
+    for (int i = 0; i < m; i++)
+    {
+        int u, v;
+        cin >> u >> v;
+        adj[u].push_back(v);
+        adj[v].push_back(u);
+    }
+
+    vector<int> tin(n + 1, -1);
+    vector<int> low(n + 1, -1);
+    vector<int> vis(n + 1, 0);
+    int timer = 0;
+    cout << endl;
+    for (int i = 0; i < n; i++)
+    {
+        if (!vis[i])
+        {
+            dfs(i, -1, vis, tin, low, timer, adj);
+        }
+    }
+
+    return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // #include<iostream>
 // #include<vector>

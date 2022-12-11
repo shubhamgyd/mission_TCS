@@ -1,33 +1,19 @@
 #include <stdio.h>
-
+int bar(int a, int b, int c)
+{
+    return (b - a) << (c);
+}
+int foo(int m, int n, int o)
+{
+    int p = bar(m + o, n + o, m + n);
+    int q = bar(m - o, n - m, n + n);
+    printf("p + q: %d\n", p + q);
+    return p + q;
+}
 int main()
 {
-    // User input of integer
-    printf("Enter number in range(1 to 4): ");
-    int level;
-    scanf("%d",&level);
-    // Switch case to display student level
-    switch(level)
-    {
-        // if 1 then show Freshman
-        case 1:
-            printf("Level of student: Freshman");
-            break;
-        // if 2 then show Sophomore
-        case 2:
-            printf("Level of student: Sophomore");
-            break;
-        // if 3 show Junior
-        case 3:
-            printf("Level of student: Junior");
-            break;
-        // if 4 then show Senior
-        case 4:
-            printf("Level of student: Senior");
-            break;
-        // desfault show invalid entry
-        default:
-            printf("Invalid Entry");
-    }
+    int x = 1, y = 2, z = 3;
+    z = x + y + z + foo(x, y, z);
+    printf("%d\n", z);
     return 0;
 }

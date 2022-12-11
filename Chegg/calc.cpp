@@ -1,43 +1,38 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void findMissing(int arr[], int n)
+char lostCharNW(string stringSent, string stringRec)
 {
-    int repeat = 0;
-    int miss = 0;
-    int i = 0;
-    while (i < n)
-    {
-        if (arr[i] == arr[arr[i] - 1])
-        {
-            i++;
-        }
-        else
-        {
-            swap(arr[i], arr[arr[i] - 1]);
-        }
-    }
+    map<char, int> mp;
+    int n = stringSent.length();
     for (int i = 0; i < n; i++)
     {
-
-        if (arr[i] != i + 1)
+        mp[stringSent[i]]++;
+    }
+    n = stringRec.length();
+    char ch;
+    for (int i = 0; i < n; i++)
+    {
+        if (mp.find(stringRec[i]) != mp.end())
         {
-            repeat = arr[i];
-            miss = i + 1;
-            break;
+            mp[stringRec[i]]--;
+            if (mp[stringRec[i]] == 0)
+            {
+                mp.erase(stringRec[i]);
+            }
         }
     }
-    cout << repeat << " " << miss << endl;
+    ch = mp.begin()->first;
+    return ch;
 }
+
 int main()
 {
-    int n;
-    cin >> n;
-    int arr[n];
-    for (int i = 0; i < n; i++)
-    {
-        cin >> arr[i];
-    }
-    findMissing(arr, n);
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+    string a, b;
+    cin >> a >> b;
+    cout << lostCharNW(a, b) << endl;
     return 0;
 }

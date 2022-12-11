@@ -1,39 +1,65 @@
-import random
+import statistics
+lstx = []
+lsty = []
+lstz = []
 
-# a
+file = open("articles.txt", "r")
+hvk = file.read()
 
+k = 0
+for i in hvk:
+    # print(hvk[1])
+    j = ord(hvk[k])
+    lstx.append()
+    k += 1
 
-def generateA():
-    return random.randint(0, 5)  # using random module
-
-# b
-
-
-def generateB():
-    return random.randint(0, 8)  # using random module
-
-# c
-
-
-def useBotA():
-    num = generateB() % 6
-    print("Random number is :", num)  # using generateB function
-    return num
-
-# d
+# print(Isty)
+file.close()
 
 
-def useAtoB():
-    num = (generateA()+generateA()) % 9  # using generateA functions
-    print("Random number is: ", num)
-    return num
+def prime(N):
+    for i in range(2, N):
+        if N % i == 0:
+            return lstz.append(N)
+    return lsty.append(N)
 
 
-print("Call generateA() function.")
-print("Random number is: ", generateA())
-print("Call generateB() function.")
-print("Random Number is: ", generateB())
-print("Call useAtoB() function")
-useAtoB()
-print("Call userBtoA function")
-useBotA()
+for N in lstx:
+    prime(N)
+
+lstw = []
+for i in lsty:
+    if i not in lstw:
+        lstw.append(i)
+
+# Another list to store the elements by 2nd column wise
+modifiedList = []
+for i in lstw:
+    temp = []
+    temp.append(lsty.count(i))
+    temp.append(i)
+    modifiedList.append(temp)
+
+# sort modified list according to the 2nd column(ascending order)
+modifiedList.sort()
+# nor print data
+for i in modifiedList:
+    print("{}\t{}".format(i[1], i[0]))
+
+
+def soldieratk(num, soldierPosition, posSoldier):
+    n = num
+    a = soldierPosition
+    arr = []
+    arr.append(0)
+    for i in range(1, n+1):
+        arr.append(i)
+    for i in range(len(soldierPosition)):
+        arr[a[i][0]:a[i][1]+1] = arr[a[i][0]:a[i][1]+1][::-1]
+    arr.pop(0)
+    return arr[posSoldier-1]
+
+
+print(lstw)
+print("Mean: {}".format(statistics.mean(lsty)), end=" ")
+print(' Varience: {}'.format(statistics.variance(lsty)))

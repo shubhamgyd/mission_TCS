@@ -12,6 +12,7 @@
 #include <cstring>
 #include <cmath>
 #include <cstdlib>
+#include <bits/stdc++.h>
 using namespace std;
 class point
 {
@@ -57,7 +58,8 @@ void _graham(int n, point *p, int &s, point *ch)
     p[k] = p[0], p[0] = p1;
     qsort(p + 1, n - 1, sizeof(point), graham_cp);
     for (ch[0] = p[0], ch[1] = p[1], ch[2] = p[2], s = i = 3; i < n; ch[s++] = p[i++])
-        for (; s > 2 && xmult(ch[s - 2], p[i], ch[s - 1]) < -eps; s--);
+        for (; s > 2 && xmult(ch[s - 2], p[i], ch[s - 1]) < -eps; s--)
+            ;
 }
 
 int graham(int n, point *p, point *convex, int maxsize = 1, int dir = 1)
@@ -76,12 +78,6 @@ double area(point a, point b, point c)
 {
     return fabs((a - c) * (b - c)) / 2;
 }
-
-
-
-
-
-
 
 class ElectronicScarecrows
 {
@@ -141,18 +137,50 @@ public:
     }
 };
 
+vector<int> solve(vector<int> A)
+{
+    vector<int> ans;
+    vector<queue<int>> all(A.size() + 1);
+    for (int i = 0; i < A.size(); ++i)
+        if (A[i] < A.size())
+        {
+            all[A[i]].push(i);
+        }
+    for (int i = 0, j = -1; i < A.size(); ++i)
+    {
+        for (int mex = 0;; ++mex)
+        {
+            while (!all[mex].empty() && all[mex].front() <= j)
+            {
+                all[mex].pop();
+            }
+            if (all[mex].empty())
+            {
+                ans.push_back(mex);
+                j = i;
+                break;
+            }
+            else
+            {
+                i = max(i, all[mex].front());
+            }
+        }
+    }
+    return ans;
+}
 
 int main()
 {
     ElectronicScarecrows obj;
     int n;
-    cin>>n;
-    vector<int>res,res1;
-    for(int i=0;i<n;i++)
+    cin >> n;
+    vector<int> res, res1;
+    for (int i = 0; i < n; i++)
     {
-        int a,b;
-        cin>>a>>b;
-        res.push_back(a);res1.push_back(b);
+        int a, b;
+        cin >> a >> b;
+        res.push_back(a);
+        res1.push_back(b);
     }
-    cout<<obj.largestArea(res,res1,n)<<endl;
+    cout << obj.largestArea(res, res1, n) << endl;
 }
