@@ -1,77 +1,39 @@
 #include <bits/stdc++.h>
 using namespace std;
+string findOdd(vector<string> &series)
+{
+    int n = series.size();
+    map<vector<int>, vector<string>> mp;
+    for (int i = 0; i < n; i++)
+    {
+        vector<int> nums;
+        string str = series[i];
+        for (int j = 0; j < str.length() - 1; j++)
+        {
+            int num = (str[j + 1] - 'a') - (str[j] - 'a');
+            nums.push_back(num);
+        }
+        mp[nums].push_back(str);
+    }
+    for (auto it : mp)
+    {
+        if (it.second.size() == 1)
+        {
+            return it.second[0];
+        }
+    }
+    return "";
+}
 
 int main()
 {
-    int n, m;
-    cin >> n >> m;
-    vector<int> markets(m);
-    for (int i = 0; i < m; i++)
-    {
-        cin >> markets[i];
-    }
-    vector<vector<int>> res(n, vector<int>(n));
+    int n;
+    cin >> n;
+    vector<string> res(n);
     for (int i = 0; i < n; i++)
     {
-        for (int j = 0; j < n; j++)
-        {
-            cin >> res[i][j];
-        }
+        cin >> res[i];
     }
-    vector<int> adj[n];
-
+    cout << findOdd(res) << endl;
     return 0;
 }
-// #include <bits/stdc++.h>
-// using namespace std;
-
-// int passes(char *input1)
-// {
-//     int n = strlen(input1);
-//     int cnt = 0;
-//     int i = 0;
-//     while (i < n - 1)
-//     {
-//         int steps = 0;
-//         if (input1[i] == 'A')
-//         {
-//             i += 2;
-//         }
-//         else if (input1[i] == 'B')
-//         {
-//             i--;
-//         }
-//         cnt++;
-//         if (i >= n - 1)
-//             break;
-//     }
-//     return cnt;
-// }
-
-// int main()
-// {
-//     char str[] = "AABAAA";
-//     cout << passes(str);
-//     // string str;
-//     // cin >> str;
-//     // int n = str.size();
-//     // int cnt = 0;
-//     // int i = 0;
-//     // while (i < n - 1)
-//     // {
-//     //     int steps = 0;
-//     //     if (str[i] == 'A')
-//     //     {
-//     //         i += 2;
-//     //     }
-//     //     else if (str[i] == 'B')
-//     //     {
-//     //         i--;
-//     //     }
-//     //     cnt++;
-//     //     if (i >= n - 1)
-//     //         break;
-//     // }
-//     // cout << cnt << endl;
-//     return 0;
-// }

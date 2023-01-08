@@ -54,7 +54,7 @@ int main()
 {
 	int arr[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 14, 14, 14, 14, 18, 23};
 	int n = sizeof(arr) / sizeof(arr[0]);
-	int x = 17;
+	int x = 23;
 	int index = ceilSearch(arr, 0, n - 1, x);
 	if (index == -1)
 		cout << "Ceiling of " << x

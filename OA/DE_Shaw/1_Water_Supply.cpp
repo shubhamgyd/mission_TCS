@@ -50,6 +50,12 @@ TargetWaterSupply=[0]
 Output
 
 0
+
+
+we can also solve by reverse
+what we can do is we will traverse all elements and check ii it is odd element decrease element by 1. now in next step we will only have even elements we can divide all by 2. we will again repeat step one if anyone is odd. and the step 2. so on.
+Complexity will be nlogn because at alternate step we are dividing element by 2.
+
 */
 
 #include <bits/stdc++.h>

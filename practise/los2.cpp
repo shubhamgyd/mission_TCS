@@ -5,41 +5,26 @@ int main()
 {
     int n;
     cin >> n;
-    vector<int> res(n);
-    for (int i = 0; i < n; i++)
+    string str;
+    cin.ignore();
+    getline(cin, str);
+    int ans = 0;
+    stringstream ss(str);
+    string word;
+    while (ss >> word)
     {
-        cin >> res[i];
-    }
-    int x;
-    cin >> x;
-    vector<int> ans(n), temp(n);
-    int turn = 0;
-    for (int i = 0; i < x; i++)
-    {   
-        int num=res[0];
-        for (int j = 0; j < n - 1; j++)
+        string temp = word;
+        sort(begin(temp), end(temp));
+        int sum = 0;
+        for (auto ele : word)
         {
-            res[j] = abs(res[j] - res[j + 1]);
+            if (ele != temp[0] and ele != temp[temp.size() - 1])
+            {
+                sum = sum * 10 + (ele - '0');
+            }
         }
-        if(i!=0)
-        {
-            res[n-1]=abs(res[n-1]-num);
-        }
-        if(i==x-2)
-        {
-            temp=res;
-        }
+        ans += sum;
     }
-    
-    for (int i = 0; i < n; i++)
-    {
-        cout << res[i] << " ";
-    }
-    cout<<endl;
-    for (int i = 0; i < n; i++)
-    {
-        cout << temp[i] << " ";
-    }
-    cout << endl;
+    cout << ans << endl;
     return 0;
 }
