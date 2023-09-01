@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button Index Alert</title>
+    <style>
+        #button-container {
+            display: flex;
+        }
+
+        .button {
+            margin: 5px;
+            padding: 10px 20px;
+            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="button-container">
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const buttonContainer = document.getElementById("button-container");
+            function createButton(index) {
+                const button = document.createElement("button");
+                button.className = "button";
+                button.textContent = `Button #${index}`;
+                button.id = `Button ${index}`;
+                button.addEventListener("click", function () {
+                    alert(index);
+                });
+                return button;
+            }
+            for (let i = 1; i <= 20; i++) {
+                const button = createButton(i);
+                buttonContainer.appendChild(button);
+            }
+        });
+    </script>
+</body>
+
+</html>

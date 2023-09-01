@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-long  double intersectionArea(long double X1, long double Y1, long double R1, long double X2, long double Y2, long double R2)
+long double intersectionArea(long double X1, long double Y1, long double R1, long double X2, long double Y2, long double R2)
 {
     long double Pi = 3.14;
     long double d, alpha, beta, a1, a2;
@@ -30,10 +30,12 @@ long  double intersectionArea(long double X1, long double Y1, long double R1, lo
 int main()
 {
     long double x1, y1, r1, x2, y2, r2;
-    cin >> x1>>y1>>r1;
-    cin >> x2>>y2>>r2;
+    cin >> x1 >> y1 >> r1;
+    cin >> x2 >> y2 >> r2;
 
-    long double ans=intersectionArea(x1,y1,r1,x2,y2,r2);
-    cout<< fixed<<setprecision(4)<<ans<<endl;
+    long double ans = intersectionArea(x1, y1, r1, x2, y2, r2);
+    cout << fixed << setprecision(4) << ans << endl;
     return 0;
 }
+
+/* Write code for the bfs of a graph */

@@ -1,116 +1,165 @@
-#include <bits/stdc++.h>
-using namespace std;
-void ComputeArray(string pat, int lps[], int m)
+#include <iostream>
+#include <string>
+#include <vector>
+#include <unordered_map>
+#include <unordered_set>
+#include <tuple>
+#include <exception>
+#include <sstream>
+#include <iomanip>
+
+struct Bundle
 {
-    int len = 0;
+    std::string name;
+    double price;
+    int numComponents;
+    std::vector<std::pair<int, std::string>> components;
+};
 
-    lps[0] = 0;
+struct Stock
+{
+    std::string name;
+    double price;
+};
 
-    int i = 1;
-    while (i < m)
+class MarketWatchPortfolio
+{
+private:
+    std::vector<Bundle> _bundles;
+    std::unordered_map<std::string, Stock> _stocks;
+
+public:
+    MarketWatchPortfolio(std::vector<Bundle> const &bundles, std::unordered_map<std::string, Stock> const &stocks)
+        : _bundles(bundles), _stocks(stocks)
     {
-        if (pat[i] == pat[len])
+    }
+
+    void ExecuteTrades()
+    {
+        for (auto const &bundle : _bundles)
         {
-            len++;
-            lps[i] = len;
-            i++;
-        }
-        else
-        {
-            if (len != 0)
+            double bundlePrice = CalculateBundlePrice(bundle);
+            double individualStocksPrice = CalculateIndividualStocksPrice(bundle);
+
+            if (bundlePrice < individualStocksPrice)
             {
-                len = lps[len - 1];
+                PrintTrade(bundle.name, "E", "B", bundlePrice);
             }
             else
             {
-                lps[i] = 0;
-                i += 1;
+                PrintTrade(bundle.name, "E", "I", individualStocksPrice);
             }
         }
     }
-}
 
-int KMPSearch(string txt, string pat)
-{
-    int n = txt.length();
-    int m = pat.length();
-    int ans = 0;
-    int lps[m];
-    ComputeArray(pat, lps, m);
-    int i = 0;
-    int j = 0;
-    while (i < n)
+private:
+    double CalculateBundlePrice(Bundle const &bundle)
     {
-        if (pat[j] == txt[i])
+        double totalPrice = 0.0;
+        for (auto const &component : bundle.components)
         {
-            j++;
-            i++;
+            auto stockIter = _stocks.find(component.second);
+            if (stockIter == _stocks.end())
+            {
+                return -1.0; // Invalid component stock
+            }
+            totalPrice += component.first * stockIter->second.price;
         }
-        if (j == m)
-        {
-            j = lps[j - 1];
-            ans++;
-        }
-        else if (i < n && pat[j] != txt[i])
-        {
-            if (j != 0)
-                j = lps[j - 1];
-            else
-                i = i + 1;
-        }
+        return totalPrice;
     }
-    return ans;
-}
 
-int solution(vector<int> &numbers, vector<int> &pattern)
+    double CalculateIndividualStocksPrice(Bundle const &bundle)
+    {
+        double totalPrice = 0.0;
+        for (auto const &component : bundle.components)
+        {
+            auto stockIter = _stocks.find(component.second);
+            if (stockIter == _stocks.end())
+            {
+                return -1.0; // Invalid component stock
+            }
+            totalPrice += component.first * stockIter->second.price;
+        }
+        return totalPrice;
+    }
+
+    void PrintTrade(std::string const &symbol, std::string const &executeOrPass, std::string const &bundleOrIndividualStock, double cost)
+    {
+        std::cout << std::setprecision(2) << std::fixed;
+        std::cout << symbol << " " << executeOrPass << " " << bundleOrIndividualStock << " " << cost << std::endl;
+        return;
+    }
+};
+
+class InputData
 {
-    int n = numbers.size();
-    int m = pattern.size();
-    vector<int> ans;
-    for (int i = 1; i < n; i++)
+public:
+    int numBundles;
+    int numStocks;
+
+    MarketWatchPortfolio LoadInput()
     {
-        if (numbers[i] > numbers[i - 1])
+        std::vector<Bundle> bundles;
+        std::unordered_map<std::string, Stock> stocks;
+        std::string line;
+        int numStocks = -1;
+        int numBundles = -1;
+        while (std::getline(std::cin, line))
         {
-            ans.push_back(1);
+            if (line.empty())
+            {
+                break;
+            }
+            std::stringstream ss;
+            ss << line;
+            if (numStocks == -1 && numBundles == -1)
+            {
+                ss >> numBundles >> numStocks;
+                continue;
+            }
+            if (numBundles > 0)
+            {
+                Bundle bundle{};
+                auto const &components = SplitString(line, " ");
+                bundle.name = components[0];
+                bundle.price = std::stod(components[1]);
+                bundle.numComponents = std::stoi(components[2]);
+                for (std::size_t i = 3; i < components.size() - 1; i = i + 2)
+                {
+                    auto const &c = std::make_pair(std::stoi(components[i]), components[i + 1]);
+                    bundle.components.push_back(c);
+                }
+                bundles.push_back(bundle);
+                numBundles--;
+                continue;
+            }
+            Stock stock;
+            ss >> stock.name >> stock.price;
+            stocks.emplace(stock.name, stock);
         }
-        else if (numbers[i] == numbers[i - 1])
-        {
-            ans.push_back(0);
-        }
-        else
-        {
-            ans.push_back(-1);
-        }
+
+        return MarketWatchPortfolio{bundles, stocks};
     }
-    string txt = "";
-    for (auto it : ans)
+
+private:
+    std::vector<std::string> SplitString(const std::string &str, const std::string &delimiter)
     {
-        txt += to_string(it);
+        std::vector<std::string> strs;
+        size_t startPos = 0;
+        size_t endPos = 0;
+        while ((endPos = str.find(delimiter, startPos)) != std::string::npos)
+        {
+            strs.emplace_back(str.substr(startPos, endPos - startPos));
+            startPos = endPos + 1;
+        }
+        strs.emplace_back(str.substr(startPos));
+        return strs;
     }
-    string pat = "";
-    for (auto it : pattern)
-    {
-        pat += to_string(it);
-    }
-    return KMPSearch(txt, pat);
-}
+};
 
 int main()
 {
-    int n;
-    cin >> n;
-    vector<int> nums(n);
-    for (int i = 0; i < n; i++)
-    {
-        cin >> nums[i];
-    }
-    int m;
-    cin >> m;
-    vector<int> patt(m);
-    for (int i = 0; i < m; i++)
-    {
-        cin >> patt[i];
-    }
-    cout << solution(nums, patt) << endl;
-    return 0;
+    InputData inputData;
+    auto portfolio = inputData.LoadInput();
+    portfolio.ExecuteTrades();
 }

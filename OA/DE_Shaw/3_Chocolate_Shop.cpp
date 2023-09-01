@@ -1,6 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// https://leetcode.com/problems/maximum-deletions-on-a-string/
+
 // kmp
 vector<int> prefix_function(string s)
 {

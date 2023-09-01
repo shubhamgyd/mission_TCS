@@ -1,24 +1,17 @@
-#ifndef RECTANGLE_HPP
-#define RETACNGLE_HPP
+#include <iostream>
+#include <cmath>
 
-class Rectangle
+int main()
 {
-private:
-    double width_;
-    double height_;
-
-public:
-    double Area();
-    void Width(double w);
-    void Height(double h);
-    double returnWidth();
-    double returnHeight();
-    Rectangle(double w,double h)
+    // loop to first 25 numbers
+    for (int i = 1; i <= 25; i++)
     {
-        this->width_=w;
-        this->height_=h;
-        cout<<width_<<" "<<height_<<endl;
+        // get ith odd number
+        int odd_number = i * 2 - 1;
+        // get square root of ith odd number
+        double square_root = std::sqrt(odd_number);
+        // print number and square root
+        std::cout << "The square root of " << odd_number << " is " << square_root << std::endl;
     }
-};
-
-#endif
+    return 0;
+}

@@ -1,156 +1,71 @@
-#include <bits/stdc++.h>
-#define fast()                        \
-    ios_base::sync_with_stdio(false); \
-    cin.tie(NULL);                    \
-    cout.tie(NULL);
+#include <iostream>
+#include <vector>
 using namespace std;
-#define endl '\n'
-#define nline cout << "\n"
-#define max_pq priority_queue<int>
-#define min_pq priority_queue<int, vector<int>, greater<int>>
-#define For(i, x, n) for (i = x; i < n; ++i)
-#define pb push_back
-#define yes cout << "YES"
-#define no cout << "NO"
 #define int long long
-#define ff first
-#define ss second
-#define pb push_back
-#define f first
-#define s second
-// #define mp make_pair
-#define sz(v) (int)(v.size())
-#define all(v) (v).begin(), (v).end()
-// #define y cout<<"Yes"
-// #define nn cout<<"No"
-#define ll long long
-#define limit1 30
-
-const long long N = 200005, INF = 2000000000000000000;
-
-int binpow(int a, int b)
-{
-    int res = 1;
-    while (b > 0)
-    {
-        if (b & 1)
-            res = res * a;
-        a = a * a;
-        b >>= 1;
-    }
-    return res;
-}
-
-int gcd(int a, int b)
-{
-    if (b == 0)
-        return a;
-    return gcd(b, a % b);
-}
-int phi1(int n)
-{
-    int result = n;
-    for (int i = 2; i * i <= n; i++)
-    {
-        if (n % i == 0)
-        {
-            while (n % i == 0)
-                n /= i;
-            result -= result / i;
-        }
-    }
-    if (n > 1)
-        result -= result / n;
-    return result;
-}
-tuple<int, int, int> extended_gcd(int a, int b)
-{
-    if (b == 0)
-    {
-        return {1, 0, a};
-    }
-    else
-    {
-        int x, y, g;
-        tie(x, y, g) = extended_gcd(b, a % b);
-        return {y, x - (a / b) * y, g};
-    }
-}
-
-string to_upper(string &a)
-{
-    for (int i = 0; i < (int)a.size(); ++i)
-        if (a[i] >= 'a' && a[i] <= 'z')
-            a[i] -= 'a' - 'A';
-    return a;
-}
-
-string to_lower(string &a)
-{
-    for (int i = 0; i < (int)a.size(); ++i)
-        if (a[i] >= 'A' && a[i] <= 'Z')
-            a[i] += 'a' - 'A';
-    return a;
-}
-
-// const int mod = 1e9 + 7;
 
 void testCases()
 {
+    int n, k, s;
+    cin >> n >> k;
     string str;
     cin >> str;
-    map<char, int> mp;
-    for (auto it : str)
+    int ans = 0;
+    const int mod = 1e9 + 7;
+    vector<int> dp(n + 1, 0);
+    dp[0] = 1;
+    for (int i = 1; i <= n; i++)
     {
-        mp[it]++;
-    }
-    priority_queue<int> pq;
-    for (auto it : mp)
-    {
-        pq.push(it.second);
-    }
-    int len = 0;
-    bool isOneTaken = false;
-    while (!pq.empty())
-    {
-        int n = pq.top();
-        pq.pop();
-        if (n % 2 == 0)
+        for (int j = 1; j < min(i + 1, (long long)10); j++)
         {
-            len += n;
-        }
-        else
-        {
-            if (!isOneTaken)
+            if (str[i - j] != '0' and stoi(str.substr(i - j, j)) <= k)
             {
-                len += n;
-                isOneTaken = true;
-            }
-            else
-            {
-                if (n > 1)
-                {
-                    len += n - 1;
-                }
+                dp[i] = (dp[i] + dp[i - j]) % mod;
             }
         }
     }
-    cout << len << endl;
+    cout << dp[n];
 }
 
 signed main()
 {
-#ifndef ONLINE_JUDGE
-    freopen("inputf.in", "r", stdin);
-    freopen("outputf.out", "w", stdout);
-#endif
-    fast();
-    // int t;
-    // cin >> t;
-    // while (t--)
-    // {
-    //     testCases();
-    // }
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
     testCases();
     return 0;
 }
+
+// Read n, k from input
+// Read str from input
+// Initialize ans = 0
+// Initialize mod = 1e9 + 7
+// Create a vector dp of size n+1, initialized with 0
+// Set dp[0] = 1
+
+// for i = 1 to n:
+//     for j = 1 to min(i+1, 10):
+//         if str[i-j] is not '0' and stoi(str.substr(i-j, j)) <= k:
+//             dp[i] = (dp[i] + dp[i-j]) % mod
+
+// Print dp[n]
+
+A vector dp of size n + 1 is created.This vector will store the intermediate results of the dynamic programming approach.
+
+                        The initial value of dp[0] is set to 1 since an empty subsequence can be formed in one way.
+
+                        The outer loop iterates from i = 1 to n.This loop represents the position of the current character in the string.
+
+                                                         Inside the outer loop,
+                                                     the inner loop iterates from j = 1 to the minimum of i + 1 and 10. This loop represents the length of the subsequence being considered.
+
+                                                                                                                        The condition str[i - j] != '0' checks if the current character is not '0'.This condition ensures that the subsequence doesn 't start with ' 0'.
+
+                                                                                                                                                        The condition
+                                                                                                                                                        stoi(str.substr(i - j, j)) <= k checks if the subsequence formed by taking j characters from the previous positions is less than or
+                                                                                      equal to k.This condition ensures that the subsequence value is within the allowed range.
+
+                                                                                      If both conditions are satisfied,
+                                                     the value of dp[i] is updated by adding dp[i - j] and taking the modulo mod.This represents the number of ways to form the current subsequence.
+
+                                                                                                           After the loops complete,
+                                                     the final result is stored in dp[n], which represents the total number of ways to form a subsequence of length n with a sum less than or equal to k.

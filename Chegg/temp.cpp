@@ -1,43 +1,44 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int calculatesum(int n1, int n2)
+int main()
 {
-    vector<int> nums;
-    for (int i = n1; i < n2; i++)
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+    int n, d;
+    cin >> n >> d;
+    map<pair<string, string>, vector<int>> mp;
+    int cnt = 0;
+    for (int i = 0; i < n; i++)
     {
-        if (i > 1)
+        string A, B;
+        int ti;
+        cin >> A >> B >> ti;
+        mp[{A, B}].push_back(ti);
+    }
+    map<pair<string, string>, bool> visited;
+    for (auto it : mp)
+    {
+        pair<string, string> p = {it.first.second, it.first.first};
+        pair<string, string> p0 = {it.first.first, it.first.second};
+        if (mp.find(p) != mp.end() and !visited[p] and !visited[p0])
         {
-            bool isPrime = true;
-            for (int j = 2; j < i; j++)
+            visited[p] = true;
+            visited[p0] = true;
+            for (int num : it.second)
             {
-                if (i % j == 0)
+                int start = num;
+                for (int end : mp[p])
                 {
-                    isPrime = false;
-                    break;
+                    if (end - start > 0 and end - start <= d)
+                    {
+                        ++cnt;
+                    }
                 }
-            }
-            if (isPrime)
-            {
-                nums.push_back(i);
             }
         }
     }
-    if (nums.size() == 1)
-        return nums[0];
-    int sum = 0;
-    int largest = nums[nums.size() - 1];
-    for (int i = 0; i < nums.size() - 1; i++)
-    {
-        sum += largest - nums[i];
-    }
-    return sum;
-}
-
-int main()
-{
-    int n1, n2;
-    cin >> n1 >> n2;
-    cout << calculatesum(n1, n2) << endl;
+    cout << cnt << endl;
     return 0;
 }

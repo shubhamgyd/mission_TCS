@@ -1,91 +1,104 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define int long long
 
-signed main()
+int minParentheses(string p)
 {
-    ios_base::sync_with_stdio(false);
-    cin.tie(0);
-    cout.tie(0);
-    int t;
-    cin >> t;
-    while (t--)
+    int bal = 0;
+    int ans = 0;
+
+    for (int i = 0; i < p.length(); ++i)
     {
-        int n;
-        cin >> n;
-        string str;
-        cin >> str;
-        if (n == 0)
+        bal += p[i] == '(' ? 1 : -1;
+        if (bal == -1)
         {
-            cout << 0 << endl;
-            continue;
+            ans += 1;
+            bal += 1;
         }
-        int arr[n];
-        for (int i = 0; i < n; i++)
-        {
-            cin >> arr[i];
-        }
-        int sum = 0;
-        for (int i = 0; i < n; ++i)
-        {
-            sum += arr[i];
-        }
-        unordered_map<char, int> mp;
-        for (int i = 0; i < n; i++)
-        {
-            if (mp.find(str[i]) != mp.end())
-            {
-                mp[str[i]] = max(mp[str[i]], arr[i]);
-            }
-            else
-            {
-                mp[str[i]] = arr[i];
-            }
-        }
-        for (auto it : mp)
-        {
-            sum -= it.second;
-        }
-        cout << sum << endl;
     }
-    return 0;
+
+    return bal + ans;
 }
 
-// #include <bits/stdc++.h>
-// using namespace std;
+int solve(string str)
+{
+    int matched = 0;
+    int cnt = 0;
+    for (int i = 0; i < str.length(); i++)
+    {
+        matched += (str[i] == '(' ? 1 : -1);
+        if (matched == -1)
+        {
+            cnt += 1;
+            matched += 1;
+        }
+    }
+    return cnt + matched;
+}
+int find_mistake(int *nums, int nums_length)
+{
+    int miss = 0;
+    int db = 0;
+    map<int, int> mp;
+    for (int i = 0; i < nums_length; i++)
+    {
+        mp[nums[i]]++;
+    }
+    for (int i = 1; i <= nums_length; i++)
+    {
+        if (mp.find(i) == mp.end())
+        {
+            miss = i;
+        }
+        else
+        {
+            if (mp[i] == 2)
+            {
+                db = i;
+            }
+        }
+    }
+    return miss + db;
+}
 
-// int main()
-// {
-//     ios_base::sync_with_stdio(false);
-//     cin.tie(0);
-//     cout.tie(0);
-//     int n, k;
-//     cin >> n >> k;
-//     int arr[n];
-//     for (int i = 0; i < n; i++)
-//     {
-//         cin >> arr[i];
-//     }
-//     unordered_map<int, int> mp;
-//     for (int i = 0; i < n; i++)
-//     {
-//         mp[arr[i]]++;
-//     }
-//     int cnt = 0;
-//     int ans = 0;
-//     vector<int> res;
-//     for (auto i : mp)
-//     {
-//         res.push_back(i.second);
-//     }
-//     sort(res.begin(), res.end(), greater<int>());
-//     for (int i = 0; i < res.size(); i++)
-//     {
-//         if (ans >= k)
-//             break;
-//         ans += res[i];
-//         cnt++;
-//     }
-//     cout << cnt << endl;
-//     return 0;
-// }
+int ascii_deletion_distance(string str1, string str2)
+{
+    map<char, int> mp, mp1;
+    for (auto it : str1)
+    {
+        mp[it]++;
+    }
+    for (auto it : str2)
+    {
+        mp1[it]++;
+    }
+    int dis = 0;
+    for (auto it : str1)
+    {
+        if (mp1.find(it) == mp1.end())
+        {
+            dis += int(it);
+        }
+    }
+    for (auto it : str2)
+    {
+        if (mp.find(it) == mp.end())
+        {
+            dis += int(it);
+        }
+    }
+    return dis;
+}
+
+int main()
+{
+
+    int n;
+    cin >> n;
+    int arr[n];
+    for (int i = 0; i < n; i++)
+    {
+        cin >> arr[i];
+    }
+    cout << find_mistake(arr, n) << endl;
+    return 0;
+}

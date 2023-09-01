@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void updateHash(vector<int> &nums, vector<int> &hashValue)
+vector<vector<int>> updateHash(vector<int> &nums, vector<int> &hashValue)
 {
     map<int, vector<int>> mp;
     for (int i = 0; i < nums.size(); i++)
@@ -22,14 +22,7 @@ void updateHash(vector<int> &nums, vector<int> &hashValue)
     {
         ans.push_back(it.second);
     }
-    for (auto it : ans)
-    {
-        for (auto num : it)
-        {
-            cout << num << " ";
-        }
-        cout << endl;
-    }
+    return ans;
 }
 
 int main()
@@ -48,9 +41,20 @@ int main()
     {
         cin >> hashValue[i];
     }
-    updateHash(nums, hashValue);
+    vector<vector<int>> ans = updateHash(nums, hashValue);
+    for (int i = 0; i < ans.size(); i++)
+    {
+        for (int j = 0; j < ans[i].size(); j++)
+        {
+            if (j == ans[i].size() - 1)
+            {
+                cout << ans[i][j];
+            }
+            else
+            {
+                cout << ans[i][j] << " ";
+            }
+        }
+        cout << endl;
+    }
 }
-
-// 10
-// 57 73 35 92 1 60 88 52 96 98
-// 61 76 41 93 10 64 89 56 97 98

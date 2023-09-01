@@ -58,101 +58,83 @@
 //     return 0;
 // }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Variation of partition subset sum problem
 // Check Wheather given  sum is present in array or not
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
-//int dp[100][100];
+// int dp[100][100];
 
-bool subsetsum(int arr[],int n, int sum)
+bool subsetsum(int arr[], int n, int sum)
 {
-    int total=sum;
-    //Declaration of array
-    int dp[n+1][sum+1];
+    int total = sum;
+    // Declaration of array
+    int dp[n + 1][sum + 1];
 
-    //Initialization of array 
-    //dp[0][0]=true;
-    //first col =true
-    //first row = false;
-    // Think about it.
-    for(int i=0;i<=n;i++)
+    // Initialization of array
+    // dp[0][0]=true;
+    // first col =true
+    // first row = false;
+    //  Think about it.
+    for (int i = 0; i <= n; i++)
     {
-        dp[i][0]=true;
+        dp[i][0] = true;
     }
 
-    for(int i=1;i<=sum;i++)
+    for (int i = 1; i <= sum; i++)
     {
-        dp[0][i]=false;
+        dp[0][i] = false;
     }
 
-
-    for(int i=1;i<=n;i++)
+    for (int i = 1; i <= n; i++)
     {
-        for(int j=1;j<=sum;j++)
+        for (int j = 1; j <= sum; j++)
         {
             // If element if less than or equal to given sum , then we have two choices
             // Either taken or not taken
-            if(arr[i-1]<=j)
+            if (arr[i - 1] <= j)
             {
-                dp[i][j]=dp[i-1][j-arr[i-1]] || dp[i-1][j];
+                dp[i][j] = dp[i - 1][j - arr[i - 1]] || dp[i - 1][j];
             }
-            // If element is greater than given sum ,  then take the value from the previos 
+            // If element is greater than given sum ,  then take the value from the previos
             // upper array block
             // Discard it , store the previous valid flag
             else
             {
-                dp[i][j]=dp[i-1][j];
+                dp[i][j] = dp[i - 1][j];
             }
         }
     }
-    // Final ans will get by using this block 
+    // Final ans will get by using this block
     // Either true or false
-    int range=total/2;
-    vector<int>v;
-    int mn=INT_MAX;
-    for(int i=0;i<=range;i++)
+    int range = total / 2;
+    vector<int> v;
+    int mn = INT_MAX;
+    for (int i = 0; i <= range; i++)
     {
-        if(dp[n][i])
+        if (dp[n][i])
         {
-            mn=min(mn,total-2*i);
+            mn = min(mn, total - 2 * i);
         }
     }
-    //return dp[n][sum];
-    cout<<mn<<endl;
+    // return dp[n][sum];
+    cout << mn << endl;
     return mn;
 }
 
-
-bitset<1000001>can;
+bitset<1000001> can;
 
 int main()
 {
-    int arr[]={4,1,3,2};
-    int n=sizeof(arr)/sizeof(arr[0]);
-    //int sum=9;
-    int finalS=0;
-    for(int i=0;i<n;i++)
+    int arr[] = {2, -1, 0, 4, -2, -9};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    // int sum=9;
+    int finalS = 0;
+    for (int i = 0; i < n; i++)
     {
-        finalS+=arr[i];
+        finalS += arr[i];
     }
-    subsetsum(arr,n,finalS);
+    subsetsum(arr, n, finalS);
     // if(subsetsum(arr,n,finalS)==true)
     // {
     //     cout<<"Yes Sum Present"<<'\n';
@@ -161,7 +143,6 @@ int main()
     // {
     //     cout<<"Given Sum Not Ptesent"<<'\n';
     // }
-
 
     // cout<<endl;
     // cout<<"Altrnative approach and faster than DP : ";
@@ -173,5 +154,4 @@ int main()
     // }
     // puts(can[sum]?"YES":"NO");
     return 0;
-
 }

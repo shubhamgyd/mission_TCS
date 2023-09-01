@@ -1,23 +1,44 @@
-#include<iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
-
-int main()
+int OPP(int num)
 {
-    // for loop start from the 2030 and run until 2020
-    for(int year=2030;year>=2020;year--)
+    int new_num = 0;
+    string str = to_string(num);
+    for (int i = 0; i < str.length(); i++)
     {
-        // according to the consition if current year is 2025 then skip it
-        // continue is the statement it will go to the next iteration, by skipping current one
-        if(year==2025)
+        if (i % 2 == 0)
         {
-            continue;
-        }
-        // else print the year
-        else
-        {
-            cout<<year<<endl;
+            new_num = new_num * 10 + (str[i] - '0');
         }
     }
+    return new_num;
+}
+
+int count_pairs(vector<int> &arr)
+{
+    int n = arr.size();
+    vector<int> opr_arr;
+    for (auto it : arr)
+    {
+        opr_arr.push_back(OPP(it));
+    }
+    int count = 0;
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = i + 1; j < n; j++)
+        {
+            if (arr[i] + opr_arr[j] == arr[j] + opr_arr[i])
+            {
+                count++;
+            }
+        }
+    }
+    return count;
+}
+int main()
+{
+    vector<int> arr = {12345, 6789, 2468, 1357, 8642};
+    cout << count_pairs(arr) << endl;
     return 0;
 }

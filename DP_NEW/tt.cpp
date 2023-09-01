@@ -1,163 +1,174 @@
-// // In this problem we are going to find the all possible paths from the source vertex to the destination
-// // Given a directed acyclic graph (DAG) of n nodes labeled from 0 to n - 1, find all possible paths from node 0 to node n - 1, 
-// //                 and return them in any order.
-// //The graph is given as follows: graph[i] is a list of all nodes you can visit from node i 
-// //(i.e., there is a directed edge from node i to node graph[i][j]).
+/* cerberus97 - Hanit Banga */
 
+#include <iostream>
+#include <iomanip>
+#include <cassert>
+#include <cmath>
+#include <cstdio>
+#include <cstring>
+#include <cstdlib>
+#include <map>
+#include <set>
+#include <queue>
+#include <stack>
+#include <vector>
+#include <algorithm>
 
-// //Remember one thing, it is a DAG(Directed Acyclic Graph) so there no worry about cycle formation, also TLE
-// #include<bits/stdc++.h>
-// using namespace std;
-
-
-// void dfs(vector<vector<int>>&graph,vector<vector<int>>&result,vector<int>&paths,int src,int destn)
-// {
-//     paths.push_back(src);                                 // Pushing the src into the temporary path , for checking path is possible or not
-//     if(src==destn) result.push_back(paths);      // If the current node becomes the last node of graph/destination i.e graph.size()-1 
-//                                                 // Then push the path into the resultant path (valid path)
-//     else
-//         for(int ele:graph[src])
-//             dfs(graph,result,paths,ele,destn);        // Recursively checking the paths to the last node
-//     paths.pop_back();                           // If path  is not present from the current source to last node , then pop the element,
-//                                                 //  (i.e lastly pushed element is not valid ) , so we can check other vertex.
-// }
-
-
-// vector<vector<int>> allPossiblePath(vector<vector<int>>&graph,int src,int destn)
-// {
-//     vector<vector<int>>result;
-//     vector<int>paths;
-//     dfs(graph,result,paths,src,destn);
-//     cout<<result.size()<<endl;
-//     return result;
-// }
-
-
-// int32_t main()
-// {
-//     int v,e,src,destn;
-//     cin>>v>>e>>src>>destn;
-//     vector<vector<int>>graph(v);
-//     for(int i=0;i<e;i++)
-//     {
-//         int u,v;
-//         cin>>u>>v;
-//         graph[u].push_back(v);
-//     }
-//     //destn=graph.size()-1;
-
-//     vector<vector<int>>path=allPossiblePath(graph,src,destn);
-//     cout<<"Resultant Paths From source to Destination are: "<<endl;
-//     for(auto ele:path)
-//     {
-//         for(auto it:ele)
-//         {
-//             if(it==destn)
-//             {
-//                 cout<<it;
-//             }
-//             else cout<<it<<"-->";
-//         }
-//         cout<<endl;
-//     }
-// }
-
-
-
-#include<bits/stdc++.h>
 using namespace std;
 
+#define pb push_back
+#define fast_cin()                    \
+	ios_base::sync_with_stdio(false); \
+	cin.tie(NULL)
 
-void dfs(vector<int>graph[],vector<int>&paths,int src,int destn,int weight,bool &ct,vector<bool>&visited,int &value)
-{
-	bool ok=false;
-	visited[src]=true;
-    paths.push_back(src);  
-	value|=src;                               
-    if(src==destn){
-		if(value>weight)
-		{
-			ok=true;
-			ct=true;
-			return;
-		}
-	}   
-    if(ok)
-	{
-		return;
-	}                                          
-    else
-        for(int ele:graph[src])
-		{
-			if(!visited[ele])
-			{
-				dfs(graph,paths,ele,destn,weight,ct,visited,value);   
-			}
-		}
-	value|=paths.back(); 
-    paths.pop_back();  
-	visited[src]=false;                      
-                                                
-}
+typedef long long ll;
+typedef long double ld;
+typedef pair<int, int> pii;
+typedef pair<ll, ll> pll;
 
-vector<string> solution(int n,int m,vector<vector<int>>edges,int q,vector<vector<int>>queries)
-{
-	vector<int>adj[n+1];
-	for(int i=0;i<m;i++)
-	{
-		int u=edges[i][0];
-		int v=edges[i][1];
-	}
-	vector<string>ans;
-	vector<int>path;
-	for(int i=0;i<q;i++)
-	{
-		vector<bool>visited(n+1,false);
-		int u,v,w;
-		u=queries[i][0];
-		v=queries[i][1];
-		w=queries[i][2];
-		bool ok=false;
-		int value=0;
-		dfs(adj,path,u,v,w,ok,visited,value);
-		if(ok)
-		{
-			ans.push_back("YES");
-		}
-		else
-		{
-			ans.push_back("NO");
-		}
-	}
-	return ans;
-}
+const int N = 2e5 + 10, B = 20, M = (1 << B) + 10;
 
+vector<int> g[N];
+int sz[N], par[N], ent[N], ext[N], at[N], nxt = 1;
+int mask[N], rmask[N], cnt[M];
+ll upd[N], upd_mask[M];
+
+int dfs_sz(int u, int p);
+void dfs_times(int u);
+void dfs_solve(int u, bool keep);
+void process(int v, int u);
+void add(int v);
+void dfs_pushup(int u);
 
 int main()
 {
-	int n,m;
-	cin>>n>>m;
-	vector<int>adj[n+1];
-	for(int i=0;i<m;i++)
+	fast_cin();
+	int n;
+	cin >> n;
+	for (int i = 1; i < n; ++i)
 	{
-		int a,b;
-		cin>>a>>b;
-		adj[a].push_back(b);
-		adj[b].push_back(a);
+		int u, v;
+		cin >> u >> v;
+		g[u].pb(v);
+		g[v].pb(u);
 	}
-	int q;
-	cin>>q;
-	vector<vector<int>>queries;
-	for(int i=0;i<q;i++)
+	string s;
+	cin >> s;
+	for (int i = 0; i < n; ++i)
 	{
-		int u,v,w;
-		cin>>u>>v>>w;
-		queries.push_back({u,v,w});
+		mask[i + 1] = (1 << (s[i] - 'a'));
 	}
-	vector<string>ans=solution(n,m,adj,q,queries);
-	for(auto it:ans)
+	dfs_sz(1, 0);
+	dfs_times(1);
+	dfs_solve(1, 0);
+	dfs_pushup(1);
+	for (int u = 1; u <= n; ++u)
 	{
-		cout<<it<<endl;
+		cout << upd[u] << ' ';
 	}
-	return 0;
+	cout << endl;
+}
+
+int dfs_sz(int u, int p)
+{
+	if (p)
+	{
+		g[u].erase(find(g[u].begin(), g[u].end(), p));
+	}
+	par[u] = p;
+	rmask[u] = mask[u] ^ rmask[p];
+	sz[u] = 1;
+	for (auto &v : g[u])
+	{
+		sz[u] += dfs_sz(v, u);
+		if (sz[v] > sz[g[u][0]])
+		{
+			swap(v, g[u][0]);
+		}
+	}
+	reverse(g[u].begin(), g[u].end());
+	return sz[u];
+}
+
+void dfs_times(int u)
+{
+	at[nxt] = u;
+	ent[u] = nxt++;
+	for (auto &v : g[u])
+	{
+		dfs_times(v);
+	}
+	ext[u] = nxt;
+}
+
+void dfs_solve(int u, bool keep)
+{
+	for (auto &v : g[u])
+	{
+		dfs_solve(v, v == g[u].back());
+	}
+	for (auto &v : g[u])
+	{
+		if (v != g[u].back())
+		{
+			for (int t = ent[v]; t < ext[v]; ++t)
+			{
+				int w = at[t];
+				process(w, u);
+			}
+			for (int t = ent[v]; t < ext[v]; ++t)
+			{
+				int w = at[t];
+				add(w);
+			}
+		}
+	}
+	add(u);
+	process(u, u);
+	if (!keep)
+	{
+		for (int t = ent[u]; t < ext[u]; ++t)
+		{
+			int v = at[t];
+			upd[v] += upd_mask[rmask[v]];
+			--cnt[rmask[v]];
+		}
+		for (int t = ent[u]; t < ext[u]; ++t)
+		{
+			int v = at[t];
+			upd_mask[rmask[v]] = 0;
+		}
+	}
+}
+
+void process(int v, int u)
+{
+	int cur = rmask[v] ^ mask[u];
+	upd[v] += cnt[cur];
+	upd[u] -= cnt[cur];
+	upd[par[u]] -= cnt[cur];
+	++upd_mask[cur];
+	for (int i = 0; i < B; ++i)
+	{
+		upd[v] += cnt[cur ^ (1 << i)];
+		upd[u] -= cnt[cur ^ (1 << i)];
+		upd[par[u]] -= cnt[cur ^ (1 << i)];
+		++upd_mask[cur ^ (1 << i)];
+	}
+}
+
+void add(int v)
+{
+	int cur = rmask[v];
+	upd[v] -= upd_mask[cur];
+	++cnt[cur];
+}
+
+void dfs_pushup(int u)
+{
+	for (auto &v : g[u])
+	{
+		dfs_pushup(v);
+		upd[u] += upd[v];
+	}
 }

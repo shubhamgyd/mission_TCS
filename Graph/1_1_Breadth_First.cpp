@@ -1,42 +1,66 @@
 // In this program we are going to  traverse the breadth first traversal of a graph
 
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
-
-const int N=1e5;
-queue<int>q;
+const int N = 1e5;
+queue<int> q;
 int dist[N];
 bool visited[N];
-vector<int>adj[N];
+vector<int> adj[N];
 
-void addEdge(int u,int v)
+void addEdge(int u, int v)
 {
     adj[u].push_back(v);
 }
 
-void bfs(int s,int edges)
+string superReducedString(string s)
 {
-    visited[s]=true;
-    dist[s]=0;
-    q.push(s);
-    cout<<endl;
-    cout<<"Distances of nodes from the source point (minimum number of edges source to destination): "<<endl;
-    cout<<"Vertex  Distance "<<endl;
-    while(!q.empty())
+    vector<char> st;
+    int n = s.length();
+    for (int i = 0; i < n; i++)
     {
-        int it=q.front();q.pop();
-        cout<<it<<"        "<<dist[it]<<endl;
-        for(auto ele:adj[it])
+        if (!st.empty() && st.back() == s[i])
         {
-            if(visited[ele])
+            st.pop_back();
+        }
+        else
+            st.push_back(s[i]);
+    }
+    string ans = "";
+    int sz = st.size();
+    for (int i = 0; i < sz; i++)
+    {
+        ans += st[i];
+    }
+    if (st.empty())
+        return "Empty String";
+    return ans;
+}
+
+void bfs(int s, int edges)
+{
+    visited[s] = true;
+    dist[s] = 0;
+    q.push(s);
+    cout << endl;
+    cout << "Distances of nodes from the source point (minimum number of edges source to destination): " << endl;
+    cout << "Vertex  Distance " << endl;
+    while (!q.empty())
+    {
+        int it = q.front();
+        q.pop();
+        cout << it << "        " << dist[it] << endl;
+        for (auto ele : adj[it])
+        {
+            if (visited[ele])
             {
                 continue;
             }
             else
             {
-                visited[ele]=true;
-                dist[ele]=dist[it]+1;
+                visited[ele] = true;
+                dist[ele] = dist[it] + 1;
                 q.push(ele);
             }
         }
@@ -46,14 +70,14 @@ int edges;
 
 int32_t main()
 {
-    cin>>edges;
-    for(int i=1;i<=edges;i++)
+    cin >> edges;
+    for (int i = 1; i <= edges; i++)
     {
-        int u,v;
-        cin>>u>>v;
-        addEdge(u,v);
+        int u, v;
+        cin >> u >> v;
+        addEdge(u, v);
     }
-    bfs(1,edges);
+    bfs(0, edges);
 }
 
 // Time complexity of bfs - O(v+e)  in adjacency list
