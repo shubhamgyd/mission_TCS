@@ -1,7 +1,8 @@
 def add(a, b):
-    return a + b
+    c = a + b
+    return c
 
 if __name__=="__main__":
-    a = input()
-    b = input()
+    a = int(input())
+    b = int(input())
     print(add(a, b))
